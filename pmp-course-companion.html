@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "PMP Course Companion",
+  "schemaVersion": 1,
+  "description": "Compagnon du cours PMP de 35 h : guide d'exploitation du cours avec le PMP Trainer (EN), décision de langue d'examen (FR/EN), journal de bord éditable (gaps, erreurs, contradictions, sauvegarde locale et export), références PMI sourcées. ECO juillet 2026. 100 % hors ligne."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#8a6520">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href='data:application/manifest+json,{"name":"PMP Course Companion","short_name":"PMP Companion","display":"standalone","background_color":"%23f5f0e8","theme_color":"%238a6520","start_url":"."}'>
+<title>PMP Course Companion · 35-hour course &amp; exam readiness</title>
+<style>
+:root{--bg:#f5f0e8;--card:#faf7f0;--border:#d8ceb4;--gold:#8a6520;--ink:#3a2e18;--muted:#7a6a4a;--ok:#3d7a4a;--warn:#b0641c;--bad:#a33a2a;--soft:#efe7d6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+header{background:var(--card);border-bottom:2px solid var(--border);padding:22px 28px 14px}
+header h1{margin:0;font-size:26px;letter-spacing:.3px;color:var(--gold)}
+header p{margin:6px 0 0;color:var(--muted);font-size:14px}
+nav{display:flex;flex-wrap:wrap;gap:6px;padding:12px 28px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+nav button{font:inherit;font-size:14px;padding:8px 14px;border:1px solid var(--border);background:var(--bg);color:var(--ink);border-radius:20px;cursor:pointer}
+nav button.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+main{max-width:1080px;margin:0 auto;padding:24px 28px 60px}
+section.tab{display:none}section.tab.active{display:block}
+h2{font-size:21px;color:var(--gold);border-bottom:1px solid var(--border);padding-bottom:6px;margin:30px 0 12px}
+h3{font-size:17px;margin:20px 0 8px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:14.5px;margin:10px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:var(--soft);color:var(--gold)}
+.tip{border-left:4px solid var(--gold);background:var(--soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.tip b:first-child{color:var(--gold)}
+.badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12.5px;background:var(--soft);border:1px solid var(--border);margin-right:4px}
+.badge.ok{background:#e3efe4;color:var(--ok)}.badge.warn{background:#f6e7d3;color:var(--warn)}.badge.bad{background:#f3ddd8;color:var(--bad)}
+.step{display:flex;gap:14px;margin:10px 0}.step .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:720px){.vs{grid-template-columns:1fr}}
+.vs .card h3{margin-top:0}
+a{color:var(--gold)}
+.small{font-size:13.5px;color:var(--muted)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.btn{font:inherit;font-size:14px;padding:7px 13px;border:1px solid var(--gold);background:var(--card);color:var(--gold);border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--gold);color:#fff}
+.journal td{padding:4px}
+.journal input,.journal textarea,.journal select{width:100%;font:inherit;font-size:14px;border:1px solid var(--border);border-radius:6px;padding:6px;background:#fff;color:var(--ink)}
+.journal textarea{min-height:56px;resize:vertical}
+.journal .del{border:none;background:none;color:var(--bad);cursor:pointer;font-size:18px}
+.conf{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--border);margin-top:34px;padding-top:12px}
+kbd{background:var(--soft);border:1px solid var(--border);border-radius:4px;padding:0 5px;font-size:13px}
+@media print{nav,.tools{display:none}section.tab{display:block!important}body{background:#fff}}
+</style>
+</head>
+<body>
+<header>
+<h1>PMP Course Companion</h1>
+<p>Turning the 35-hour course into full exam readiness · ECO July 2026 · works with <b>pmp-trainer.html</b> v2.0 · written 27 August 2026</p>
+</header>
+<nav>
+<button data-t="guide" class="active">Guide</button>
+<button data-t="lang">Exam language: FR or EN?</button>
+<button data-t="journal">Course journal</button>
+<button data-t="refs">PMI references</button>
+<button data-t="day">Exam day</button>
+</nav>
+<main>
+
+<!-- ================= GUIDE ================= -->
+<section class="tab active" id="tab-guide">
+<h2>0 · What the 35 hours are, and are not</h2>
+<div class="card">
+<p>The 35 contact hours are an <b>eligibility requirement</b> (PMI Certification Handbook): they must come from a course that includes a learning assessment. Self-study with the trainer does not count. Keep the certificate of completion: PMI audits a share of applications at random and asks for it.</p>
+<p>The course is <b>not</b> the exam preparation by itself. Even a good 35-hour course cannot cover the whole theory in depth and cannot replace calibrated practice. Treat the course as the <b>map</b>; the trainer and PMI Study Hall are the <b>territory</b>.</p>
+</div>
+<div class="tip"><b>Your course, checked on 27 August 2026.</b> "PMP Exam Prep Course 35 PDUs/Hours Updated for the 2026 Exam" (TIA Training, Andrew Ramdayal, Udemy Business, last updated August 2026): 35.5 hours, 271 lectures, explicitly built on the <b>July 2026 ECO</b> and the <b>PMBOK Guide 8th edition</b>, with 400+ practice questions, section quizzes, a full-length mock exam and a 30-day study plan. It does not include PMI Study Hall (a separate PMI subscription), so plan it for after the course. Section-by-section mapping to the trainer below.</div>
+
+<h2>1 · Before the course starts (2 to 3 hours)</h2>
+<div class="step"><div class="n">1</div><div>Open the trainer, <b>ECO Reference</b> tab: read the 26 task cards once and self-assess each one (To review / Fair / Mastered). This builds your personal weak-point map in the Dashboard.</div></div>
+<div class="step"><div class="n">2</div><div><b>Course</b> tab: chapter 16 (The 2026 exam: format, strategy, mindset), chapter 22 (situation decoder) and chapter 1 (fundamentals). This is the vocabulary the instructor will use from the first minute.</div></div>
+<div class="step"><div class="n">3</div><div>Run one 40-question <b>timed session</b>, all domains, without studying for it. The value is the untrained baseline.</div></div>
+<div class="step"><div class="n">4</div><div>Download the PMI PDFs (References tab) and skim the ECO (about 10 pages): exam questions paraphrase the exact wording of the tasks, so you must recognise it.</div></div>
+
+<h2>2 · During the course: the daily loop (30 to 45 min per day)</h2>
+<table>
+<tr><th>Step</th><th>Where in the trainer</th><th>Purpose</th></tr>
+<tr><td><b>Map</b></td><td>ECO tab: identify which tasks (P / PR / BE) the module addresses</td><td>Every exam question hangs from a task; a module that maps to nothing is background</td></tr>
+<tr><td><b>Consolidate</b></td><td>Course tab: read the matching chapter(s); search every term the instructor used that you cannot define in one sentence</td><td>Fill the depth the course skipped</td></tr>
+<tr><td><b>Practise</b></td><td>Practice tab, Training mode, domain filter on the module's domain, 15 to 20 questions</td><td>Turn knowledge into the PMI-mindset reflex</td></tr>
+<tr><td><b>Gap log</b></td><td>Journal tab, section Gaps</td><td>Every notion the instructor presented that the trainer does not cover, or covers differently, noted verbatim with the slide reference</td></tr>
+</table>
+<div class="tip"><b>The gap log is the most valuable output of the course for this project.</b> Bring it to the next session with Claude: each item is verified against the ECO / PMBOK and integrated into the trainer (new sections, corrected wording, new questions), then republished.</div>
+
+<h3>Your course, section by section (Udemy, TIA / Andrew Ramdayal, "PMP Exam Prep Course 35 PDUs/Hours Updated for the 2026 Exam", based on PMBOK 8)</h3>
+<p class="small">Read on 27 August 2026 from the course page: 16 sections, 271 lectures, 35.5 hours, 9 section quizzes and one full-length mock exam. The course teaches the <b>PMBOK 8 nomenclature</b> (6 principles, 7 performance domains, 40 processes); the trainer's chapter 23 gives that nomenclature and the correspondence with the PMBOK 6 names used in chapters 5 to 12 and 19.</p>
+<table>
+<tr><th>Course section</th><th>Length</th><th>Trainer chapters</th><th>ECO tasks</th></tr>
+<tr><td>1 Introduction · 2 Introduction to the PMP exam (ECO, requirements, question types, scoring, CCR)</td><td>1 h 10</td><td>16 The 2026 exam · ECO tab · Companion "Exam day"</td><td>all</td></tr>
+<tr><td>3 Project management terms (project, value, program/portfolio, life cycle, governance, stakeholders, PMO, structures, constraints, product vs project, leadership styles, AI)</td><td>1 h 56</td><td>1 Fundamentals · 9 Team &amp; leadership · 24 §4 · Glossary</td><td>PR1, PR2, BE1, BE5</td></tr>
+<tr><td>4 Project management principles (the 6 PMBOK 8 principles)</td><td>54 min</td><td><b>23 §2</b> · 21 (the 12 PMBOK 7 principles, background)</td><td>P3, BE7, BE8</td></tr>
+<tr><td>5 Project approaches (life cycles, predictive / adaptive / hybrid, focus areas)</td><td>1 h 12</td><td>2 Approaches · <b>23 §3</b></td><td>PR2, PR3</td></tr>
+<tr><td>6 Project performance domains (Governance, Scope, Schedule, Finance, Stakeholders, Resources, Risk)</td><td>55 min</td><td><b>23 §3</b> · 20 (PMBOK 7 domains, background)</td><td>PR1-PR10</td></tr>
+<tr><td>7 PMBOK 8 common ITTOs (EEF, OPA, documents, plan, expert judgment, data, decisions, meetings, change requests, reporting, updates)</td><td>1 h 08</td><td>19 Essential ITTOs · 17 Artifacts · 4 Change control</td><td>PR1, PR4, PR9</td></tr>
+<tr><td>8 PMBOK 8 processes (the 40 processes with ITTOs, contract types, estimating, CPM and critical chain, EVM formulas, closing)</td><td>15 h 24</td><td><b>23 §4-5</b> · 4 to 12 · 19 · Formulas tab · 24 §4 (critical chain)</td><td>PR1-PR10, BE2</td></tr>
+<tr><td>9 Agile mindset and leadership (manifesto, Declaration of Interdependence, Scrum, XP, Lean, Kanban, FDD, Crystal, SAFe, DA, servant leadership, team building, negotiation, facilitation, green/red zone, conflict levels, motivation theories)</td><td>5 h 11</td><td>3 Agile in depth · 18 Scaling · 9 Team &amp; leadership · <b>24 §3</b></td><td>P1-P8</td></tr>
+<tr><td>10 Agile product, delivery and hybrid (value delivery, agile charter, compliance, COCOMO, cost of change, MVP/MMF, user stories, story points, prioritisation, lead/cycle time, Little's law, CFD, technical debt, spikes, agile risk, agile contracting, CAS, Cynefin, Stacey, value stream, Kaizen, pre-mortem, retrospective, hybrid)</td><td>4 h 02</td><td><b>24 §1-3</b> · 3 · 11 Risk · 12 Contracts · 20 §5 (Cynefin, Stacey)</td><td>PR2, PR3, PR5, PR8, BE3, BE4</td></tr>
+<tr><td>11 AI in project management (adopting AI, responsible use, use cases)</td><td>30 min</td><td><b>24 §4</b></td><td>BE6, BE7</td></tr>
+<tr><td>12 PMP application (membership, filling the application, writing the experience descriptions, audit)</td><td>52 min</td><td>16 §4 Eligibility · Companion "Exam day"</td><td>—</td></tr>
+<tr><td>13 ECO review (People 1-8, Process 1-10, Business Environment 1-8)</td><td>55 min</td><td>ECO tab (26 cards) : do the self-assessment right after this section</td><td>all 26</td></tr>
+<tr><td>14 Exam mindset (the instructor's 50 mindset principles)</td><td>1 h 06</td><td>22 Situation decoder · 16 §2 Mindset</td><td>all</td></tr>
+<tr><td>15 Full-length mock exam · 16 Conclusion and 35-hour certificate</td><td>—</td><td>Practice tab, timed mode, then Study Hall mocks · keep the certificate for the application</td><td>—</td></tr>
+</table>
+<div class="tip"><b>What the course adds that the trainer did not have (integrated on 27 August 2026, trainer v2.0):</b> the whole PMBOK 8 nomenclature (chapter 23), and the agile metrics and coaching models of sections 9-10 (chapter 24: Little's law, lead/cycle time, CFD, MVP vs MMF, cost of change, COCOMO, Declaration of Interdependence, inverting the triangle, Gulf of Evaluation, green/red zone, success/failure mode, pre-mortem, value stream, critical chain, responsible AI). Not integrated on purpose: the instructor's own "50 mindset principles" (not a PMI source) and the course's question bank (copyrighted); use them inside the course.</div>
+<div class="tip"><b>Watch-points while following the course</b>: (1) the course is in English with automatic subtitles only; keep the trainer's glossary open for the French official terms. (2) Section 8 alone is 15 hours: follow it with chapter 23 §4 open and tick each of the 40 processes as you go. (3) The instructor's 30-day study plan (lecture 4) is a good pacing baseline; the companion's "after the course" plan adds the Study Hall mocks that the course cannot provide.</div>
+<h2>3 · After the course: the 4 to 6 weeks before the exam</h2>
+<div class="step"><div class="n">1</div><div><b>Week 1</b>: rework every "To review" task in the ECO tab until it is at least "Fair". Re-read chapters 16 and 22.</div></div>
+<div class="step"><div class="n">2</div><div><b>Weeks 2 to 4</b>: <b>PMI Study Hall</b> (Essentials or Plus), the only source with PMI-written questions in the 2026 formats (case study, multiple response, matching, hotspot). Target: at least 1 000 practice questions across sources and <b>two full 180-question / 240-minute mocks</b> with the two breaks, at the time of day of your real slot. The trainer's timed mode drills by domain; endurance is trained on full-length mocks only.</div></div>
+<div class="step"><div class="n">3</div><div><b>Booking rule</b>: book only when timed sessions give a stable 75 % or more on <b>every</b> domain and Study Hall mocks show "Target" or better everywhere. PMI does not publish the passing score; these thresholds are the usual advice of preparation providers, not an official cut-off.</div></div>
+<div class="step"><div class="n">4</div><div><b>Last week</b>: formulas read without computing, glossary in both languages, ECO tasks read aloud in English then in French. No new material in the last 48 hours.</div></div>
+</section>
+
+<!-- ================= LANGUAGE ================= -->
+<section class="tab" id="tab-lang">
+<h2>Passer l'examen en français ou en anglais ?</h2>
+<div class="card">
+<p><b>Ce que PMI propose, vérifié.</b> L'examen existe en anglais et en 14 autres langues, dont le français. Quand tu réserves une version traduite, <b>l'original anglais de chaque question reste accessible à tout moment pendant l'examen</b>. Ce n'est donc pas un choix « français OU anglais » : c'est « français avec l'anglais à portée de clic » contre « anglais seul ». Point à vérifier lors de la réservation sur Pearson VUE : plusieurs sources indiquent que l'affichage est en écran partagé et que certaines réponses peuvent n'être proposées qu'en anglais ; PMI ne le documente pas publiquement.</p>
+</div>
+<div class="vs">
+<div class="card"><h3>Version française + original anglais</h3>
+<p><span class="badge ok">Pour</span> Zéro risque de contresens sur les longues mises en situation (l'examen 2026 est très narratif : études de cas, scénarios de 5 à 8 lignes). La charge cognitive va au raisonnement, pas au décodage.</p>
+<p><span class="badge ok">Pour</span> L'anglais reste disponible pour trancher un mot clé ambigu (« FIRST », « BEST », « NEXT », un terme PMI traduit de façon inhabituelle).</p>
+<p><span class="badge bad">Contre</span> Les traductions PMI sont parfois littérales ; certains termes officiels français surprennent (« maîtrise des changements », « référence de base »). Il faut les avoir vus avant.</p>
+<p><span class="badge bad">Contre</span> Basculer coûte du temps : 180 questions en 240 min laissent 80 s par question. Basculer sur 20 % des questions est tenable ; sur 60 %, tu manques de temps.</p>
+</div>
+<div class="card"><h3>Version anglaise seule</h3>
+<p><span class="badge ok">Pour</span> Le vocabulaire PMI est né en anglais ; toutes les ressources de préparation (ECO, PMBOK, Study Hall, le trainer) sont en anglais. Tu révises et tu passes dans la même langue : pas de double encodage.</p>
+<p><span class="badge ok">Pour</span> C'est le vocabulaire opérationnel des organisations multilatérales et des postes internationaux : « stakeholder register », « change control board », « earned value », « definition of done ». Le préparer une fois sert ensuite tous les jours.</p>
+<p><span class="badge bad">Contre</span> Sur 4 heures, la fatigue linguistique existe même à un bon niveau ; une nuance mal lue en fin d'épreuve coûte une question.</p>
+<p><span class="badge bad">Contre</span> Aucun filet si un énoncé est mal compris.</p>
+</div>
+</div>
+<h3>Recommandation argumentée</h3>
+<div class="card">
+<p>Ta crainte (« me rajouter une complexité en anglais ») et ton opportunité (« dégager un vocabulaire spécifique applicable aux postes internationaux ») ne s'opposent pas, parce que la version française <b>inclut</b> l'anglais. Le choix rationnel est donc :</p>
+<div class="step"><div class="n">1</div><div><b>Réserver la version française</b> (filet de sécurité gratuit, aucun inconvénient structurel).</div></div>
+<div class="step"><div class="n">2</div><div><b>Préparer en anglais</b> : le trainer en mode EN, les termes appris d'abord en anglais, la traduction française officielle vue en second (glossaire EN → FR du trainer, sous-titres FR des 26 tâches). C'est exactement ce que recommandent les formateurs expérimentés : « courseware anglais même pour un examen traduit ».</div></div>
+<div class="step"><div class="n">3</div><div><b>Décider la langue de lecture le jour J avec une règle simple</b> : lire d'abord la version dans laquelle tu es le plus rapide sur tes examens blancs. Mesure-le : fais un examen blanc Study Hall en anglais et un en français, compare score et temps. Si l'écart de score est inférieur à 3 points et que l'anglais est aussi rapide, lis en anglais et garde le français comme filet. Sinon, lis en français et bascule uniquement sur les mots clés d'intention.</div></div>
+<p>Le bénéfice professionnel (vocabulaire PM anglais) est acquis dans les deux cas, parce qu'il vient de la préparation, pas de la langue de l'écran le jour de l'examen.</p>
+</div>
+<div class="tip"><b>Pense-bête</b> : les mots qui décident de la réponse sont presque toujours des mots d'intention en majuscules ou en position clé : <kbd>FIRST</kbd> <kbd>NEXT</kbd> <kbd>BEST</kbd> <kbd>MOST likely</kbd> <kbd>EXCEPT</kbd> <kbd>should have done</kbd>. C'est sur eux que la bascule vers l'anglais vaut le temps dépensé.</div>
+<p class="small">Sources : PMI, page PMP (liste des langues) ; Oliver F. Lehmann, « Exam Language » (accès à l'original anglais, recommandation) ; Key Consulting, « Language aids for PMP exam » (écran partagé, réponses en anglais, non confirmé par PMI). Conformité : liste des langues et accès à l'original ≈ 100 % ; modalités d'affichage ≈ 70 % (sources tierces, à vérifier à la réservation).</p>
+</section>
+
+<!-- ================= JOURNAL ================= -->
+<section class="tab" id="tab-journal">
+<h2>Course journal</h2>
+<p class="small">Everything typed here is saved in this browser automatically (localStorage). Export to JSON before changing computer, and bring the export to the next session with Claude. <b>Print</b> gives a clean paper version.</p>
+<div class="card">
+<div class="grid">
+<label>Training provider<input id="j-org" data-k="org" placeholder="Organisme"></label>
+<label>Dates<input id="j-dates" data-k="dates" placeholder="du … au …"></label>
+<label>Material aligned on ECO July 2026?<select data-k="eco"><option value="">?</option><option>Yes</option><option>No</option><option>Partly</option></select></label>
+<label>Study Hall access included?<select data-k="sh"><option value="">?</option><option>Yes</option><option>No</option></select></label>
+</div>
+</div>
+<div class="tools"><button class="btn primary" id="j-export">Export JSON</button><button class="btn" id="j-import">Import JSON</button><button class="btn" onclick="window.print()">Print</button><input type="file" id="j-file" accept=".json" hidden></div>
+
+<h3>Gaps: notions seen in class, absent or different in the trainer</h3>
+<table class="journal" id="t-gaps"><thead><tr><th style="width:70px">Day</th><th style="width:140px">Module / slide</th><th>Notion</th><th>What the course says</th><th>What the trainer says</th><th style="width:90px">Integrate?</th><th style="width:30px"></th></tr></thead><tbody></tbody></table>
+<button class="btn" data-add="gaps">+ Add a gap</button>
+
+<h3>Questions missed in class</h3>
+<table class="journal" id="t-miss"><thead><tr><th style="width:70px">Day</th><th style="width:90px">ECO task</th><th>Question (summary)</th><th>Mistake made</th><th>Expected reflex</th><th style="width:30px"></th></tr></thead><tbody></tbody></table>
+<button class="btn" data-add="miss">+ Add a question</button>
+
+<h3>Contradictions between the course and the trainer (to be checked at the source)</h3>
+<table class="journal" id="t-contra"><thead><tr><th>Point</th><th>Course</th><th>Trainer</th><th>Source to check</th><th style="width:30px"></th></tr></thead><tbody></tbody></table>
+<button class="btn" data-add="contra">+ Add a contradiction</button>
+
+<h3>Daily log</h3>
+<table class="journal" id="t-log"><thead><tr><th style="width:70px">Day</th><th>Modules covered</th><th>Trainer chapters read</th><th style="width:110px">Questions done / score</th><th style="width:30px"></th></tr></thead><tbody></tbody></table>
+<button class="btn" data-add="log">+ Add a day</button>
+</section>
+
+<!-- ================= REFERENCES ================= -->
+<section class="tab" id="tab-refs">
+<h2>PMI reference documents</h2>
+<div class="tip"><b>How to get them.</b> pmi.org refuses automated downloads from Claude's environment, so the PDFs are fetched by you: double-click <b>references/telecharger_references.bat</b> (Windows 10/11, built-in curl). It saves every free document below into the <b>references</b> folder. Check that each file is larger than 100 KB; a tiny file means the link moved.</div>
+<h3>Free official documents (public URLs, verified 27 August 2026)</h3>
+<table>
+<tr><th>File</th><th>Document</th><th>Why it matters</th></tr>
+<tr><td>PMI_PMP_Examination_Content_Outline_July2026.pdf</td><td><a href="https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/new-pmp-examination-content-outline-2026.pdf">PMP Examination Content Outline, July 2026</a></td><td><b>The</b> reference: 3 domains (33 / 41 / 26), 26 tasks and their enablers, 180 questions, 240 min, two 10-min breaks (first after the case-study section), question formats. The trainer's ECO tab is aligned on it word for word.</td></tr>
+<tr><td>PMI_Certification_Handbook.pdf</td><td><a href="https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/generic-certification-handbook.pdf">PMI Certification Handbook</a></td><td>Eligibility, application, audit, scheduling, retakes, fees, policies.</td></tr>
+<tr><td>PMI_CCR_Handbook.pdf</td><td><a href="https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/ccr-certification-requirements-handbook.pdf">Continuing Certification Requirements Handbook</a></td><td>Renewal: 60 PDUs over 3 years, Education vs Giving Back, Talent Triangle. Lightly tested; needed after you pass.</td></tr>
+<tr><td>PMI_Code_of_Ethics_and_Professional_Conduct.pdf</td><td><a href="https://www.pmi.org/-/media/pmi/documents/public/pdf/ethics/pmi-code-of-ethics.pdf">PMI Code of Ethics and Professional Conduct</a> (2025 edition)</td><td>Responsibility, Respect, Fairness, Honesty; aspirational vs mandatory standards. Ethics scenarios appear in every domain.</td></tr>
+<tr><td>Scrum_Guide_2020.pdf</td><td><a href="https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-US.pdf">The Scrum Guide, November 2020</a></td><td>Roles, events, artifacts, commitments: heavily tested.</td></tr>
+<tr><td>(web page)</td><td><a href="https://www.pmi.org/certifications/project-management-pmp/new-exam">PMI: what the new PMP exam means for you</a></td><td>PMI's own summary: AI, sustainability, value focus; eligibility expanded to apprenticeships and training, 10-year experience window.</td></tr>
+</table>
+<h3>Paid or member-only references (download from your PMI account)</h3>
+<p class="small">PMI members download the standards as PDF from <a href="https://www.pmi.org/standards">pmi.org/standards</a>. Save them in the references folder with these names.</p>
+<table>
+<tr><th>Suggested file name</th><th>Document</th><th>Relevance</th></tr>
+<tr><td>PMBOK_Guide_8th_Edition.pdf</td><td><b>A Guide to the Project Management Body of Knowledge, 8th edition (November 2025)</b>, with The Standard for Project Management</td><td><b>The primary reference of the 2026 exam</b> (with the Agile Practice Guide): 6 principles, 7 performance domains, 5 focus areas, 40 processes with ITTOs, AI appendix. Trainer chapter 23. Your course is built on it.</td></tr>
+<tr><td>PMBOK_Guide_7th_Edition.pdf</td><td>PMBOK Guide, 7th edition (2021)</td><td>12 principles, 8 performance domains, models / methods / artifacts, tailoring. Background; trainer chapters 20 and 21.</td></tr>
+<tr><td>PMBOK_Guide_6th_Edition.pdf</td><td>PMBOK Guide, 6th edition (2017)</td><td>49 processes, ITTOs, EVM, CPM: the substance is unchanged in PMBOK 8, but the process names are; use chapter 23 §5 to translate. Trainer chapters 5 to 12, 17, 19.</td></tr>
+<tr><td>Agile_Practice_Guide.pdf</td><td>Agile Practice Guide (PMI and Agile Alliance, 2017)</td><td>About 60 % of the exam is agile or hybrid.</td></tr>
+<tr><td>Process_Groups_A_Practice_Guide.pdf</td><td>Process Groups: A Practice Guide (2022)</td><td>Process-based view aligned with PMBOK 7.</td></tr>
+</table>
+<div class="tip"><b>Naming note.</b> There is no document called the "PMP BOK": the body of knowledge is the <b>PMBOK Guide</b>. The exam is not based on a single book; PMI writes questions from the ECO, and the reference list for the 2026 exam names the PMBOK Guide 8th edition and the Agile Practice Guide.</div>
+<h3>Deliberately not here</h3>
+<p>No third-party question dumps: forbidden by the PMI Code of Ethics and usually wrong for the 2026 exam. <a href="https://www.pmi.org/shop/p-/digital-product/pmp-study-hall">PMI Study Hall</a> (subscription) is the only practice bank produced by PMI itself and the recommended complement for question volume and the new formats.</p>
+</section>
+
+<!-- ================= EXAM DAY ================= -->
+<section class="tab" id="tab-day">
+<h2>Exam-day facts</h2>
+<div class="grid">
+<div class="card"><h3>Format (ECO, July 2026)</h3><p>180 questions (10 unscored pretest) · 240 minutes · two 10-minute breaks: the first after the case-study section, the second about halfway through the independent questions · <b>no return</b> to earlier questions after a break · formats: single and multiple response, drag-and-drop, practicum / case study.</p></div>
+<div class="card"><h3>Identity and logistics</h3><p>Two valid IDs whose name matches your PMI profile exactly. Test centre: arrive 30 minutes early. Online (OnVUE): run the system check the day before, clear desk, no second screen. Check the Certification Handbook edition you downloaded for the current rules.</p></div>
+<div class="card"><h3>Language</h3><p>French version booked, English original available on screen. Read intention words (<kbd>FIRST</kbd>, <kbd>NEXT</kbd>, <kbd>BEST</kbd>, <kbd>EXCEPT</kbd>) in English whenever the French feels ambiguous. See the language tab for the decision rule.</p></div>
+<div class="card"><h3>Pacing</h3><p>80 seconds per question on average. Flag and move on after 2 minutes. Use the first break to reset, not to review. Results: preliminary pass / fail on screen; official report by domain (Needs Improvement to Above Target) a few days later.</p></div>
+</div>
+<div class="conf"><b>Conformity of this companion.</b> Exam structure, breaks, formats, domains: PMI ECO July 2026 (PDF verified 27/08/2026), about 100 %. Eligibility, audit, ID rules: PMI Certification Handbook (generic edition; the PMP-specific handbook may differ in details), about 95 %. Course-section mapping: read directly from the Udemy course page on 27/08/2026 (titles and durations), mapped to trainer chapters by the author, about 95 %. PMBOK 8 structure (6 / 7 / 5 / 40): three concordant secondary sources (BrainBOK, MyPrepPilot, Learning Tree) plus the course structure itself; the guide itself was not consulted, about 90 %. Language-aid display details: third-party sources, about 70 %. Volume recommendations (1 000 questions, two full mocks, 75 % threshold): preparation-market consensus, indicative only.</div>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$$('nav button').forEach(b=>b.onclick=()=>{$$('nav button').forEach(x=>x.classList.toggle('active',x===b));$$('section.tab').forEach(s=>s.classList.toggle('active',s.id==='tab-'+b.dataset.t));try{localStorage.setItem('pmpc.tab',b.dataset.t)}catch(e){}});
+try{const t=localStorage.getItem('pmpc.tab');if(t){const b=$(`nav button[data-t=${t}]`);if(b)b.click()}}catch(e){}
+/* journal */
+const COLS={gaps:['day','module','notion','course','trainer','integrate'],miss:['day','task','question','mistake','reflex'],contra:['point','course','trainer','source'],log:['day','modules','chapters','score']};
+const WIDE={notion:1,course:1,trainer:1,question:1,mistake:1,reflex:1,point:1,source:1,modules:1,chapters:1};
+let J={meta:{},gaps:[],miss:[],contra:[],log:[]};
+try{const s=localStorage.getItem('pmpc.journal');if(s)J=Object.assign(J,JSON.parse(s))}catch(e){}
+function save(){try{localStorage.setItem('pmpc.journal',JSON.stringify(J))}catch(e){}}
+function render(){
+ $$('[data-k]').forEach(el=>{el.value=J.meta[el.dataset.k]||'';el.oninput=()=>{J.meta[el.dataset.k]=el.value;save()}});
+ for(const k in COLS){const tb=$('#t-'+k+' tbody');tb.innerHTML='';
+  J[k].forEach((row,i)=>{const tr=document.createElement('tr');
+   COLS[k].forEach(c=>{const td=document.createElement('td');let el;
+    if(c==='integrate'){el=document.createElement('select');el.innerHTML='<option value="">?</option><option>Yes</option><option>No</option><option>Check</option>'}
+    else el=document.createElement(WIDE[c]?'textarea':'input');
+    el.value=row[c]||'';el.oninput=()=>{row[c]=el.value;save()};td.appendChild(el);tr.appendChild(td)});
+   const td=document.createElement('td');td.innerHTML='<button class="del" title="Delete">×</button>';td.querySelector('button').onclick=()=>{if(confirm('Delete this row?')){J[k].splice(i,1);save();render()}};tr.appendChild(td);tb.appendChild(tr)});
+ }
+}
+$$('[data-add]').forEach(b=>b.onclick=()=>{J[b.dataset.add].push({});save();render()});
+$('#j-export').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(J,null,1)],{type:'application/json'}));a.download='pmp-course-journal.json';a.click()};
+$('#j-import').onclick=()=>$('#j-file').click();
+$('#j-file').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{J=Object.assign({meta:{},gaps:[],miss:[],contra:[],log:[]},JSON.parse(t));save();render()}catch(x){alert('Invalid JSON')}})};
+render();
+</script>
+</body>
+</html>
