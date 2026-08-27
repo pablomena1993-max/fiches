@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8a6520">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="UK Talk">
+<meta name="description" content="Guide d'anglais britannique oral : conversations de pub, réactions, jurons dosés, anecdotes, entretien professionnel formel, détecteur de calques et simulateur.">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='34' fill='%23f5f0e8'/%3E%3Ctext x='90' y='118' font-size='92' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EUK%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f5f0e8'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EUK%3C/text%3E%3C/svg%3E">
+<link rel="manifest" id="manifest-link">
+<title>UK Conversation · pub &amp; interview</title>
+<style>
+
+:root{
+  --bg:#f5f0e8; --card:#faf7f0; --border:#d8ceb4; --gold:#8a6520; --ink:#3a2e18;
+  --ink-soft:#6b5c40; --accent:#7a4a2a; --ok:#4a6b3a; --warn:#9a5a20;
+  --radius:12px;
+  --pad-l:max(16px, env(safe-area-inset-left));
+  --pad-r:max(16px, env(safe-area-inset-right));
+  --pad-t:max(12px, env(safe-area-inset-top));
+  --pad-b:max(20px, env(safe-area-inset-bottom));
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  font-size:17px; line-height:1.6;
+  padding:var(--pad-t) var(--pad-r) var(--pad-b) var(--pad-l);
+}
+.wrap{max-width:880px;margin:0 auto}
+
+header.top{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 22px; margin-bottom:16px;
+}
+header.top h1{font-size:1.5rem;margin:0 0 6px;line-height:1.25;color:var(--gold);letter-spacing:.2px}
+header.top .sub{font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{
+  font-size:.76rem;letter-spacing:.4px;text-transform:uppercase;
+  background:#efe7d6;border:1px solid var(--border);border-radius:99px;
+  padding:4px 11px;color:var(--ink-soft);font-family:system-ui,sans-serif;
+}
+.badge.strong{background:var(--gold);color:#faf7f0;border-color:var(--gold)}
+
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
+  position:sticky; top:0; z-index:20;
+  background:var(--bg); padding:8px 0;
+}
+button{
+  font-family:system-ui,-apple-system,sans-serif;font-size:.85rem;
+  background:var(--card);color:var(--ink);border:1px solid var(--border);
+  border-radius:99px;padding:9px 15px;cursor:pointer;min-height:42px;
+  transition:background .15s,border-color .15s;
+}
+button:hover{background:#efe7d6}
+button.on{background:var(--gold);color:#faf7f0;border-color:var(--gold)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.intro-note{
+  background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;font-size:.94rem;color:var(--ink-soft);
+}
+.intro-note strong{color:var(--ink)}
+
+section.seg{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:14px;overflow:hidden;
+}
+.seg-head{
+  display:flex;align-items:flex-start;gap:12px;width:100%;
+  padding:15px 18px;cursor:pointer;background:none;border:none;border-radius:0;
+  text-align:left;min-height:0;
+}
+.seg-head:hover{background:#f2ecdf}
+.seg-num{
+  flex:0 0 auto;font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;
+  background:var(--gold);color:#faf7f0;border-radius:6px;padding:3px 8px;margin-top:3px;
+}
+.seg-titles{flex:1 1 auto}
+.seg-title{font-size:1.06rem;font-weight:700;color:var(--gold);display:block}
+.seg-fr{font-size:.9rem;color:var(--ink-soft);display:block;margin-top:2px;font-style:italic}
+.chev{flex:0 0 auto;color:var(--ink-soft);font-size:1.1rem;margin-top:4px;transition:transform .2s}
+section.seg.open .chev{transform:rotate(90deg)}
+
+.seg-body{display:none;padding:0 18px 18px}
+section.seg.open .seg-body{display:block}
+
+h3.sub{
+  font-family:system-ui,sans-serif;font-size:.76rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border);
+}
+h3.sub:first-child{margin-top:6px}
+
+ol.variantes{list-style:none;margin:0;padding:0;counter-reset:v}
+ol.variantes li.var{
+  counter-increment:v;position:relative;padding:11px 12px 11px 40px;
+  border-bottom:1px dashed var(--border);
+}
+ol.variantes li.var:last-child{border-bottom:none}
+ol.variantes li.var::before{
+  content:counter(v);position:absolute;left:10px;top:12px;
+  font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft);
+  border:1px solid var(--border);border-radius:50%;width:21px;height:21px;
+  display:flex;align-items:center;justify-content:center;background:var(--bg);
+}
+li.var.picked{background:#f0ead9;border-left:3px solid var(--gold);border-radius:6px}
+.es{display:block;font-size:1.03rem;color:var(--ink)}
+.meta{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.75rem;color:var(--ink-soft)}
+.tag{
+  display:inline-block;border-radius:99px;padding:1px 8px;margin-right:6px;
+  border:1px solid var(--border);background:#efe7d6;
+}
+.tag.idio{background:#e6ecdd;border-color:#b9c8a6;color:#3f5530}
+.tag.sout{background:#e9e2f0;border-color:#c2b4d2;color:#4a3a5e}
+.risk{letter-spacing:1px;color:var(--warn)}
+.note-var{font-style:italic}
+
+.transitions{margin:10px 0 0;padding:12px 14px;background:#f0ead9;border-radius:8px;font-size:.94rem}
+.transitions span.ch{display:inline-block;margin:3px 8px 3px 0;padding:2px 9px;background:var(--card);border:1px solid var(--border);border-radius:99px;font-size:.9rem}
+
+ul.rebonds{list-style:none;margin:0;padding:0}
+ul.rebonds li{padding:9px 0 9px 20px;position:relative;border-bottom:1px dashed var(--border);font-size:.95rem}
+ul.rebonds li:last-child{border-bottom:none}
+ul.rebonds li::before{content:"?";position:absolute;left:0;top:9px;color:var(--gold);font-weight:700}
+ul.rebonds .amorce{display:block;margin-top:3px;color:var(--accent)}
+
+.alerte{
+  background:#f7efe2;border:1px solid #e0cba8;border-left:4px solid var(--warn);
+  border-radius:8px;padding:11px 14px;margin:9px 0;font-size:.93rem;
+}
+.alerte strong{color:var(--warn)}
+
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin-top:8px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-family:system-ui,sans-serif;font-size:.74rem;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-soft)}
+td.es-col{font-weight:600;color:var(--gold);white-space:nowrap}
+
+
+.tb-sep{width:1px;background:var(--border);margin:2px 4px;align-self:stretch}
+.slot:hover{background:#f0ead9;border-bottom-color:var(--gold)}
+.slot.conn{color:var(--accent);font-style:italic;border-bottom-style:dotted}
+.slot.flash{background:#e8dfc6}
+
+.slot.active{background:#e8dfc6;border-bottom-color:var(--gold)}
+.slot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#popover{
+  position:absolute;z-index:200;display:none;
+  background:var(--card);border:1px solid var(--gold);border-radius:10px;
+  box-shadow:0 6px 22px rgba(58,46,24,.18);
+  padding:6px;max-height:60vh;overflow-y:auto;
+  font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+}
+#popover.show{display:block}
+#popover .pop-head{
+  font-family:system-ui,sans-serif;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);padding:6px 10px 8px;border-bottom:1px solid var(--border);margin-bottom:4px;
+}
+#popover .pop-item{
+  padding:9px 11px;border-radius:7px;cursor:pointer;line-height:1.45;
+  border-left:3px solid transparent;
+}
+#popover .pop-item:hover{background:#f0ead9}
+#popover .pop-item.current{background:#eae1c9;border-left-color:var(--gold)}
+#popover .pop-es{display:block;font-size:1rem;color:var(--ink)}
+#popover .pop-meta{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft)}
+#popover .pop-note{font-style:italic}
+@media (max-width:520px){
+  #popover .pop-es{font-size:.96rem}
+  #popover{max-height:52vh}
+}
+
+body.masque .es{filter:blur(5px);opacity:.55;cursor:pointer;transition:filter .18s,opacity .18s}
+body.masque li.var.revele .es{filter:none;opacity:1}
+body.masque .meta{visibility:hidden}
+body.masque li.var.revele .meta{visibility:visible}
+
+footer.jv{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 18px;margin-top:22px;font-size:.86rem;color:var(--ink-soft);
+}
+footer.jv h2{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink);margin:0 0 8px;font-family:system-ui,sans-serif}
+footer.jv ul{margin:0;padding-left:18px}
+footer.jv li{margin-bottom:5px}
+
+@media (max-width:520px){
+  body{font-size:16px}
+  header.top{padding:16px}
+  .seg-head{padding:13px 14px}
+  .seg-body{padding:0 14px 15px}
+  ol.variantes li.var{padding-left:36px}
+}
+
+/* ---------- Onglets ---------- */
+nav.tabs{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+nav.tabs button{
+  font-size:.82rem;padding:8px 13px;min-height:38px;border-radius:8px;
+  display:flex;align-items:center;gap:7px;
+}
+nav.tabs button .tn{
+  font-size:.68rem;font-weight:700;background:#efe7d6;border:1px solid var(--border);
+  border-radius:4px;padding:1px 5px;color:var(--ink-soft);
+}
+nav.tabs button.on .tn{background:rgba(250,247,240,.25);border-color:rgba(250,247,240,.4);color:#faf7f0}
+.block{display:none}
+.block.on{display:block}
+.block-intro{
+  background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:var(--radius);padding:13px 17px;margin-bottom:16px;font-size:.92rem;color:var(--ink-soft);
+}
+.block-intro strong{color:var(--ink)}
+.continu{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:16px;
+}
+.continu .lead{font-size:.88rem;color:var(--ink-soft);font-family:system-ui,sans-serif;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.continu .lead strong{color:var(--ink)}
+.continu .texto{font-size:1.12rem;line-height:2.05;margin:0}
+.continu .metrics{
+  margin-top:16px;padding-top:12px;border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);
+  display:flex;flex-wrap:wrap;gap:16px;
+}
+.continu .metrics b{color:var(--ink);font-weight:600}
+.continu .howto{margin-top:14px;font-size:.86rem;color:var(--ink-soft);font-family:system-ui,sans-serif}
+body.vue-con .block.on section.seg{display:none}
+body.vue-seg .block.on .continu{display:none}
+body.vue-con .only-seg,body.vue-seg .only-con{display:none}
+body.sans-continu .only-con,body.sans-continu #btn-view-con,body.sans-continu #btn-view-all{display:none}
+@media (max-width:520px){
+  nav.tabs button{font-size:.76rem;padding:7px 10px}
+  .continu{padding:16px 15px}
+}
+@media print{
+  nav.tabs,.toolbar{display:none!important}
+  .block{display:block!important}
+  .seg-body{display:block!important}
+  .continu{display:none!important}
+}
+
+/* ---------- Simulador ---------- */
+.sim-filters{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-family:system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);margin-bottom:14px}
+.sim-filters label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.sim-lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;margin-right:2px}
+.sim-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.sim-q-head{display:flex;justify-content:space-between;font-family:system-ui,sans-serif;font-size:.74rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:10px}
+.sim-q{font-size:1.35rem;line-height:1.5;margin:0 0 14px;color:var(--ink)}
+.sim-timer{position:relative;height:10px;background:#efe7d6;border-radius:99px;overflow:hidden;margin-bottom:14px}
+.sim-bar{height:100%;width:0;background:var(--gold);transition:width .25s linear}
+.sim-timer.over .sim-bar{background:#b0432f}
+.sim-clock{position:absolute;right:8px;top:-20px;font-family:system-ui,sans-serif;font-size:.78rem;color:var(--ink-soft)}
+.sim-actions{display:flex;flex-wrap:wrap;gap:8px}
+.sim-answer{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px}
+.sim-answer.show{display:block}
+.sim-fact,.sim-amorce{font-size:.98rem;margin:0 0 14px}
+.sim-amorce{font-style:italic}
+.sim-hint{font-family:system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sim-hint button{min-height:30px;padding:4px 11px;font-size:.78rem}
+.sim-vars li.var{cursor:pointer}
+.sim-vars li.var.lead-var{background:#efe7d6;border-radius:8px}
+.sim-go{font-family:system-ui,sans-serif;font-size:.84rem;margin:12px 0 0}
+.sim-go a{color:var(--gold)}
+body.sim-on .toolbar{display:none}
+button.mini{min-height:28px;padding:3px 10px;font-size:.74rem}
+.sim-modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chuleta{border-left-color:#b0432f}
+.chu-list li.var{cursor:default}
+.chu-src{display:block;font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft);margin-top:3px}
+.ent-table{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:.82rem;margin-bottom:10px}
+.ent-table th,.ent-table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.ent-table td.over{color:#b0432f;font-weight:600}
+.ent-table td.under{color:#7a6a3a}
+#lus-text{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:10px;resize:vertical}
+.lus-status{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);align-self:center}
+.lus-marked{line-height:1.9;font-size:1.05rem}
+.lus-marked mark{background:#f3d9c4;color:#7a2a1a;padding:1px 4px;border-radius:4px;border-bottom:2px solid #b0432f}
+.lus-marked mark.warn{background:#efe7d6;color:var(--ink);border-bottom-color:var(--gold)}
+.lus-list{padding-left:18px;font-size:.92rem}.lus-list li{margin-bottom:5px}
+.lus-list b{color:#b0432f}
+button.tts{min-height:22px;padding:0 7px;font-size:.66rem;margin:2px 0 4px;border-radius:6px;background:#efe7d6;display:inline-block}
+li.var .es+button.tts{float:right;margin-left:10px}
+body.masque button.tts{visibility:hidden}
+.tts-active{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+.tag.vul{background:#f3d9c4;color:#7a2a1a;border-color:#e0b898}
+.tag.muy{background:#e9b8b0;color:#5a1a10;border-color:#c98f85}
+.tag.bcn{background:#dfe7f3;color:#243c66;border-color:#b9c8e0}
+</style>
+<body class="vue-seg">
+<div class="wrap">
+
+<header class="top">
+  <h1>UK Conversation · pub &amp; interview</h1>
+  <p class="sub">Guide d'anglais britannique oral, en deux registres : se faire des amis au pub (réponses, réactions, jurons dosés, anecdotes) et se présenter en entretien professionnel (registre formel, hedging, boîte à outils d'interaction). Compagnon oral du British Trainer v3. Registre étiqueté <em>casual</em> / <em>vulgar</em> / <em>very vulgar</em> / <em>formal</em> / <em>polished</em>.</p>
+  <div class="badges">
+    <span class="badge strong">Conformité linguistique ≈ 92 %</span>
+    <span class="badge">9 blocs</span>
+    <span class="badge">37 segments</span>
+    <span class="badge">202 formulations</span>
+    <span class="badge">Faits : dictées CLOE du 27/08/2026</span>
+    <span class="badge">v1 · 27/08/2026</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button data-b="1"><span class="tn">1</span>Me, in twenty seconds</button>
+  <button data-b="2"><span class="tn">2</span>Music &amp; football</button>
+  <button data-b="3"><span class="tn">3</span>Down the pub</button>
+  <button data-b="4"><span class="tn">4</span>Reactions &amp; noises</button>
+  <button data-b="5"><span class="tn">5</span>Plans &amp; leaving</button>
+  <button data-b="6"><span class="tn">6</span>Stories</button>
+  <button data-b="7"><span class="tn">7</span>Interview mode</button>
+  <button data-b="8"><span class="tn">8</span>Toolkit &amp; SOS</button>
+  <button data-b="9" class="tab-sim"><span class="tn">9</span>Simulator</button>
+</nav>
+
+<div class="toolbar">
+  <button id="btn-view-seg" class="on">Vue segments</button>
+  <button id="btn-view-con">Vue continue</button>
+  <button id="btn-view-all">Vue complète</button>
+  <span class="tb-sep"></span>
+  <button id="btn-open" class="only-seg">Tout déplier</button>
+  <button id="btn-mask" class="only-seg">Mode production</button>
+  <button id="btn-sobrio" class="only-con">Version simple</button>
+  <button id="btn-rico" class="only-con">Version riche</button>
+  <button id="btn-shuffle" class="only-con">Recombiner</button>
+  <button id="btn-print">Imprimer</button>
+</div>
+
+<div class="block" data-b="1" data-continu="1">
+  <div class="block-intro"><strong>Bloc 1 · Me, in twenty seconds.</strong> Ce qu'on vous demande dans les dix premières minutes, et ce que vous répondez sans faire un exposé. Règle britannique : réponse courte, une pointe d'autodérision, et la troisième phrase est une question à l'autre. Le Britannique se méfie de qui se vend ; il adore qui se moque de soi. <em>Vue continue disponible : votre « pitch » informel, à dire d'un trait puis à découper.</em></div>
+<div class="continu">
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage pour voir les formulations, cliquez pour changer. Les chevilles en italique sont les mots qui font « parlé ». Trop long pour un vrai pub : n'en dites qu'un tiers et laissez l'autre poser la question suivante.</p>
+  <p class="texto"></p>
+  <div class="metrics">
+    <span><b class="m-words">0</b> mots</span>
+    <span>durée estimée <b class="m-time">0</b> à 150 mots par minute</span>
+    <span><b class="m-combi">0</b> combinaisons possibles</span>
+  </div>
+  <p class="howto">Dites-le à voix haute, puis coupez-le en trois répliques séparées par une question à l'autre. <button class="tts-all mini">Listen to the text</button> <button class="tts-stop mini">Stop</button></p>
+</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Where are you from, then?</span><span class="seg-fr">Fait dicté : grandi à la campagne à côté de Lyon, village de pierres dorées (Oingt, Beaujolais), famille d'origine espagnole (Andalousie côté père, Pays basque côté mère).</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Well,|So,|Right, so|Ah,">
+      <li class="var"><span class="es">I'm French — a tiny village near Lyon. Spanish family, though, so it's complicated.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« so it's complicated » en clin d'œil : l'hameçon qui relance</span></span></li>
+      <li class="var"><span class="es">proper middle-of-nowhere France — a village of about a thousand people near Lyon. All vineyards and old stone.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« proper middle of nowhere » = la cambrousse profonde ; « proper » intensifieur très britannique</span></span></li>
+      <li class="var"><span class="es">French passport, Spanish surname, Brazilian address. Bit of a mess, really.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">présentation à trois temps + « bit of a mess, really » : autodérision et understatement, très UK</span></span></li>
+      <li class="var"><span class="es">a little wine village near Lyon — golden stone houses, the postcard sort of thing. Sounds lovelier than my teenage years there felt.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">la chute autodérisoire est la politesse britannique du pittoresque</span></span></li>
+      <li class="var"><span class="es">Lyon — well, the countryside next to it. Half Andalusian, half Basque, raised French. Long story.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« long story » promet une suite : on vous reposera la question</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Spanish family? Whereabouts?<span class="amorce">Almería on my dad's side, Basque Country on my mum's. And you — you from round here?</span></li>
+      <li>Ah, Lyon! The food, right?<span class="amorce">Yeah, it takes itself very seriously, food-wise. To be fair, it delivers. You lot don't do too badly either these days.</span></li>
+      <li>What brings you over here?<span class="amorce">Voir segment 02.</span></li>
+    </ul>
+    <div class="alerte"><strong>« Then » et « mate ».</strong> Le « then » final (<em>Where are you from, then?</em>) n'ajoute rien au sens : c'est la cheville d'oralité qui rend la question sociable. <em>Mate</em> est le vocatif universel entre hommes de 20 à 50 ans (au Nord aussi <em>pal</em>, <em>love</em> tous genres chez les commerçants) ; ne l'utilisez pas en entretien, partout ailleurs à volonté. Répondre en retournant la question (<em>And you — from round here?</em>) est attendu : un Britannique ne supporte pas l'interrogatoire unilatéral.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">What brings you over? How long are you here for?</span><span class="seg-fr">Faits dictés : vit à Rio depuis 2020 (6 ans et demi), mutation interne en cours vers Barcelone (idéalement mars-mai 2027) ; a vu un match à Anfield. Adaptez la raison du séjour à la réalité du moment.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Well,|To be honest,|Basically,|So,">
+      <li class="var"><span class="es">just over for a bit — seeing the city, seeing some friends. I live in Rio, so I take my Europe in doses.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« in doses » amuse ; « Rio » déclenche à coup sûr la question suivante</span></span></li>
+      <li class="var"><span class="es">bit of work, bit of wandering. I'm based in Brazil these days, moving to Barcelona next year, so Europe's slowly pulling me back.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« bit of X, bit of Y » : le rythme binaire décontracté très parlé</span></span></li>
+      <li class="var"><span class="es">honestly? Mostly the football. I've wanted to see a match here for years.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">à n'employer que si c'est vrai ce jour-là ; au Royaume-Uni c'est une raison de voyage parfaitement respectable</span></span></li>
+      <li class="var"><span class="es">I'm sorting out a move back to Europe with work — Barcelona, hopefully next spring. So I'm doing the rounds a bit before I settle.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« sorting out » = organiser ; « doing the rounds » = faire la tournée</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Rio?! What's that like?<span class="amorce">Voir segment 04 — la question arrive toujours.</span></li>
+      <li>Barcelona, nice. Why there?<span class="amorce">Family's Spanish, weather's kind, and it's the one European city that feels a bit like Rio. Have you been?</span></li>
+      <li>First time in the UK?<span class="amorce">Si non : No — I've been over a few times. I even made it to Anfield once, which for me was basically a pilgrimage. Puis voir bloc 2, segment 03.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le piège « since / for ».</strong> Français et portugais poussent vers <em>« I live here since 2020 »</em>. L'anglais exige le present perfect et distingue : <em>I've lived in Rio <b>since</b> 2020</em> (point de départ) / <em>I've lived there <b>for</b> six and a half years</em> (durée). C'est LE calque qui trahit le francophone dès la deuxième phrase ; le détecteur du bloc 9 le repère.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">What do you do?</span><span class="seg-fr">Fait dicté : entreprise d'énergies renouvelables et d'efficacité énergétique ; longtemps chef de projet solaire ; maintenant finance, stratégie, gestion multi-pays ; vise à terme les organisations internationales.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses, de la plus courte à la plus complète</h3>
+    <ol class="variantes" data-conn="Oh,|Well,|Me?|So,">
+      <li class="var"><span class="es">renewables. Solar panels, basically.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« renewables » tout court est le mot de la conversation, pas « renewable energy sector »</span></span></li>
+      <li class="var"><span class="es">I work in solar — ran projects for years, now I'm more on the numbers-and-strategy side of things.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« the … side of things » : le flou décontracté typiquement britannique</span></span></li>
+      <li class="var"><span class="es">I'm an engineer, but the talking kind, not the spreadsheet kind. Solar farms, mostly on factory roofs.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">autodérision sur le cliché de l'ingénieur : fonctionne aussi bien qu'en Espagne</span></span></li>
+      <li class="var"><span class="es">solar energy — and the long game is to end up somewhere more public-interest, international organisations, that sort of thing. We'll see.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">version longue, à ne sortir que si on vous relance ; « we'll see » désamorce la grandiloquence</span></span></li>
+      <li class="var"><span class="es">I put solar panels on roofs. Well — I don't personally, you understand. I mostly send emails about it.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">la vanne anti-corporate : très appréciée ; ne vous survendez jamais au pub</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Decent money in that?<span class="amorce">Pays for the pints, let's put it that way. What about you, what do you do?</span></li>
+      <li>Solar? In this country? Good luck.<span class="amorce">Ha — you'd be surprised. Scotland's basically one big wind farm these days. But yeah, I'll grant you the sun's not your strong suit.</span></li>
+    </ul>
+    <div class="alerte"><strong>Trente secondes maximum sur le boulot,</strong> comme en Espagne mais pour une raison différente : parler salaire, réussite ou ambition à un inconnu est un tabou de classe au Royaume-Uni. <em>What do you do?</em> est une politesse ; la modestie ostentatoire (<em>I mostly send emails</em>) est la bonne monnaie. Jamais « I earn », jamais « my career ». Et retournez la question vite.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Rio! What's it actually like?</span><span class="seg-fr">Faits dictés : incroyable, ville unique ; été perpétuel ; soirées, samba, musique, voyages, gens ; très facile de se faire des copains ; deux fois moins cher qu'en France ; sécurité : pas un problème quand on sait se comporter.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Honestly,|Mate,|Well,|Put it this way:">
+      <li class="var"><span class="es">it's ridiculous. Summer all year, music on every corner, and you make friends in about two days.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« ridiculous » positif = « un truc de dingue » ; l'équivalent exact de « una pasada »</span></span></li>
+      <li class="var"><span class="es">there's nowhere like it. Beach, mountains, samba, parties — and about half the price of France.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">six years of summer, basically. I now understand why nobody ever leaves.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">bloody brilliant, to be honest. It's a madhouse, but in the best way — always something on, always someone up for it.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">« bloody » : juron doux quasi universel ; « up for it » = partant</span></span></li>
+      <li class="var"><span class="es">the best bit is the people. You'd be amazed how fast strangers become mates out there.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« you'd be amazed » : l'accroche qui invite la question suivante</span></span></li>
+    </ol>
+    <h3 class="sub">Sur la sécurité, la question qui arrive toujours</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">Dangerous? Less than you'd think. You learn where to go and where not to, and that's about it.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Six years, zero trouble. But I don't act the tourist — phone stays in the pocket, and I don't wander anywhere daft.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« daft » = idiot, doux et très britannique ; « act the tourist » = jouer au touriste</span></span></li>
+      <li class="var"><span class="es">Things can happen, same as anywhere. Bit of street sense and you're grand.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« street sense » = avoir de la rue ; « you're grand » plutôt irlandais-nord, compris partout</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>What about the favelas?<span class="amorce">I've worked in a few and played music in a few. It's not what the films show — or not only that. Ever been to Brazil?</span></li>
+      <li>And carnival? Is it like on telly?<span class="amorce">Better — because you don't watch it, you play in it. Voir bloc 6, Stories.</span></li>
+      <li>I've always wanted to go.<span class="amorce">Do it. I'll sort you an itinerary and introduce you to half of Rio.</span></li>
+    </ul>
+    <div class="alerte"><strong>Calibrez l'enthousiasme.</strong> Le Britannique se méfie du superlatif sincère : après deux phrases enthousiastes, redescendez d'un cran avec une pointe d'ironie (<em>It does rain there too, mind</em>). L'understatement n'interdit pas l'enthousiasme, il exige qu'on le fasse suivre d'un clin d'œil. <em>Mind</em> en fin de phrase = « cela dit ».</div>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">05</span><span class="seg-titles"><span class="seg-title">Your English is good — where's the accent from?</span><span class="seg-fr">Faits dictés : portugais parlé parfaitement avec un accent « toujours dégueulasse » ; l'espagnol en souffre (« portugnol ») ; français langue maternelle. En anglais : accent mixte français-brésilien, à assumer en premier.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Rire de son accent avant les autres</h3>
+    <ol class="variantes" data-conn="Ha,|Well,|Yeah,|Ah,">
+      <li class="var"><span class="es">it's French with a Brazilian topping. Nobody can place it, including me.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">fair warning: if a Portuguese word falls out mid-sentence, I'm not drunk, it's just Rio leaking.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« fair warning » + « leaking » : la vanne qui désamorce toutes les fautes de la soirée</span></span></li>
+      <li class="var"><span class="es">my English is a bit of a Frankenstein — French head, Brazilian body, and the grammar of whoever I spoke to last.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">do correct me, honestly. If you let me get away with it, I'll only get worse.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">les Britanniques, contrairement aux Espagnols, n'osent pas corriger : il faut le demander deux fois</span></span></li>
+      <li class="var"><span class="es">I speak four languages and mispronounce all of them equally. It's a kind of fairness.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">l'autodérision « fairness » est un trait d'humour très anglais ; ne revendiquez jamais quatre langues « parfaites »</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>No, it's charming!<span class="amorce">Déviez le compliment, ne l'acceptez pas : Charming is one word for it. My colleagues have others. — accepter un compliment de face (« thank you, I know ») passe pour de l'arrogance.</span></li>
+      <li>Say something in Portuguese!<span class="amorce">Dites une phrase, puis : That either meant 'nice to meet you' or 'two more beers'. Honestly, fifty-fifty.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le compliment se dévie, toujours.</strong> Règle documentée dans le British Trainer (fiche d2) : un compliment accepté platement choque ; la réponse attendue est la déflexion autodérisoire (<em>Oh, this old thing? Three quid in a charity shop</em>). Sur l'accent, même mécanique : minimisez, plaisantez, retournez.</div>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">06</span><span class="seg-titles"><span class="seg-title">Seeing anyone? How old are you, anyway?</span><span class="seg-fr">Faits dictés : célibataire, pas de relation pour l'instant ; 33 ans depuis peu. Sujet accepté.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Ha,|Well,|Nah,|Honestly,">
+      <li class="var"><span class="es">single, actually. Rio keeps you busy; relationships require a calendar.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">nope, footloose and fancy-free, as they say. Mostly footloose.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« footloose and fancy-free » : expression consacrée = célibataire et sans attaches</span></span></li>
+      <li class="var"><span class="es">just turned thirty-three. I've been assured it's all downhill from here.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« it's all downhill from here » : la plainte comique sur l'âge, sport national</span></span></li>
+      <li class="var"><span class="es">thirty-three. Old enough to know better, apparently still too young to act on it.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>We'll find you someone tonight!<span class="amorce">Steady on. Let me finish this pint first. — « steady on » = doucement, tout doux.</span></li>
+      <li>Thirty-three's nothing, wait till you hit forty.<span class="amorce">That's what everyone over forty says. I'm choosing to believe you.</span></li>
+    </ul>
+    <div class="alerte"><strong>« I'm 33 », jamais « I have 33 years ».</strong> Le calque français-portugais numéro un sur l'identité. De même : <em>I just turned 33</em> (pas « I made 33 years »). Le détecteur du bloc 9 les repère tous les deux.</div>
+  </div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">07</span><span class="seg-titles"><span class="seg-title">Turning the question back</span><span class="seg-fr">Pas de fait dicté : la brique qui transforme un interrogatoire en conversation. À utiliser après chaque réponse des segments 01 à 06.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Les retours qui marchent</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">And yourself?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">le retour minimal universel, plus britannique que « and you? »</span></span></li>
+      <li class="var"><span class="es">What about you — you from round here?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Enough about me. What's your story, then?</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Go on — what do you do when you're not propping up this bar?</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">« propping up the bar » = tenir le comptoir ; taquinerie douce, uniquement si l'ambiance est déjà là</span></span></li>
+      <li class="var"><span class="es">How do you all know each other, then?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">LA question magique en groupe : elle fait raconter le groupe au lieu de vous</span></span></li>
+    </ol>
+    <div class="alerte"><strong>La règle des deux phrases.</strong> Même mécanique qu'en Espagne, plus stricte encore : deux phrases sur vous, puis une question. Le Britannique juge la conversation à l'équilibre du temps de parole, et « he does go on a bit » (« il est un peu bavard ») est une exécution sociale.</div>
+  </div>
+</section>
+</div>
+<div class="block" data-b="2" data-continu="0">
+  <div class="block-intro"><strong>Bloc 2 · Music &amp; football.</strong> Les deux sujets qui font passer d'« inconnu sympa » à « mate ». Au Royaume-Uni, le football est un langage à part entière et Liverpool est votre meilleur atout dicté. Faits dictés uniquement. Boîte à outils, sans vue continue.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">What music are you into?</span><span class="seg-fr">Fait dicté : éducation rock, metal, funk ; beaucoup de jazz, surtout moderne et fusion ; électronique pour le sport ou pour « rester en transe » ; rap ; musiques balkaniques, ambient.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Oh,|Well,|Honestly,|Bit of everything —">
+      <li class="var"><span class="es">I grew up on rock and metal, then jazz took over. Mostly modern stuff, fusion — the kind people pretend to enjoy.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">l'autodérision sur le jazz fusion prévient la taquinerie au lieu de la subir</span></span></li>
+      <li class="var"><span class="es">everything from funk to Balkan brass, honestly. My playlists look like a border dispute.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">a lot of jazz, a lot of rap, and electronic stuff when I run — anything that keeps me in a trance.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">depends on the hour. Jazz in the evening, metal when the email count gets silly.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« when X gets silly » : tournure comique douce très courante</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Jazz? Bit fancy, aren't we?<span class="amorce">Taquinerie garantie. Réponse en escalade pince-sans-rire : Terribly. I only drink my lager from a wine glass. — ne vous justifiez jamais, surenchérissez.</span></li>
+      <li>What's Brazilian music actually like?<span class="amorce">Samba's just the export label — there's a whole continent underneath. Come to a bloco one day and you'll see. Puis glosez « bloco » : a street carnival band, basically.</span></li>
+      <li>Seen anyone good live lately?<span class="amorce">Répondez vrai, court, puis : What's the live scene like round here? — tout le monde a un avis sur les salles locales.</span></li>
+    </ul>
+    <div class="alerte"><strong>Glosez vos mots brésiliens.</strong> <em>Bloco</em>, <em>cuíca</em>, <em>pandeiro</em> : donnez la traduction d'un mot dans la foulée (<em>a bloco — a street carnival band</em>), sans quoi vous passez pour celui qui étale. Même règle qu'avec le jury CLOE, pour une raison différente : au pub, le jargon non glosé sonne prétentieux.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">I play drums — looking for people to play with</span><span class="seg-fr">Faits dictés : 12 ans de batterie (conservatoire, jazz et musiques actuelles), basse, guitare, pandeiro, un peu de piano ; blocos à Rio, concerts réguliers ; cherche un groupe (batterie idéalement, basse aussi).</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Well,|Actually,|Yeah,|Funny you ask —">
+      <li class="var"><span class="es">I'm a drummer, mainly. Twelve years of it — jazz school as a kid, then funk, then Brazilian percussion took over my life.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">drums first, bass second, and I'll have a go at anything with strings if nobody stops me.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« have a go at » = s'essayer à ; le refus du sérieux est la bonne posture</span></span></li>
+      <li class="var"><span class="es">in Rio I play in blocos — street carnival bands, hundreds of drummers at once. Loudest thing you'll ever hear sober.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">glose intégrée + chute ; « sober » fait toujours rire au pub</span></span></li>
+      <li class="var"><span class="es">I'm actually looking for people to play with over here — drums ideally, bass at a push. Know anyone?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« at a push » = à la rigueur ; la demande directe marche : les musiciens se recrutent au pub</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>There's an open mic on Thursday, you should come.<span class="amorce">Go on then. I'm not promising quality, but I'm promising volume. — « go on then » est LE oui britannique décontracté.</span></li>
+      <li>Are you any good?<span class="amorce">Ne dites jamais oui : Twelve years in, so either I'm decent or very slow to learn. — l'auto-éloge direct est irrecevable.</span></li>
+      <li>What on earth is a cuíca?<span class="amorce">A Brazilian friction drum — sounds like a laughing monkey. I'm aware how that sentence sounds.</span></li>
+    </ul>
+    <div class="alerte"><strong>« Play the drums », jamais « play of the drums » ni « jugar ».</strong> En anglais on <em>plays an instrument</em> sans préposition. Et la modestie performative est obligatoire : à « are you any good? », la seule réponse irrecevable est « yes, very ». Le Britannique teste votre autodérision, pas votre CV musical.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Who do you support? Lyon, Liverpool, Vasco</span><span class="seg-fr">Faits dictés : équipe d'enfance Lyon, grande époque 2001-2008, sept titres d'affilée, Juninho ; Liverpool suivi depuis plus de 12 ans, un match vu à Anfield, tous les matchs suivis, passion pour le club et la ville ; à Rio, Vasco : outsider, supporters fous, stade dans la favela, ambiance dingue ; lien Lyon-Vasco par Juninho.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Well,|Right,|Ah,|Long version or short version?">
+      <li class="var"><span class="es">Lyon since I was a kid — the glory years, seven titles in a row, Juninho and all that. And Liverpool for the last twelve-odd years.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« twelve-odd » = une douzaine ; « and all that » clôt la liste à l'anglaise</span></span></li>
+      <li class="var"><span class="es">Liverpool, since way before it was fashionable again, thank you very much.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« thank you very much » ironique : revendication d'antériorité, rituel du supporter</span></span></li>
+      <li class="var"><span class="es">I've actually been to Anfield. Heard You'll Never Walk Alone live and pretended I had something in my eye.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">l'émotion avouée par déni comique : la seule façon britannique de dire qu'on a pleuré</span></span></li>
+      <li class="var"><span class="es">and in Rio I follow Vasco, who are rubbish, and I love them anyway. Mad fans, stadium by a favela, best atmosphere I know.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« rubbish » affectueux : aimer un club nul est LE badge d'authenticité au Royaume-Uni</span></span></li>
+      <li class="var"><span class="es">it all connects, actually: Juninho, Lyon's greatest, is a Vasco legend too. That's my defence and I'm sticking to it.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">avoir trois clubs est suspect au Royaume-Uni ; l'argument Juninho est votre alibi dicté</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Typical glory hunter, supporting Liverpool.<span class="amorce">Accusation rituelle. Défense : Mate, I signed up mid-table. I've earned the good bits. — ne vous vexez jamais, plaidez avec humour.</span></li>
+      <li>What's football like in Brazil then?<span class="amorce">Same religion, warmer church. A Vasco match is chaos — drums going the whole ninety minutes. You'd love it or need a lie-down.</span></li>
+      <li>You can't support three clubs.<span class="amorce">One per continent. It's called diversification — I work in finance-ish, I know these things.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le club est une identité, pas une préférence.</strong> On ne demande pas « which team do you like? » mais <em>who do you support?</em> — et on n'en change pas. « Glory hunter » (supporter opportuniste) est l'accusation standard contre tout fan étranger de Liverpool : préparez la défense en plaisantant, jamais en vous justifiant sérieusement. Dire du mal de son propre club est permis et même obligatoire ; qu'un autre le fasse, non.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Match-day survival: sounding like you belong</span><span class="seg-fr">Pas de fait personnel : la langue du football regardé ensemble — commentaires rituels, plaintes rituelles, célébration. Langue documentée du pub de match.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Les répliques rituelles devant un match</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">We're playing rubbish today. — On joue comme des pieds. (« we » : le supporter dit toujours « we »)</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">How has he missed that?! My nan would've scored that.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« my nan » (ma mamie) : l'hyperbole comparative rituelle sur l'occasion manquée</span></span></li>
+      <li class="var"><span class="es">Ref! You're having a laugh! — Arbitre, tu te moques de nous !</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">That's never a penalty. — Jamais penalty. (« never » emphatique, grammaire de stade)</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Typical. Absolutely typical. — Fatalisme rituel après un but encaissé à la 90e.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">le pessimisme performatif est la posture par défaut du supporter anglais</span></span></li>
+      <li class="var"><span class="es">Get in! — LE cri du but marqué. Aussi : Yes! Go on!</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">We'll bottle it, watch. — On va se saborder, tu vas voir. (« bottle it » = craquer sous la pression)</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">léger, pas vraiment vulgaire, mais argot marqué</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le pessimisme est la politesse du supporter.</strong> Annoncer la défaite de son équipe (<em>we'll bottle it</em>) est un rite de protection collective ; l'optimisme affiché porte malheur et vous désigne comme touriste. Grammaire de stade : <em>that's never a penalty</em>, <em>we was robbed</em> — entendez-les, ne les corrigez jamais.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="3" data-continu="0">
+  <div class="block-intro"><strong>Bloc 3 · Down the pub.</strong> Les micro-interactions qui reviennent dix fois par soirée, et les règles non écrites qui font 90 % de l'aisance : commander au comptoir, le système des tournées, choisir sans chichis. Faits dictés : bière plutôt artisanale, vin rouge par culture familiale, ouvert à tout ; mange de tout. Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Ordering at the bar</span><span class="seg-fr">Commander à l'anglaise : au comptoir, court, direct, sans « I would like ». Le contact visuel avec le barman est la file d'attente.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Les formules</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">Pint of [nom], please. / Half of [nom], please.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">la formule de base ; « half » = demi ; jamais « I would like a beer »</span></span></li>
+      <li class="var"><span class="es">What's decent on cask? — Qu'est-ce que vous avez de bien en pression traditionnelle ?</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">votre goût dicté pour la bière artisanale : « cask ale » est la vraie bière anglaise ; question qui fait mousser le barman</span></span></li>
+      <li class="var"><span class="es">Can I get a taster of that one? — On peut goûter avant de choisir une cask, c'est normal.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Same again, please. — La même chose. (au deuxième tour)</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">…and one for yourself? — Et un pour vous ? (la façon de « tipper » le barman : on lui offre un verre, on ne laisse pas de pièces)</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">geste de connaisseur ; à faire quand le service a été chaleureux</span></span></li>
+      <li class="var"><span class="es">Do you do food? What's good here?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« do you do » : le verbe à tout faire du service britannique</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Cash or card? — You alright there? (= je peux vous servir ?)<span class="amorce">« You alright there? » du barman n'est pas une question sur votre santé : répondez la commande. Yeah — pint of the pale, please.</span></li>
+      <li>We've got [trois noms de bières inconnues].<span class="amorce">Which one's yours? I'll trust you. — déléguer le choix flatte et évite le blanc.</span></li>
+    </ul>
+    <div class="alerte"><strong>Pas de serveur, pas de doigt levé, pas de « garçon ».</strong> Au pub on commande AU comptoir, on paie tout de suite, on porte ses verres. La file d'attente est invisible : le barman sait qui est arrivé quand, et gruger (« queue-jumping ») est le péché mortel. Agiter son billet ou claquer des doigts disqualifie. Le contact visuel patient suffit.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Rounds: buying, accepting, escaping</span><span class="seg-fr">Le système des tournées est LE contrat social du pub : chacun paie pour tout le monde à son tour. S'y soustraire sans le dire est la faute la plus grave du guide.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Les formules</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">What are you having? / What's everyone having? — J'offre cette tournée : qu'est-ce que vous prenez ?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">My round. Same again all round? — C'est ma tournée. La même pour tout le monde ?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">I'll get these. — Je prends celles-ci. (en s'approchant du comptoir)</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Go on then. — LE oui britannique à un verre proposé : « allez, d'accord ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">à connaître absolument : accepter trop vite est avide, refuser sec est froid ; « go on then » est le juste milieu feint</span></span></li>
+      <li class="var"><span class="es">I'm only stopping for one, so I'll get my own, ta. — Je ne reste que pour un verre, je me le paie : la seule sortie honorable du système des tournées.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">You got the last ones — my shout. — « my shout » : variante de « my round », plutôt Nord et Australie, comprise partout.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Put your money away, you're our guest.<span class="amorce">Une fois : Well, next one's mine then. Insister au-delà d'une fois est impoli — mais tenir parole au tour suivant est obligatoire.</span></li>
+      <li>You're not going already?<span class="amorce">Voir bloc 5, segment 04 pour partir sans drame.</span></li>
+    </ul>
+    <div class="alerte"><strong>La dette de tournée n'expire jamais.</strong> Accepter des verres et partir avant d'avoir payé les siens est la trahison de référence — elle se raconte encore des années après. Si vous ne pouvez pas rester, dites-le AVANT d'accepter le premier verre. Le montant n'a aucune importance ; la rotation, toute.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">What are you drinking? Beer talk, food talk</span><span class="seg-fr">Faits dictés : bière plutôt artisanale ; vin rouge par culture familiale ; vermouth découvert à Barcelone ; ouvert à tout, mange de tout.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Oh,|Well,|Honestly,|For me,">
+      <li class="var"><span class="es">I'm a craft beer man, mostly — so this country is dangerous territory for me.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">le compliment indirect au pays hôte, toujours mieux reçu que le compliment direct</span></span></li>
+      <li class="var"><span class="es">red wine at home — family thing, we're wine people — but in here, whatever's good on cask.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">I'll try anything once. Twice if it's free.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">formule consacrée + rallonge comique</span></span></li>
+      <li class="var"><span class="es">what's a proper local one? I'd rather drink badly like a local than well like a tourist.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">à sortir une fois l'ambiance installée ; déclenche fièrement trois recommandations</span></span></li>
+      <li class="var"><span class="es">and I eat everything, before you ask. Yes, including that.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">anticipe la blague rituelle sur la cuisine anglaise vs le Français</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>A Frenchman drinking English beer? Your embassy will hear of this.<span class="amorce">I know. I'm basically a defector. Don't tell Lyon. — jouez la trahison nationale avec eux, jamais contre eux.</span></li>
+      <li>You have to try a Sunday roast. / a proper curry.<span class="amorce">Go on then, where's the best one round here? — la question « where's the best X round here » est la meilleure relance du bloc : tout le monde a un avis.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le Français au pub est attendu au tournant.</strong> La taquinerie sur le vin, la cuisine et « the French » arrive dans la demi-heure : c'est un cadeau, pas une attaque — être taquiné, c'est être inclus. Répondez en surenchérissant sur vous-même (<em>I'm basically a defector</em>), jamais en défendant la France premier degré. Fiche e1 du British Trainer : l'escalade pince-sans-rire est la réponse canonique au banter.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Small talk fuel: weather, "you alright?", the queue</span><span class="seg-fr">Pas de fait personnel : les trois rituels d'ouverture avec des inconnus, documentés dans les fiches d2 et d8 du British Trainer. La météo est une poignée de main, pas une information.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Les échanges rituels</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">You alright? — Yeah, good, you? — Ce n'est PAS une question sur votre santé : c'est « bonjour ». Réponse en quatre mots maximum.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">répondre par un vrai état de santé est LE contresens de l'étranger</span></span></li>
+      <li class="var"><span class="es">Bit grey out, isn't it? — Awful. Still, could be worse. — Météo : on acquiesce et on surenchérit doucement, on ne contredit jamais.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">contredire (« I find it pleasant ») refuse la poignée de main sociale</span></span></li>
+      <li class="var"><span class="es">Lovely day for it. — Se dit par tous les temps, surtout ironiquement sous la pluie.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Is this the queue? / Are you in the queue? — La question la plus sérieuse du pays. En cas de doute, toujours la poser.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Busy in here tonight. / Quiet tonight, innit. — Le constat d'ambiance : l'ouverture de conversation la plus simple du pub.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« innit » : tag londonien informel ; comprenez-le, employez plutôt « isn't it »</span></span></li>
+      <li class="var"><span class="es">Sorry — could I just squeeze past? — Le « sorry » lubrifiant : six emplois par heure est un métabolisme normal.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>La règle météo (fiche d8).</strong> Le sujet n'est pas la pluie : c'est un protocole de coopération. Le mouvement correct est <em>agree and escalate mildly</em> — acquiescer et surenchérir d'un cran (« Awful, isn't it. Still, could be worse »). Trois jetons par jour — un tag météo, un <em>cheers</em>, un <em>sorry</em> — suffisent à passer pour socialisé.</div>
+  </div>
+</section>
+</div>
+<div class="block" data-b="4" data-continu="0">
+  <div class="block-intro"><strong>Bloc 4 · Reactions &amp; noises.</strong> Ce qu'on dit quand l'autre parle : la matière première de toute amitié. Particularité britannique : la gamme descend souvent en intensité là où l'espagnol monte — l'understatement est le registre par défaut, et le ton fait la moitié du sens. Étiquettes <em>casual</em> / <em>vulgar</em> / <em>very vulgar</em> ; les points ● mesurent le risque social. Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Surprise: no way!</span><span class="seg-fr">Réagir à une nouvelle, une anecdote, un truc étonnant.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">No way! / You're joking! / You're kidding me.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">You're having a laugh. — Tu te moques de moi. (très britannique)</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Blimey. / Bloody hell. — Du pittoresque désuet au juron doux universel.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">« bloody hell » : le juron d'étonnement le plus rentable ; doux, partout sauf entretien</span></span></li>
+      <li class="var"><span class="es">Get out! / Shut up! — Faux impératifs : « non, sérieux ?! » entre amis proches.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">uniquement avec le sourire et l'intonation montante, sinon c'est un ordre</span></span></li>
+      <li class="var"><span class="es">Well I never. — Ça alors. (désuet, à sortir en clin d'œil)</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Fuck off! — Incrédulité admirative entre potes confirmés, PAS une insulte dans ce contexte.</span><span class="meta"><span class="tag idio muy">very vulgar</span><span class="risk">●●●</span><span class="note-var">à comprendre absolument, à employer jamais avant d'être du groupe</span></span></li>
+    </ol>
+    <div class="alerte"><strong>L'échelle des jurons (fiche b4)</strong> : <em>blimey</em> &lt; <em>bloody, sod it</em> &lt; <em>crap, bollocks, arse</em> &lt; <em>shit</em> et au-delà. Votre kit sûr : <em>bloody, sod it, bollocks</em> (= n'importe quoi). Le reste : reconnaître, apprécier, laisser sur l'étagère. Jurer PRÈS de quelqu'un est banal ; jurer CONTRE quelqu'un change de catégorie.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Enthusiasm: brilliant — and its deadpan twin</span><span class="seg-fr">Dire que quelque chose est bien, du plus sage au plus argotique — en sachant que le même mot, à plat, dit l'inverse.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Brilliant. / Lovely. / Nice one. — Le trio de base, cent fois par jour.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">That's class. / Quality. — Plutôt Nord ; « class » adjectif = super.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Not bad. Not bad at all. — En déadpan, c'est un compliment supérieur à « brilliant ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">litote : « not bad at all » à plat = vraiment très bien (fiche d1)</span></span></li>
+      <li class="var"><span class="es">I'm well chuffed with that. — « chuffed » = ravi ; « well » intensifieur jeune/londonien.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">That's the dog's bollocks, that. — Vulgaire de forme, laudatif de sens : « le top du top ».</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●●</span><span class="note-var">paradoxe documenté : « bollocks » = nul, « the dog's bollocks » = excellent</span></span></li>
+      <li class="var"><span class="es">…lovely. (ton plat, pause avant) — Ironie : « génial » qui veut dire « catastrophe ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">l'ironie s'entend au ton PLAT : l'enthousiasme sincère a une mélodie, l'ironie n'en a pas</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le piège « quite » (fiche b3).</strong> <em>Quite good</em> en bouche britannique = « bof, correct » ; en bouche américaine = « très bon ». Pour louer sans risque : <em>really good</em>, <em>proper good</em> (familier). Et calibrez : « absolutely » ne s'accouple qu'aux adjectifs extrêmes (<em>absolutely brilliant</em>, jamais <em>absolutely good</em>).</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Sympathy &amp; annoyance: nightmare</span><span class="seg-fr">Réagir à une galère, une mauvaise nouvelle, un truc pénible — le registre où l'anglais britannique est le plus codifié.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Oh no. That's rough. / That's rubbish, that. — La compassion de base.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Nightmare. / Absolute nightmare. — LE mot-réaction aux galères du quotidien (train raté, proprio pénible).</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">réservé aux ennuis moyens : pour un vrai malheur, on redevient simple et sincère</span></span></li>
+      <li class="var"><span class="es">What a pain. / What a faff. — « faff » = complication pénible et inutile.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Gutted. You must be gutted. — « gutted » = effondré (défaite, occasion ratée).</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Sod's Law, that. — La loi de l'emmerdement maximum, citée comme une institution.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">That's taking the piss, that is. — Là, ils exagèrent / c'est du foutage de gueule.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●●</span><span class="note-var">« take the piss » = se moquer / abuser ; version polie : « taking the mickey »</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Compatir à l'anglaise : ni tragédie ni solution.</strong> Le Britannique qui raconte sa galère attend une réaction brève (<em>nightmare</em>), pas un conseil ni une analyse. Et n'appliquez JAMAIS l'understatement au malheur des autres : « your mother's illness must be a bit annoying » est monstrueux (fiche d1) — l'understatement se réserve à ses propres ennuis.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Agreeing, disagreeing, dodging</span><span class="seg-fr">Dire oui, non, bof — sans jamais dire « I disagree » : le désaccord direct est une violence au Royaume-Uni.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Fair enough. — D'accord / je te l'accorde : l'accord neutre à tout faire.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Too right. / Spot on. / Couldn't agree more. — L'accord enthousiaste.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Hmm, I don't know… — Le début du désaccord britannique : jamais « you're wrong ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">I'm not so sure, you know. / I'm not entirely convinced. — Désaccord ferme, forme douce (litote).</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« not entirely convinced » = je suis contre ; décodez de même chez les autres</span></span></li>
+      <li class="var"><span class="es">See, I'd say the opposite, but what do I know.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« but what do I know » désamorce : on peut tout dire suivi de ça</span></span></li>
+      <li class="var"><span class="es">Each to their own. — Chacun ses goûts : la clôture pacifique d'un désaccord de goût.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Bollocks. — « N'importe quoi » : le désaccord cru entre potes.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Décodage obligatoire.</strong> <em>With the greatest respect…</em> = « vous avez tort » ; <em>I hear what you say</em> = « et je n'en tiendrai aucun compte » ; <em>that's one way of looking at it</em> = « c'est faux ». Le désaccord britannique se dit en formules d'accord apparent : apprenez à l'entendre avant de le produire.</div>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">05</span><span class="seg-titles"><span class="seg-title">Fillers: the noise between the words</span><span class="seg-fr">Les mots qu'on dit quand on ne dit rien. C'est ce qui fait « parlé » plus que tout le vocabulaire.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Right. / Right then. — Le mot qui ouvre et ferme tout : décision, départ, changement de sujet.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">To be fair… / To be honest… — Les deux béquilles d'opinion, dix fois par heure.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">souvent réduits à « tbf », « tbh » à l'écrit (fiche b5)</span></span></li>
+      <li class="var"><span class="es">…and that. / …and all that. / …or whatever. — Clôtures de liste vagues, équivalent de « et tout ça ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">You know what I mean? / Know what I mean? — Le tag de connivence.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Bless. / Bless him. — Attendrissement, parfois condescendant d'un cheveu.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Anyway… — Le seul moyen poli de conclure une conversation ou une anecdote qui traîne.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« Anyway… » + mouvement du corps = « je vais y aller » ; tout le monde comprend</span></span></li>
+      <li class="var"><span class="es">Mustn't grumble. / Can't complain. — Réponse rituelle à « how's things? » : « ça va, on fait aller ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Les question tags font l'oral.</strong> <em>…isn't it? …don't you? …wasn't it?</em> en fin de phrase ne demandent pas de réponse : ils invitent l'autre à acquiescer. C'est l'équivalent fonctionnel du « ¿no? » espagnol, avec accord grammatical. Sans tags, votre anglais sonne écrit ; le tag descendant (ton qui tombe) affirme, le tag montant demande vraiment.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="5" data-continu="0">
+  <div class="block-intro"><strong>Bloc 5 · Plans, numbers, leaving.</strong> Relancer une conversation qui meurt, proposer de se revoir — en sachant que le « oui » britannique de politesse ne vaut rien sans date —, refuser sans vexer, échanger les contacts, et partir. Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Reviving a dying conversation</span><span class="seg-fr">Les questions qui marchent toujours au Royaume-Uni — voisines de celles de Barcelone, avec deux spécialités locales : le logement et les trajets.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">So what's good round here? Where should I actually be going?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">déléguer la connaissance locale : infaillible</span></span></li>
+      <li class="var"><span class="es">How do you all know each other, then?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Been anywhere nice lately? Any holidays coming up?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">les vacances : sujet-refuge national, avec la météo et les trajets</span></span></li>
+      <li class="var"><span class="es">What's the rent like round here? Because everyone tells me London's a horror show.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">le logement est LE sujet de plainte fédérateur (fiche e5) — on se plaint du marché, jamais on ne demande le loyer de quelqu'un</span></span></li>
+      <li class="var"><span class="es">How long did it take you to get here? — Le rituel du trajet : « Find us alright? »</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">les Britanniques comparent les itinéraires comme d'autres les recettes ; question étrange mais infaillible</span></span></li>
+      <li class="var"><span class="es">Here — settle an argument for us: [n'importe quel débat léger].</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">enrôler la tablée dans un micro-débat (biscuits, chip shop, meilleur pub) : très efficace, très local</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Sujets sûrs / sujets minés (fiche d2).</strong> Sûrs : trajets, vacances, logement (le marché), la file d'attente, la météo, le sport. Minés avant amitié réelle : le salaire, le prix de ses biens, la religion, le vote. Le Brexit est l'exemple canonique du sujet à laisser venir — s'ils l'ouvrent, écoutez ; ne l'ouvrez pas.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Suggesting meeting up — and decoding the reply</span><span class="seg-fr">Proposer sans peser. Attention au « oui » de politesse : « we should definitely do that » sans date = non.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Fancy a pint later in the week? — « fancy » : LE verbe de l'invitation décontractée.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">We should do this again. You around next weekend?</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">la deuxième phrase transforme la politesse en vrai plan : toujours ancrer une date</span></span></li>
+      <li class="var"><span class="es">I'm going to that open mic Thursday — come along if you're about.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« if you're about » = si tu es dans le coin ; l'invitation sans pression, forme reine</span></span></li>
+      <li class="var"><span class="es">Give us a shout if anything's happening this weekend. — « give us a shout » = fais-moi signe (« us » = me, très parlé).</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Coming for a swift one? — « Un petit rapide ? » (= trois, tout le monde le sait)</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">Décoder les réponses</h3>
+    <ul class="rebonds">
+      <li>Yeah, definitely, we should sort something out! (sans date)<span class="amorce">= poliment non, ou pas maintenant. Réponse : relancez UNE fois avec une date précise ; si la date reste floue, laissez.</span></li>
+      <li>Go on then. / Yeah, I'm about Thursday.<span class="amorce">= vrai oui. Verrouillez : Thursday it is. I'll text you the place.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le oui sans date est un non.</strong> Règle sociale documentée : l'enthousiasme vague (<em>we must do this again sometime!</em>) est une formule de clôture aimable, pas un engagement. Le vrai accord contient un jour, un lieu ou un « I'll text you ». Ne vous vexez pas du premier, ne ratez pas le second.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Saying no without killing the vibe</span><span class="seg-fr">Refuser une sortie, un verre de plus, une proposition — l'exercice de politesse le plus périlleux : le non britannique s'enrobe toujours.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Best not — early start tomorrow. Next time, though.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« best not » + excuse + promesse : le refus canonique en trois temps</span></span></li>
+      <li class="var"><span class="es">I'd love to, but I'm shattered. I'll be rubbish company.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« shattered » = crevé ; s'accuser soi-même (« rubbish company ») adoucit tout refus</span></span></li>
+      <li class="var"><span class="es">Not for me tonight — but you lot crack on. — « crack on » = continuez sans moi.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Go on then — but a half. A small one. I mean it this time.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">le refus qui capitule : parfaitement honorable et statistiquement majoritaire</span></span></li>
+      <li class="var"><span class="es">Maybe another time — I'm driving. — L'excuse reine, jamais discutée.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Un refus sec est une gifle.</strong> « No thanks » tout court, sans excuse ni « next time », froisse. La structure attendue : regret + raison (même mince) + porte ouverte. En retour, n'insistez jamais plus d'une fois quand on VOUS dit non enrobé — « no pressure » est votre meilleure amie.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Numbers, socials, and the long goodbye</span><span class="seg-fr">Échanger le contact et partir. Le départ britannique est un processus en trois annonces, pas un événement.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Stick your number in there, I'll text you about Thursday.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« stick » = mets ; l'échange se fait autour d'un plan concret, pas dans le vide</span></span></li>
+      <li class="var"><span class="es">You on WhatsApp? I'll add you to the group.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">être ajouté au groupe WhatsApp est le vrai certificat d'adoption</span></span></li>
+      <li class="var"><span class="es">Right, I'd best be off. — La formule de départ sans cérémonie.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">I'm going to make a move. / We should make a move. — Première annonce de départ (il en faudra trois).</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">One for the road, then I really am off.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Cheers for tonight — this was a good laugh. See you Thursday.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">« a good laugh » : le compliment de soirée standard ; « cheers » = merci ET au revoir</span></span></li>
+      <li class="var"><span class="es">Safe trip back. / Get home safe. — La bénédiction de sortie.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le départ en trois temps.</strong> Contrairement au départ espagnol (quinze minutes de plus), le départ britannique s'annonce (<em>make a move</em>), se répète (<em>right, seriously</em>), puis s'exécute vite — pas de tour de table d'embrassades. Un simple <em>See you, cheers!</em> à la cantonade suffit ; partir sans rien dire (« French exit », ironie de l'histoire) est réservé aux très grandes soirées.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="6" data-continu="1">
+  <div class="block-intro"><strong>Bloc 6 · Stories.</strong> Vos deux anecdotes de carnaval dictées, remontées pour une table de pub : accroche courte, puis récit à coulisses. La narration britannique diffère de l'espagnole : sous-vendez l'accroche (<em>funny story, actually</em>), laissez les chiffres faire le travail, et fermez par une chute sèche plutôt qu'une morale. Chevilles : <em>so anyway</em>, <em>at which point</em>, <em>turns out</em>. <em>Vue continue disponible.</em></div>
+<div class="continu">
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Le récit d'un seul tenant, permutable passage par passage. Entraînez-vous à le dire en 60 à 90 secondes : au-delà, la table décroche.</p>
+  <p class="texto"></p>
+  <div class="metrics">
+    <span><b class="m-words">0</b> mots</span>
+    <span>durée estimée <b class="m-time">0</b> à 150 mots par minute</span>
+    <span><b class="m-combi">0</b> combinaisons possibles</span>
+  </div>
+  <p class="howto">Dites-le à voix haute, chronométrez, coupez un tiers. <button class="tts-all mini">Listen to the text</button> <button class="tts-stop mini">Stop</button></p>
+</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Story 1: the rain over the bloco</span><span class="seg-fr">Fait dicté : l'an dernier, trois blocos de plus de 600 personnes chacun ; 42 °C ; il s'est mis à pleuvoir juste au-dessus du bloco et nulle part ailleurs, comme une bénédiction, arc-en-ciel à côté, après 6 ou 7 heures de jeu : « la libération ».</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">L'accroche</h3>
+    <ol class="variantes" data-conn="So,|Right,|Actually —|Oh, that reminds me —">
+      <li class="var"><span class="es">funny story from last carnival, actually. It involves six hundred drummers and a very confused rain cloud.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« funny story, actually » : l'accroche sous-vendue, exact inverse de l'accroche espagnole</span></span></li>
+      <li class="var"><span class="es">I once got rained on by the only cloud in Rio. Genuinely just us. I'll explain.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">quick one: have you ever been grateful to be rained on? Because I have, once, deeply.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">l'accroche-question, plus risquée mais qui capte toute la table</span></span></li>
+    </ol>
+    <h3 class="sub">Le récit</h3>
+    <ol class="variantes" data-conn="So anyway,|So,|Right, so">
+      <li class="var"><span class="es">last carnival I was playing in three blocos — street carnival bands, six-hundred-plus drummers each. Forty-two degrees. Six, seven hours of playing.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">les chiffres dictés font le travail ; débit calme, laissez-les tomber un par un</span></span></li>
+      <li class="var"><span class="es">picture it: forty-two degrees, seven hours of drumming, six hundred of us cooking in the street.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« picture it » : l'invitation à visualiser, cheville de conteur</span></span></li>
+    </ol>
+    <ol class="variantes" data-conn="And then,|At which point|And I swear,">
+      <li class="var"><span class="es">it starts raining — on us. Just on us. On the bloco and nowhere else, with a rainbow parked next door.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">this one cloud decides we're the chosen ones. Rain on the parade, sun everywhere else, rainbow on the side. Like a blessing, honestly.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">La chute</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">Six hundred people screaming like we'd won the World Cup. Over drizzle.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">chute par bathos : l'énorme ramené au minuscule (« drizzle » = crachin), très britannique</span></span></li>
+      <li class="var"><span class="es">Best shower of my life, and I include the one at home.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Narration à la britannique.</strong> Sous-vendez l'entrée, chargez le milieu de détails concrets, fermez sec par une chute — jamais de morale (« it was magical » tue l'histoire). L'auditoire participera : les interruptions (« no way », « you're joking ») sont des encouragements, pas des coupures.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Story 2: the carnival that never ended (2022)</span><span class="seg-fr">Fait dicté : 2022, carnaval annulé par la mairie ; soirées en club autorisées avec billet et PCR négatif ; Sambódromo ouvert ; la fête de rue a eu lieu quand même, plus forte que jamais ; second carnaval officiel en avril ; post-carnaval du premier = pré-carnaval du second : carnaval ininterrompu de fin décembre à début mai.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">L'accroche</h3>
+    <ol class="variantes" data-conn="So,|Right,|Here's one —">
+      <li class="var"><span class="es">did I ever tell you about the year Rio cancelled carnival and accidentally got five months of it?</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">2022 might be the greatest carnival in history, and officially it never happened.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">le paradoxe en une phrase : l'accroche la plus solide du guide</span></span></li>
+    </ol>
+    <h3 class="sub">Le récit</h3>
+    <ol class="variantes" data-conn="So,|Basically,|Right, so">
+      <li class="var"><span class="es">the city cancels the street carnival — covid. But club nights are allowed, with a ticket and a negative test. And the Sambadrome stays open.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">glosez si besoin : the Sambadrome — the big parade stadium</span></span></li>
+      <li class="var"><span class="es">so you couldn't have carnival in the street, but you could have it indoors, with paperwork. Rio being Rio, the street carnival happened anyway — bigger than ever.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« Rio being Rio » : la cheville fataliste qui explique tout</span></span></li>
+    </ol>
+    <ol class="variantes" data-conn="And then|Turns out|Wait, it gets better:">
+      <li class="var"><span class="es">the city holds the official carnival in April instead. So the after-party of the illegal one ran straight into the warm-up of the legal one.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">normally you get a pre-carnival from late December, the week itself, then two or three weeks of afters. That year? End of December to early May. Non-stop.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« afters » = l'after ; la mécanique du cycle dictée, posée calmement</span></span></li>
+    </ol>
+    <h3 class="sub">La chute</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">Five months. My drums needed therapy. So did my neighbours.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">And that's how a cancellation became the longest carnival on record. Bureaucracy: undefeated.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">« Bureaucracy: undefeated » : chute à froid, structure « X: undefeated » très internet-britannique</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Réserve d'exactitude, comme dans la version espagnole :</strong> « peut-être le plus grand carnaval de l'histoire » est votre appréciation dictée, pas un record vérifié — gardez le « might be ». Les éléments factuels (annulation, clubs sur billet et test, Sambodrome ouvert, second carnaval en avril, continuité décembre-mai) sont la dictée du 27/08/2026.</div>
+  </div>
+</section>
+</div>
+<div class="block" data-b="7" data-continu="1">
+  <div class="block-intro"><strong>Bloc 7 · Interview mode.</strong> Le registre formel oral : entretien de mobilité interne, entretien d'embauche, présentation à un comité. Adapté de vos blocs CLOE 1, 2 et 5 et des dictées du 27/08/2026, en anglais britannique professionnel : hedging, understatement calibré, aucun chiffre non dicté. Étiquettes <em>formal</em> (sobre) et <em>polished</em> (relevé, sélectionné par « Version riche »). Ni salaire ni noms d'employeurs : « a French wind developer », « the Brazilian subsidiary of a French energy group ». <em>Vue continue disponible : votre présentation de deux minutes.</em></div>
+<div class="continu">
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Votre présentation formelle d'un seul tenant. Cible : deux minutes maximum — au-delà, vous amputez le temps d'interaction, qui est aussi évalué.</p>
+  <p class="texto"></p>
+  <div class="metrics">
+    <span><b class="m-words">0</b> mots</span>
+    <span>durée estimée <b class="m-time">0</b> à 150 mots par minute</span>
+    <span><b class="m-combi">0</b> combinaisons possibles</span>
+  </div>
+  <p class="howto">Dites-le à voix haute, chronométrez, visez moins de deux minutes. <button class="tts-all mini">Listen to the text</button> <button class="tts-stop mini">Stop</button></p>
+</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Tell me about yourself</span><span class="seg-fr">Faits dictés : ingénieur énergie-environnement (IMT Mines Alès, 2018) ; 2 ans d'éolien en France ; au Brésil depuis février 2020 ; aujourd'hui vers la finance et la stratégie ; retour en Europe en préparation.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">L'ouverture</h3>
+    <ol class="variantes" data-conn="Well,|Thank you —|Of course.|Certainly.">
+      <li class="var"><span class="es">I'm an energy engineer by training — I graduated from IMT Mines Alès in the south of France in 2018, specialising in energy and environment.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">the short version: French engineer, six and a half years in Brazil building solar projects, now moving towards strategy and finance — and towards Europe.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">« the short version » : annonce de concision, très appréciée en entretien britannique</span></span></li>
+      <li class="var"><span class="es">my background sits at the crossroads of engineering and energy markets, with most of my career spent in international settings — France, and then Brazil since early 2020.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">« sits at the crossroads of » : la métaphore sobre qui structure sans se vanter</span></span></li>
+    </ol>
+    <h3 class="sub">Le fil en une phrase</h3>
+    <ol class="variantes" data-conn="Essentially,|In a nutshell,|Broadly speaking,">
+      <li class="var"><span class="es">I started in wind power in France, moved to solar in Brazil, and I'm now broadening into finance, strategy and multi-country coordination.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">the through-line of my career has been taking renewable projects from paper to production — and, increasingly, taking the business itself forward rather than one project at a time.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●●</span><span class="note-var">« through-line » = fil conducteur ; à réserver à un auditoire attentif</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables de l'interlocuteur</h3>
+    <ul class="rebonds">
+      <li>Why did you leave France in the first place?<span class="amorce">A mix of curiosity and opportunity: I'd done a university exchange in Brazil, and when a position came up in Rio just as the subsidiary was starting, it was too good a fit to pass up.</span></li>
+      <li>Walk me through your CV, briefly.<span class="amorce">Voir segments 02 et 03 — gardez chaque étape sous trente secondes.</span></li>
+    </ul>
+    <div class="alerte"><strong>Deux minutes, pas plus.</strong> Même règle que devant le jury CLOE : la présentation liminaire longue ampute l'interaction, qui est évaluée. En anglais britannique professionnel, ajoutez la modestie structurelle : les faits portent l'éloge, jamais les adjectifs. « I led 80 projects » est recevable ; « I'm an exceptional leader » ne l'est pas.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Early career: wind power in France</span><span class="seg-fr">Faits dictés : chef de projet éolien chez un développeur en France (2 ans, région parisienne, projets dans toute la France), puis appui au développement international : Croatie et Maroc, alignement de bureaux d'études locaux sur la stratégie interne. L'éolien terrestre très controversé en zone rurale (projet marquant vers Montauban).</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="After graduating,|Straight out of university,|To begin with,">
+      <li class="var"><span class="es">I spent two years with a French wind developer, managing onshore projects across the country from the Paris region.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">towards the end I supported international development as well — Croatia and Morocco — helping local engineering partners align with the company's standards and strategy.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">onshore wind in rural France is genuinely contested — one project near Montauban faced very strong local opposition. That's where I learned that a project lives or dies on its local acceptance, not on its engineering.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">transformer la difficulté dictée en apprentissage : le mouvement attendu en entretien UK</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>What did that opposition teach you, concretely?<span class="amorce">To treat stakeholders as part of the critical path — spend time on the ground early, and never let the first conversation with a community be about a done deal.</span></li>
+    </ul>
+    <div class="alerte"><strong>Hedging obligatoire sur les jugements (fiche a2).</strong> « L'éolien est controversé » se dit <em>onshore wind can be genuinely contested</em>, pas <em>everyone hates wind farms</em>. Modalisez les généralités (<em>tends to, can be, in my experience</em>), gardez les faits nus pour ce qui est dicté et vérifiable.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">The Brazil chapter: scale and scope</span><span class="seg-fr">Faits dictés : arrivé février 2020, juste avant le Covid ; filiale brésilienne d'un groupe énergétique français, 5 personnes à l'arrivée, environ 70 aujourd'hui (100 au pic) ; 5 ans chef de projet photovoltaïque ; 80 projets, ≈160 MW cumulés, une douzaine d'États ; projets types 2-5 MW ; clients industriels et enseignes multisites.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="In 2020,|Then,|In February 2020,">
+      <li class="var"><span class="es">I joined the Brazilian subsidiary of a French energy group in Rio — I arrived in February 2020, a few weeks before Covid, which made for an interesting onboarding.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span><span class="note-var">« which made for an interesting onboarding » : understatement professionnel, sourire garanti</span></span></li>
+      <li class="var"><span class="es">the subsidiary had five people when I arrived; it's around seventy today. I've effectively grown with the company, from project delivery to more strategic roles.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">over five years as a project manager I developed some eighty solar projects — roughly 160 megawatts across a dozen states, typically two to five megawatts each, for industrial clients and multi-site retailers.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span><span class="note-var">les chiffres dictés, posés sans adjectif : c'est eux qui impressionnent</span></span></li>
+      <li class="var"><span class="es">what I'd highlight is less the volume than the range: every project meant a different state, a different grid operator, a different local reality — Brazil teaches you adaptability at scale.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">« what I'd highlight is less X than Y » : structure de mise en valeur sobre</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>What does a typical project look like?<span class="amorce">Two to five megawatts, usually on or near the client's site — an industrial plant, or a retailer with hundreds of shops offsetting consumption through generation credits.</span></li>
+      <li>Eighty projects — what was your actual role in them?<span class="amorce">End-to-end development: siting, permitting, grid connection, contracts — coordinating the specialists rather than doing every discipline myself.</span></li>
+    </ul>
+    <div class="alerte"><strong>« Some eighty », « roughly 160 » :</strong> l'approximation assumée (<em>some, roughly, around</em>) est plus crédible qu'une fausse précision — et couvre la nature dictée des chiffres. Ne montez jamais un chiffre non dicté en entretien : « I don't have that figure to hand, but I can come back to you » est une réponse forte, pas un aveu.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Amazonia: the projects I'm proudest of</span><span class="seg-fr">Faits dictés : 7 projets développés en Amazonie, 4 construits dans la région de Manaus, ≈12 MW ; complexité principale : lenteur et désorganisation des procédures environnementales locales ; réussite citée : mobilisation de toutes les compétences, acceptation par les acteurs locaux.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="If I had to pick one thing,|The work I'm proudest of|Perhaps the most formative part">
+      <li class="var"><span class="es">is the Amazon portfolio: seven projects developed, four built around Manaus, about twelve megawatts in one of the hardest places in Brazil to build anything.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">the technical side was manageable; the real complexity was procedural — local permitting that moves slowly and unpredictably, so the discipline is patience, documentation and relationships.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span><span class="note-var">formulation neutre et publiable de la difficulté dictée ; aucune accusation</span></span></li>
+      <li class="var"><span class="es">what stays with me is being accepted locally — being seen as someone who understood the place and was genuinely involved, not someone flying in with a spreadsheet.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>Why is building there so hard?<span class="amorce">Logistics, first — everything arrives by river or by air. And then the administrative environment: processes exist, but timelines are elastic. You plan for that or you fail.</span></li>
+    </ul>
+    <div class="alerte"><strong>Document public :</strong> la dictée mentionnait des soupçons sur les causes des lenteurs administratives ; conformément à la règle du projet (jamais d'accusation invérifiable en ligne), la formulation retenue est « slow and unpredictable » — exacte, suffisante, et défendable en entretien.</div>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">05</span><span class="seg-titles"><span class="seg-title">Beyond projects: storage, ESG, institutions</span><span class="seg-fr">Faits dictés : étude d'une business line stockage (« nouvelle ruée vers l'or », prix en baisse d'environ 80 % ces dernières années) ; relations institutionnelles et publiques, ESG, communication externe ; partenariat avec le consulat de France à Rio (mécénat, ouverture de la campagne culturelle franco-brésilienne 2025, exposition photo, en présence de l'ambassadeur) ; Fresque du climat avec plus de 700 personnes à Rio, mémoire de 10 propositions présenté pendant le G20.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="More recently,|Over the last couple of years,|Alongside project work,">
+      <li class="var"><span class="es">I assessed a potential storage business line — batteries are the sector's new gold rush, with prices down around eighty per cent in recent years, though the local skills base hasn't caught up yet.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span><span class="note-var">« new gold rush » : votre image dictée, qui passe très bien en anglais</span></span></li>
+      <li class="var"><span class="es">I also took on institutional relations, ESG and external communication — the side of the business where you represent the company rather than build for it.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">two examples: a sponsorship partnership with the French consulate in Rio, opening the 2025 Franco-Brazilian cultural season with a photography exhibition; and a climate-awareness event that brought together over seven hundred people, whose ten proposals were presented during the G20 in Rio.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">deux exemples concrets valent dix généralités ; débit lent sur les chiffres</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>What's your view on storage as a business?<span class="amorce">Cautiously bullish: the economics have turned, but execution capability is the bottleneck. In plain terms — the gold rush is real, and so is the shortage of good miners.</span></li>
+    </ul>
+    <div class="alerte"><strong>Chiffres sectoriels : une réserve à voix haute.</strong> Comme dans le bloc débat CLOE : les données énergétiques évoluent vite. Le « around eighty per cent » est votre chiffre dicté ; s'il est challengé, la sortie honorable est <em>that's the order of magnitude I was working with — I'd want to check the latest figures before standing on the exact number</em>.</div>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">06</span><span class="seg-titles"><span class="seg-title">A failure I own</span><span class="seg-fr">Fait dicté : projet social de panneaux solaires et batteries pour une communauté riveraine de 250 personnes, à 6 heures de bateau de Manaus ; échec au financement : divergence de vision avec l'ONG partenaire, difficulté à justifier 3 à 4 millions de réais sur fonds propres, mécanismes fiscaux insuffisants ; le projet a capoté.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="The one that still bothers me|A genuine failure?|The clearest example">
+      <li class="var"><span class="es">is a social project that never happened: solar and batteries for a riverside community of two hundred and fifty people, six hours by boat from Manaus.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">we failed on the financing. The NGO and we had genuinely different visions, and I couldn't make a three-to-four-million-real spend on own funds defensible to private stakeholders — the tax mechanisms available covered a fraction of it.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span><span class="note-var">l'échec en faits, sans blâme externe : « we failed », pas « the NGO failed »</span></span></li>
+      <li class="var"><span class="es">what I took from it: on impact projects, align the financing model and the partners' visions before falling in love with the engineering. I'd sequence it completely differently today.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">la leçon formulée en règle réutilisable : exactement ce que la question teste</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>Would you attempt it again?<span class="amorce">Yes — with blended finance and the impact case built jointly from day one. The need hasn't gone anywhere.</span></li>
+    </ul>
+    <div class="alerte"><strong>La question « failure » est un rituel d'entretien britannique :</strong> elle teste l'honnêteté et la capacité d'analyse, pas le casier. Structure attendue : le fait, votre part de responsabilité (« I couldn't make it defensible »), la leçon. Le faux échec (« I work too hard ») est éliminatoire.</div>
+  </div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">07</span><span class="seg-titles"><span class="seg-title">Why Europe, why now — and the five-year view</span><span class="seg-fr">Faits dictés : famille d'origine espagnole, volonté de reconnecter ; mutation interne vers Barcelone en cours, déménagement idéalement mars-mai 2027 ; viser des rôles multi-pays, stratégie, M&amp;A, financement vert ; à cinq ans : idéalement un organisme international (ONU, Banque mondiale), projets de territoire et d'intérêt public ; quatre langues de travail.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="The move is|Frankly,|Two reasons, really:">
+      <li class="var"><span class="es">both personal and professional. My family is Spanish — Andalusia on one side, the Basque Country on the other — and after six years in Brazil, Europe is the right next chapter. I'm working on an internal move to Barcelona, ideally by spring 2027.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">professionally, I'm looking for multi-country scope — strategy, green finance, M&amp;A — closer to where decisions are made.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">five years out, I'd like to be contributing to public-interest work at an international organisation — the UN system or the World Bank, ideally at the meeting point of public and private.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span><span class="note-var">l'ambition dictée, modalisée (« I'd like to be ») : ambition sans arrogance</span></span></li>
+      <li class="var"><span class="es">and languages are part of the plan: I work in French, Portuguese, English and Spanish — four working languages, which is precisely what multi-country roles consume.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span><span class="note-var">« working languages », jamais « perfectly mastered » : laissez l'interlocuteur conclure</span></span></li>
+    </ol>
+    <h3 class="sub">Relances probables</h3>
+    <ul class="rebonds">
+      <li>Isn't that a step away from engineering?<span class="amorce">A step up from it, I'd say. The sector's constraint is no longer technology — it's capital allocation and execution across borders. That's where I want to be useful.</span></li>
+      <li>Any questions for us?<span class="amorce">Toujours en avoir deux : What does success in this role look like at the twelve-month mark? · How is the team split across countries, and where does this role sit in that?</span></li>
+    </ul>
+    <div class="alerte"><strong>Clore un entretien à la britannique :</strong> remerciement bref, reformulation d'intérêt en une phrase (<em>this is exactly the kind of scope I'm looking for</em>), pas de plaidoyer final. L'excès de conclusion défait le travail des deux minutes d'ouverture.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="8" data-continu="0">
+  <div class="block-intro"><strong>Bloc 8 · Toolkit &amp; SOS.</strong> La boîte à outils d'interaction adaptée du bloc 7 CLOE : gagner du temps, clarifier, nuancer, réparer — en formel comme au pub — plus la carte SOS et la liste des calques français et portugais qui vous trahissent en anglais. Le détecteur du bloc 9 les repère. À relire dans le train avant l'entretien ou la soirée.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Hedging: softening what you say</span><span class="seg-fr">Le système d'adoucissement britannique (fiche a2) : au registre formel, presque rien ne s'affirme nu. C'est un critère d'aisance autant que de politesse.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">I'd say… / I would tend to think… — Le préfixe d'opinion par défaut.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">It might be worth considering… — Suggestion ferme, forme douce.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">I wonder if we could… / Would it be possible to…? — La demande indirecte : plus la demande est grosse, plus la forme s'allonge.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">That's not quite what I had in mind. — « Pas tout à fait » = pas du tout, en soie.</span><span class="meta"><span class="tag">formal</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">With respect, I see it slightly differently. — Le désaccord formel assumé ; « slightly » porte tout le poids.</span><span class="meta"><span class="tag sout">polished</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Correct me if I'm wrong, but… — L'entrée en contradiction la plus sûre.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Symétrie de décodage :</strong> ce que VOUS adoucissez, les Britanniques l'adoucissent aussi. <em>It might be worth revisiting the figures</em> de la bouche d'un supérieur = « refaites ces chiffres ». Multipliez mentalement par deux l'intensité de tout ce qu'on vous dit poliment.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Buying time, clarifying, repairing</span><span class="seg-fr">Adapté du bloc 7 CLOE : ne jamais laisser de blanc, faire répéter, reformuler, se corriger en direct — les gestes qui tiennent une conversation sous pression.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">That's a good question — let me think for a second. — Gagner trois secondes avec élégance.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Sorry, could you run that by me again? — Faire répéter, registre pro. Au pub : Come again? / You what? (Nord, familier)</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">So if I've understood you right, you're asking whether… — Reformuler : gagne du temps ET marque l'écoute.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">What I mean is… / Let me put that another way. — Se réparer sans s'excuser trois fois.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">…what's the word… it'll come to me — anyway, the point is… — Contourner le mot manquant : stratégie C1 reconnue, en anglais aussi.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">I don't have the exact figure to hand, but I can follow up. — L'incertitude avouée, mieux notée qu'un chiffre faux.</span><span class="meta"><span class="tag">formal</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le silence britannique est court.</strong> Un blanc de plus de deux secondes appelle un remplissage (<em>well, let me see…</em>). Mais le remplissage par « euh » à la française s'entend : préférez les phrases-ponts complètes ci-dessus, qui achètent le même temps en faisant professionnel.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">SOS: when you're lost</span><span class="seg-fr">Les phrases de survie quand ça va trop vite, au pub comme en réunion — et la déclaration d'accent préventive, votre assurance dictée du dispositif CLOE, transposée.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Sorry, I didn't catch that. — LE réflexe : « catch », pas « understand ».</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">You've lost me — say that again, slower, for the foreigner? — L'autodérision qui transforme l'incompréhension en moment sympathique.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">What does [word] mean? Is that slang? — Demander franchement : au pub, expliquer son argot fait plaisir.</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Heads-up: my English runs on French grammar and Brazilian confidence. Corrections welcome.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">la déclaration préventive d'interférence : un calque ultérieur devient un accident annoncé, pas une lacune</span></span></li>
+      <li class="var"><span class="es">Sorry — accents are the last boss. Which part of the country is yours from? — Retourner l'incompréhension d'accent en question flatteuse.</span><span class="meta"><span class="tag">casual</span><span class="risk">●●●</span><span class="note-var">les Britanniques adorent parler de leurs accents (fiche d5) ; « the last boss » : registre jeu vidéo, générationnel</span></span></li>
+    </ol>
+    <div class="alerte"><strong>L'accent de Glasgow, Liverpool ou Newcastle</strong> mettra en difficulté même votre C1 : c'est documenté et assumé par les Britanniques eux-mêmes, qui se sous-titrent entre eux à la télévision. Ne faites jamais semblant d'avoir compris deux fois de suite — la troisième réplique à côté se voit toujours.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">The calques that betray you</span><span class="seg-fr">Les interférences français→anglais et portugais→anglais repérées pour votre profil, avec la forme correcte. Le détecteur du bloc 9 les surligne dans vos réponses dictées ou tapées.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">I have 33 years → I'm 33 · since six years → for six years · I live here since 2020 → I've lived here since 2020</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">le trio identité-durée : les trois premiers calques de tout francophone</span></span></li>
+      <li class="var"><span class="es">actually (fr. actuellement / pt. atualmente) → currently, at the moment · eventually (fr. éventuellement) → possibly · deceived (fr. déçu) → disappointed</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span><span class="note-var">« actually » veut dire « en fait » ; « eventually » veut dire « finalement, à terme »</span></span></li>
+      <li class="var"><span class="es">informations → information · advices → advice · trainings → training sessions · equipments → equipment · persons → people</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">les indénombrables : la famille de fautes la plus fréquente à l'écrit comme à l'oral</span></span></li>
+      <li class="var"><span class="es">I am agree → I agree · explain me → explain to me · responsible of → responsible for · depend of → depend on · participate to → participate in</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">society (entreprise) → company · formation → training, degree · a career (cursus) → a degree course · chef (patron) → boss, manager · college (pt. colégio) → school</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">make a photo → take a photo · make a party → throw a party · take a coffee → have a coffee · win money → earn money · do a break → take a break</span><span class="meta"><span class="tag">casual</span><span class="risk">●</span><span class="note-var">les collocations make/take/have/do : à apprendre par paires, pas par règle</span></span></li>
+      <li class="var"><span class="es">assist to a meeting → attend a meeting · pass an exam (le passer) → sit/take an exam (« pass » = le réussir) · pretend to (pt. pretender) → intend to · resume (pt. resumir) → summarise</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">library (fr. librairie) → bookshop · journey (fr. journée) → day · attend (fr. attendre) → wait for · demand (fr. demander) → ask · command (fr. commander) → order · achieve (fr. achever) → finish, complete</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">sensible (fr. sensible) → sensitive (« sensible » = raisonnable) · occasion (bonne affaire) → bargain, second-hand · important (taille) → large, significant · interesting price → attractive price</span><span class="meta"><span class="tag">casual</span><span class="risk">●●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Votre profil d'interférence est double,</strong> comme en espagnol : le français fournit les faux amis (<em>actually, eventually, sensible, library</em>), le portugais les constructions (<em>pretend to, since + durée</em> via « desde »). La contre-mesure est la même que devant le jury CLOE : déclarez l'interférence tôt (segment 03), puis laissez le détecteur du bloc 9 faire les revues d'entraînement.</div>
+  </div>
+</section>
+</div>
+<div class="block" data-b="9" data-continu="0" data-sim="1">
+  <div class="sim-card chuleta">
+    <div class="sim-q-head"><span>Crib of the day · cinq formulations ●●● à placer aujourd'hui</span><button id="chu-next" class="mini">Five more</button></div>
+    <ol class="variantes chu-list"></ol>
+  </div>
+  <div class="sim-modes">
+    <button class="sim-mode on" data-mode="libre">Random questions</button>
+    <button class="sim-mode" data-mode="pub">A night at the pub (10)</button>
+    <button class="sim-mode" data-mode="interview">The interview (10)</button>
+    <button class="sim-mode" data-mode="lusismos">Calque detector</button>
+  </div>
+  <div class="block-intro"><strong>Bloc 9 · Simulator.</strong> Quelqu'un vous pose une question au hasard ; vous répondez dans le temps imparti, puis vous affichez le fait dicté et les formulations du segment concerné. « A night at the pub » enchaîne une soirée type en dix répliques ; « The interview » un entretien formel en dix questions. Le détecteur de calques relit ce que vous dictez ou tapez. Rien n'est stocké.</div>
+  <div class="sim sim-panel" data-panel="libre">
+    <div class="sim-filters">
+      <span class="sim-lab">Blocs</span>
+      <label><input type="checkbox" class="sim-f" value="1" checked> 1 Me</label>
+      <label><input type="checkbox" class="sim-f" value="2" checked> 2 Music &amp; football</label>
+      <label><input type="checkbox" class="sim-f" value="3" checked> 3 Pub</label>
+      <label><input type="checkbox" class="sim-f" value="4" checked> 4 Reactions</label>
+      <label><input type="checkbox" class="sim-f" value="5" checked> 5 Plans</label>
+      <label><input type="checkbox" class="sim-f" value="6" checked> 6 Stories</label>
+      <label><input type="checkbox" class="sim-f" value="7"> 7 Interview</label>
+      <label><input type="checkbox" class="sim-f" value="8"> 8 Toolkit</label>
+      <span class="sim-lab">Durée</span>
+      <label><input type="radio" name="sim-t" value="15" checked> 15 s</label>
+      <label><input type="radio" name="sim-t" value="30"> 30 s</label>
+      <label><input type="radio" name="sim-t" value="60"> 60 s</label>
+    </div>
+    <div class="sim-card">
+      <div class="sim-q-head"><span class="sim-src"></span><span class="sim-count"></span></div>
+      <p class="sim-q">Pulse « New question » pour commencer.</p>
+      <div class="sim-timer"><div class="sim-bar"></div><span class="sim-clock"></span></div>
+      <div class="sim-actions">
+        <button id="sim-next" class="on">New question</button>
+        <button id="sim-reveal" disabled>Show the answer</button>
+        <button id="sim-repeat" disabled>Repeat this one</button>
+        <button id="sim-rebote" disabled title="On insiste sur le même sujet">They push back</button>
+      </div>
+    </div>
+    <div class="sim-answer">
+      <h3 class="sub">Ce que vous avez dit (fait de référence)</h3>
+      <p class="sim-fact"></p>
+      <h3 class="sub">Amorce</h3>
+      <p class="sim-amorce"></p>
+      <h3 class="sub">Formulations du segment, à permuter</h3>
+      <p class="sim-hint">Cliquez sur une formulation pour la mettre en tête ; « Another one » en tire une autre au hasard. Registre : <button class="sim-reg on" data-reg="all">toutes</button><button class="sim-reg" data-reg="neutre">sobre</button><button class="sim-reg" data-reg="rico">salé / relevé</button> <button id="sim-other">Another one</button></p>
+      <ol class="variantes sim-vars"></ol>
+      <p class="sim-go"><a href="#" class="sim-link">Ouvrir le segment complet</a></p>
+    </div>
+  </div>
+
+  <div class="sim sim-panel" data-panel="ent" hidden>
+    <div class="block-intro ent-intro-pub"><strong>A night at the pub.</strong> Dix répliques dans l'ordre d'une vraie soirée : on vous aborde, première tournée, on vous questionne, quelqu'un raconte un truc et vous réagissez, on parle foot, vous racontez une anecdote, on propose de se revoir, vous partez. Temps cible par réplique. Rapport à la fin. Rien n'est conservé.</div>
+    <div class="block-intro ent-intro-int" hidden><strong>The interview.</strong> Dix questions dans l'ordre d'un vrai entretien : présentation, parcours, chiffres, réussite et échec, projet de mobilité, questions à l'interlocuteur. Temps cible par réponse — la présentation liminaire vise deux minutes maximum. Rapport à la fin.</div>
+    <div class="sim-card">
+      <div class="sim-q-head"><span class="ent-phase"></span><span class="ent-step"></span></div>
+      <p class="sim-q ent-q">Pulse « Start ».</p>
+      <div class="sim-timer ent-timer"><div class="sim-bar"></div><span class="sim-clock"></span></div>
+      <div class="sim-actions">
+        <button id="ent-start" class="on">Start</button>
+        <button id="ent-reveal" disabled>Show support</button>
+        <button id="ent-next" disabled>Next</button>
+        <button id="ent-stop" disabled>Finish</button>
+      </div>
+    </div>
+    <div class="sim-answer ent-answer">
+      <h3 class="sub">Apoyo</h3>
+      <p class="ent-fact"></p>
+      <ol class="variantes ent-vars"></ol>
+    </div>
+    <div class="sim-answer ent-report">
+      <h3 class="sub">Rapport</h3>
+      <table class="ent-table"><thead><tr><th>#</th><th>Question</th><th>Thème</th><th>Objectif</th><th>Temps</th></tr></thead><tbody></tbody></table>
+      <p class="ent-summary"></p>
+    </div>
+  </div>
+
+  <div class="sim sim-panel" data-panel="lusismos" hidden>
+    <div class="block-intro"><strong>Calque detector.</strong> Dictez (reconnaissance vocale du navigateur, en-GB) ou tapez une réponse en anglais, puis analysez : les calques français et portugais, faux amis et fautes de construction relevés dans vos fiches sont surlignés avec la forme correcte. Réserve : la reconnaissance vocale sur un accent mixte est inégale ; le texte n'est pas conservé.</div>
+    <div class="sim-card">
+      <textarea id="lus-text" rows="6" placeholder="Type or dictate your answer in English…"></textarea>
+      <div class="sim-actions">
+        <button id="lus-dictar">Dictate</button>
+        <button id="lus-analizar" class="on">Analyse</button>
+        <button id="lus-borrar">Clear</button>
+        <span class="lus-status"></span>
+      </div>
+    </div>
+    <div class="sim-answer lus-out">
+      <h3 class="sub">Texte analysé</h3>
+      <p class="lus-marked"></p>
+      <h3 class="sub">Corrections</h3>
+      <ul class="lus-list"></ul>
+    </div>
+  </div>
+</div>
+
+<footer class="jv">
+  <h2>Journal de version et réserves</h2>
+  <ul>
+    <li><strong>v1, 27 août 2026.</strong> Neuf blocs construits sur les dictées CLOE du 27/08/2026 (DICTEE_REBONDS et DICTEE_BAR), la compilation CLOE C1 et les fiches théoriques du British Trainer v3 (b1-b7, d1-d8, e1, a2-a3) ; moteur de l'outil « Español de bar » v1 : vue segments, vue continue (blocs 1, 6, 7), panneau de formulations, synthèse vocale en-GB, simulateur en quatre modes, détecteur de calques.</li>
+    <li><strong>Étiquetage.</strong> <em>casual</em> (dicible partout entre gens du même âge), <em>vulgar</em> (jurons usuels, entre amis), <em>very vulgar</em> (à comprendre plutôt qu'à dire), <em>formal</em> (registre professionnel sobre), <em>polished</em> (registre professionnel relevé). Les points ● à ●●● mesurent le risque social, pas la difficulté grammaticale.</li>
+    <li><strong>Boutons « Version simple » / « Version riche »</strong> en vue continue : sélectionnent respectivement les formulations sobres et celles étiquetées vulgar (blocs informels) ou polished (bloc 7).</li>
+    <li><strong>Réserves.</strong> Le lexique informel est l'anglais britannique courant des 25-45 ans, appuyé sur les fiches sourcées du British Trainer v3 ; les usages argotiques évoluent vite et varient par région et par groupe. Les faits personnels sont exclusivement ceux dictés pour le projet CLOE ; conformément aux règles du projet, ni salaire, ni noms d'employeurs, ni accusations invérifiables ne figurent dans ce document public. Les lieux et prénoms des questions du simulateur (Thursday open mic, etc.) sont des exemples, pas des faits.</li>
+    <li><strong>Non traité, faute de dictée :</strong> flirt explicite ; politique britannique (Brexit : consigne d'écoute seulement) ; négociation salariale en entretien (le salaire dicté ne doit pas être publié, le sujet est donc traité par une formule d'esquive au bloc 8).</li>
+  </ul>
+</footer>
+
+</div>
+<script>
+(function(){
+  /* ---------- PWA ---------- */
+  var mf = {
+    name:"UK Conversation · pub & interview", short_name:"UK Talk",
+    start_url:".", display:"standalone", background_color:"#f5f0e8", theme_color:"#8a6520",
+    icons:[
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%23f5f0e8'/%3E%3Ctext x='96' y='126' font-size='98' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EUK%3C/text%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml", purpose:"any"},
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23f5f0e8'/%3E%3Ctext x='256' y='336' font-size='260' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EUK%3C/text%3E%3C/svg%3E", sizes:"512x512", type:"image/svg+xml", purpose:"any"}
+    ]
+  };
+  try{
+    var url = URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:"application/json"}));
+    document.getElementById("manifest-link").setAttribute("href", url);
+  }catch(e){}
+
+  /* ---------- Accordéon ---------- */
+  document.querySelectorAll("section.seg").forEach(function(s){
+    s.querySelector(".seg-head").addEventListener("click", function(){ s.classList.toggle("open"); });
+  });
+
+  /* ---------- Panneau de choix, partagé ---------- */
+  var pop = document.createElement("div");
+  pop.id = "popover";
+  document.body.appendChild(pop);
+  var popSlot = null, closeT = null, touchMode = false;
+  /* Sur écran tactile, un appui émet mouseenter puis click : le panneau s'ouvrait puis se refermait aussitôt. On mémorise le type de pointeur. */
+  document.addEventListener("pointerdown", function(ev){ touchMode = (ev.pointerType === "touch" || ev.pointerType === "pen"); }, true);
+  document.addEventListener("touchstart", function(){ touchMode = true; }, {capture:true, passive:true});
+  function lower(t){ return t ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
+  function scheduleClose(){ closeT = setTimeout(closePop, 320); }
+  function closePop(){
+    pop.classList.remove("show");
+    if(popSlot) popSlot.el.classList.remove("active");
+    popSlot = null;
+  }
+  function place(anchor){
+    var r = anchor.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    pop.style.maxWidth = Math.min(440, vw - 24) + "px";
+    pop.style.left = "0px"; pop.style.top = "0px";
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var left = Math.min(Math.max(12, r.left), vw - pw - 12);
+    var top = r.bottom + 8;
+    if(top + ph > vh - 12) top = Math.max(12, r.top - ph - 8);
+    pop.style.left = (left + window.scrollX) + "px";
+    pop.style.top  = (top + window.scrollY) + "px";
+  }
+  function openPop(sl){
+    popSlot = sl;
+    pop.innerHTML = "";
+    var head = document.createElement("div");
+    head.className = "pop-head";
+    head.textContent = sl.conn ? "Chevilles de liaison" : "Formulations disponibles";
+    pop.appendChild(head);
+    sl.opts.forEach(function(o, k){
+      var item = document.createElement("div");
+      item.className = "pop-item" + (k === sl.i ? " current" : "");
+      var line = document.createElement("span");
+      line.className = "pop-es"; line.textContent = o.t;
+      item.appendChild(line);
+      if(o.tag || o.risk || o.note){
+        var meta = document.createElement("span"); meta.className = "pop-meta";
+        if(o.tag){ var tg=document.createElement("span"); tg.className=o.cls||"tag"; tg.textContent=o.tag; meta.appendChild(tg); }
+        if(o.risk){ var rk=document.createElement("span"); rk.className="risk"; rk.textContent=o.risk; meta.appendChild(rk); }
+        if(o.note){ var nt=document.createElement("span"); nt.className="pop-note"; nt.textContent=o.note; meta.appendChild(nt); }
+        item.appendChild(meta);
+      }
+      item.addEventListener("click", function(ev){
+        ev.stopPropagation();
+        sl.i = k; sl.block.render(); sl.block.metrics(); closePop();
+        sl.el.classList.add("flash");
+        setTimeout(function(){ sl.el.classList.remove("flash"); }, 260);
+      });
+      pop.appendChild(item);
+    });
+    pop.classList.add("show");
+    place(sl.el);
+    sl.el.classList.add("active");
+  }
+  pop.addEventListener("mouseenter", function(){ clearTimeout(closeT); });
+  pop.addEventListener("mouseleave", scheduleClose);
+  document.addEventListener("click", closePop);
+  document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closePop(); });
+  window.addEventListener("resize", closePop);
+  window.addEventListener("scroll", function(){ if(popSlot) place(popSlot.el); }, {passive:true});
+
+  /* ---------- Un moteur de vue continue par bloc ---------- */
+  function Bloc(el){
+    this.el = el;
+    this.cont = el.querySelector(".continu");
+    this.texto = this.cont ? this.cont.querySelector(".texto") : null;
+    this.slots = [];
+    this.built = false;
+  }
+  Bloc.prototype.mk = function(cls, opts, afterConn){
+    var self = this;
+    var el = document.createElement("span");
+    el.className = cls; el.tabIndex = 0;
+    this.texto.appendChild(el);
+    this.texto.appendChild(document.createTextNode(" "));
+    var sl = {el:el, opts:opts, i:0, conn:cls.indexOf("conn")>=0, afterConn:afterConn, block:self};
+    el.addEventListener("mouseenter", function(){ if(touchMode) return; clearTimeout(closeT); openPop(sl); });
+    el.addEventListener("mouseleave", function(){ if(!touchMode) scheduleClose(); });
+    el.addEventListener("click", function(ev){
+      ev.stopPropagation(); clearTimeout(closeT);
+      if(touchMode){ if(popSlot === sl) closePop(); else openPop(sl); return; }
+      if(popSlot !== sl) openPop(sl);
+    });
+    el.addEventListener("keydown", function(ev){
+      if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); openPop(sl); }
+      if(ev.key === "Escape") closePop();
+    });
+    return sl;
+  };
+  Bloc.prototype.build = function(){
+    if(this.built || !this.texto) return;
+    var self = this;
+    this.texto.innerHTML = ""; this.slots = [];
+    this.el.querySelectorAll("section.seg").forEach(function(s){
+      var num = s.querySelector(".seg-num").textContent.trim();
+      if(!/^\d+$/.test(num)) return;
+      s.querySelectorAll("ol.variantes").forEach(function(ol){
+        var opts = Array.prototype.map.call(ol.querySelectorAll("li.var"), function(li){
+          var tag = li.querySelector(".tag"), risk = li.querySelector(".risk"), note = li.querySelector(".note-var");
+          return { t: li.querySelector(".es").textContent.trim(),
+                   tag: tag ? tag.textContent.trim() : "",
+                   cls: tag ? tag.className : "",
+                   risk: risk ? risk.textContent.trim() : "",
+                   note: note ? note.textContent.trim() : "" };
+        });
+        if(!opts.length) return;
+        var conn = ol.getAttribute("data-conn");
+        if(conn){
+          var copts = conn.split("|").map(function(c){ return {t:c, tag:"cheville", cls:"tag", risk:"", note:""}; });
+          self.slots.push(self.mk("slot conn", copts, false));
+        }
+        self.slots.push(self.mk("slot", opts, !!conn));
+      });
+    });
+    this.built = true;
+    this.render(); this.metrics();
+  };
+  Bloc.prototype.render = function(){
+    this.slots.forEach(function(sl){
+      var t = sl.opts[sl.i].t;
+      if(!sl.conn && sl.afterConn) t = lower(t);
+      sl.el.textContent = t;
+      sl.el.title = (sl.i+1) + " sur " + sl.opts.length + ", cliquez pour choisir";
+    });
+  };
+  Bloc.prototype.metrics = function(){
+    if(!this.cont) return;
+    var words = this.texto.textContent.trim().split(/\s+/).filter(Boolean).length;
+    this.cont.querySelector(".m-words").textContent = words;
+    var sec = Math.round(words / 150 * 60);
+    this.cont.querySelector(".m-time").textContent =
+      Math.floor(sec/60) + " min " + String(sec%60).padStart(2,"0") + " s";
+    var log = 0;
+    this.slots.forEach(function(sl){ log += Math.log10(sl.opts.length); });
+    this.cont.querySelector(".m-combi").textContent =
+      log > 12 ? "plus de mille milliards de" : Math.round(Math.pow(10, log)).toLocaleString("fr-FR");
+  };
+  Bloc.prototype.pickBy = function(rich){
+    this.slots.forEach(function(sl){
+      if(sl.conn) return;
+      for(var k = 0; k < sl.opts.length; k++){
+        var c = sl.opts[k].cls || "";
+        var isRich = c.indexOf("idio") >= 0 || c.indexOf("sout") >= 0;
+        if(isRich === rich){ sl.i = k; return; }
+      }
+      sl.i = 0;
+    });
+    this.render(); this.metrics();
+  };
+  Bloc.prototype.shuffle = function(){
+    this.slots.forEach(function(sl){ sl.i = Math.floor(Math.random()*sl.opts.length); });
+    this.render(); this.metrics();
+  };
+
+  var blocs = {};
+  document.querySelectorAll(".block").forEach(function(el){ blocs[el.dataset.b] = new Bloc(el); });
+  var actif = null;
+
+  /* ---------- Onglets ---------- */
+  function setBloc(id){
+    document.querySelectorAll(".block").forEach(function(el){ el.classList.toggle("on", el.dataset.b === id); });
+    document.querySelectorAll("nav.tabs button").forEach(function(b){ b.classList.toggle("on", b.dataset.b === id); });
+    actif = blocs[id];
+    var hasCont = actif.el.dataset.continu === "1";
+    document.body.classList.toggle("sans-continu", !hasCont);
+    document.body.classList.toggle("sim-on", !!actif.el.dataset.sim);
+    if(!hasCont) setVue("seg");
+    if(hasCont) actif.build();
+    closePop();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  document.querySelectorAll("nav.tabs button").forEach(function(b){
+    b.addEventListener("click", function(){ setBloc(b.dataset.b); });
+  });
+
+  /* ---------- Vues ---------- */
+  var bSeg = document.getElementById("btn-view-seg"), bCon = document.getElementById("btn-view-con"), bAll = document.getElementById("btn-view-all");
+  function setVue(v){
+    document.body.classList.toggle("vue-con", v === "con");
+    document.body.classList.toggle("vue-seg", v === "seg");
+    document.body.classList.toggle("vue-all", v === "all");
+    bSeg.classList.toggle("on", v === "seg");
+    bCon.classList.toggle("on", v === "con");
+    bAll.classList.toggle("on", v === "all");
+  }
+  bAll.addEventListener("click", function(){ if(actif) actif.build(); setVue("all"); });
+  bSeg.addEventListener("click", function(){ setVue("seg"); });
+  bCon.addEventListener("click", function(){ if(actif) actif.build(); setVue("con"); window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Barre d'outils ---------- */
+  var btnOpen = document.getElementById("btn-open");
+  btnOpen.addEventListener("click", function(){
+    var segs = Array.prototype.slice.call(actif.el.querySelectorAll("section.seg"));
+    var anyClosed = segs.some(function(s){ return !s.classList.contains("open"); });
+    segs.forEach(function(s){ s.classList.toggle("open", anyClosed); });
+    btnOpen.textContent = anyClosed ? "Tout replier" : "Tout déplier";
+  });
+
+  var btnMask = document.getElementById("btn-mask");
+  btnMask.addEventListener("click", function(){
+    document.body.classList.toggle("masque");
+    btnMask.classList.toggle("on", document.body.classList.contains("masque"));
+    if(!document.body.classList.contains("masque"))
+      document.querySelectorAll("li.var.revele").forEach(function(li){ li.classList.remove("revele"); });
+  });
+  document.querySelectorAll("li.var").forEach(function(li){
+    li.addEventListener("click", function(){
+      if(document.body.classList.contains("masque")) li.classList.toggle("revele");
+    });
+  });
+
+  document.getElementById("btn-sobrio").addEventListener("click", function(){ if(actif) actif.pickBy(false); });
+  document.getElementById("btn-rico").addEventListener("click",   function(){ if(actif) actif.pickBy(true); });
+  document.getElementById("btn-shuffle").addEventListener("click",function(){ if(actif) actif.shuffle(); });
+  document.getElementById("btn-print").addEventListener("click", function(){
+    document.querySelectorAll("section.seg").forEach(function(s){ s.classList.add("open"); });
+    window.print();
+  });
+
+
+
+  /* ---------- Synthèse vocale en-GB (amélioration 1) ---------- */
+  var TTS = (function(){
+    var ok = ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
+    var voice = null;
+    function pick(){
+      if(!ok) return;
+      var vs = window.speechSynthesis.getVoices() || [];
+      voice = vs.filter(function(v){ return /^en[-_]GB/i.test(v.lang); })[0]
+           || vs.filter(function(v){ return /^en/i.test(v.lang); })[0] || null;
+    }
+    if(ok){ pick(); window.speechSynthesis.onvoiceschanged = pick; }
+    var current = null;
+    function stop(){ if(ok) window.speechSynthesis.cancel(); if(current){ current.classList.remove('tts-active'); current = null; } }
+    function say(text, el){
+      if(!ok) return false;
+      stop();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-GB'; if(voice) u.voice = voice; u.rate = 0.92;
+      if(el){ current = el; el.classList.add('tts-active'); }
+      u.onend = u.onerror = function(){ if(el) el.classList.remove('tts-active'); if(current === el) current = null; };
+      window.speechSynthesis.speak(u);
+      return true;
+    }
+    return {ok:ok, say:say, stop:stop, hasEn:function(){ return !!voice; }};
+  })();
+  document.querySelectorAll('li.var > .es').forEach(function(es){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'tts'; b.textContent = 'listen'; b.title = 'Synthèse vocale en-GB';
+    es.insertAdjacentElement('afterend', b);
+  });
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('button.tts'); if(b){
+      ev.stopPropagation();
+      var es = b.previousElementSibling; if(!es) return;
+      if(!TTS.say(es.textContent.trim(), es)) b.textContent = 'no voice';
+      return;
+    }
+    var a = ev.target.closest('button.tts-all'); if(a){
+      var blk = a.closest('.block'); var t = blk && blk.querySelector('.texto');
+      if(t && !TTS.say(t.textContent.replace(/\s+/g,' ').trim(), t)) a.textContent = 'no voice in this browser';
+      return;
+    }
+    if(ev.target.closest('button.tts-stop')) TTS.stop();
+  });
+  if(!TTS.ok) document.querySelectorAll('button.tts, button.tts-all, button.tts-stop').forEach(function(b){ b.disabled = true; b.title = 'Synthèse vocale indisponible dans ce navigateur'; });
+
+  /* ---------- Simulador ---------- */
+  (function(){
+    var simEl = document.querySelector('.block[data-b="9"]'); if(!simEl) return;
+    var bank = [];
+    function segInfo(seg){
+      var blk = seg.closest('.block'); var b = blk ? blk.dataset.b : '';
+      var title = seg.querySelector('.seg-title'); var fr = seg.querySelector('.seg-fr');
+      var vars = Array.prototype.map.call(seg.querySelectorAll('ol.variantes:not(.sim-vars) li.var'), function(li){ return li.cloneNode(true); });
+      return {b:b, seg:seg, title: title?title.textContent.trim():'', fr: fr?fr.textContent.trim():'', vars:vars};
+    }
+    document.querySelectorAll('.block:not([data-sim]) section.seg').forEach(function(seg){
+      var info = segInfo(seg);
+      seg.querySelectorAll('ul.rebonds li').forEach(function(li){
+        var am = li.querySelector('.amorce');
+        var q = li.childNodes[0] ? li.childNodes[0].textContent.trim() : '';
+        if(!q) return;
+        bank.push({q:q, amorce: am?am.textContent.trim():'', info:info, src:'Bloc '+info.b+' · '+info.title});
+      });
+      if(/[?]/.test(info.title)){
+        
+      }
+    });
+
+    /* Banque de questions du jury, rattachées à un segment (bloc, numéro). Formulées comme les poserait un examinateur. */
+    var EXTRA = [
+      ["1","01","Where are you from, then?"],["1","01","You don't sound French. Where's home?"],["1","02","What brings you over here?"],["1","02","How long are you here for?"],["1","02","First time in the UK?"],
+      ["1","03","What do you do, then?"],["1","03","Do you enjoy it, though?"],["1","04","What's Rio actually like?"],["1","04","Is it as dangerous as they say?"],["1","04","What about the favelas?"],
+      ["1","05","Where's the accent from?"],["1","05","Say something in Portuguese!"],["1","06","Seeing anyone?"],["1","06","How old are you, anyway?"],["1","07","Right, your turn — ask me something."],
+      ["2","01","What music are you into?"],["2","01","Seen anyone good live lately?"],["2","02","Do you play anything?"],["2","02","There's an open mic Thursday — you in?"],["2","02","What on earth is a bloco?"],
+      ["2","03","Who do you support?"],["2","03","Typical glory hunter, supporting Liverpool."],["2","03","What's football like in Brazil, then?"],["2","03","Have you actually been to Anfield?"],
+      ["2","04","(A striker misses an open goal right in front of you. React.)"],["2","04","That's never a penalty, is it?"],
+      ["3","01","What are you having?"],["3","01","(The bartender says: You alright there?)"],["3","02","Same again all round?"],["3","02","Put your money away — you're our guest."],
+      ["3","03","Beer or wine man?"],["3","03","A Frenchman drinking English beer? Explain yourself."],["3","04","Bit grey out, isn't it?"],["3","04","Busy in here tonight, innit."],
+      ["4","01","Guess what — Dave's only gone and moved to Australia."],["4","01","I got the job, by the way."],["4","02","What do you reckon to this pub, then?"],["4","02","I've got tickets for Saturday's gig."],
+      ["4","03","My landlord's putting the rent up again."],["4","03","Train got cancelled twice this morning."],["4","04","Best pub in town, this. Agreed?"],["4","04","Pineapple belongs on pizza. Discuss."],["4","05","You've gone quiet — everything alright?"],
+      ["5","01","So… how are you finding it over here?"],["5","01","Been anywhere nice lately?"],["5","02","We should do something at the weekend."],["5","02","Fancy coming to the match on Saturday?"],
+      ["5","03","Go on, one more. Don't be boring."],["5","04","Give us your number, I'll text you."],["5","04","You're not going already? It's early."],
+      ["6","01","What's the maddest thing you've seen at carnival?"],["6","01","Is it true you play for seven hours straight?"],["6","02","What happened with carnival during covid?"],["6","02","How long does Rio carnival actually last?"],
+      ["7","01","Tell me about yourself."],["7","02","Why renewable energy, of all things?"],["7","03","What scale have you worked at?"],["7","04","What's the hardest place you've ever had to deliver a project?"],
+      ["7","05","What's your view on battery storage as a business?"],["7","06","Tell me about a time something failed."],["7","07","Why should we back you for this move?"],
+      ["8","01","(Say this more diplomatically: \"This plan is wrong.\")"],["8","02","(You didn't understand the question. Recover without panicking.)"],["8","03","(Someone with a strong Glaswegian accent has just told you a joke.)"],["8","04","(Put into correct English: \"I am here since three years.\")"]
+    ];
+    EXTRA.forEach(function(x){
+      var blk = document.querySelector('.block[data-b="'+x[0]+'"]'); if(!blk) return;
+      var seg = null; blk.querySelectorAll('section.seg').forEach(function(sg){ var n = sg.querySelector('.seg-num'); if(n && n.textContent.trim() === x[1]) seg = sg; });
+      if(!seg) return;
+      var info = segInfo(seg);
+      bank.push({q:x[2], amorce:'', info:info, src:'Bloc '+info.b+' · '+info.title});
+    });
+    var filters = simEl.querySelectorAll('.sim-f');
+    var qEl = simEl.querySelector('.sim-q'), srcEl = simEl.querySelector('.sim-src'), cntEl = simEl.querySelector('.sim-count');
+    var bar = simEl.querySelector('.sim-bar'), timer = simEl.querySelector('.sim-timer'), clock = simEl.querySelector('.sim-clock');
+    var ans = simEl.querySelector('.sim-answer'), factEl = simEl.querySelector('.sim-fact'), amEl = simEl.querySelector('.sim-amorce');
+    var varsEl = simEl.querySelector('.sim-vars'), link = simEl.querySelector('.sim-link');
+    var bNext = document.getElementById('sim-next'), bReveal = document.getElementById('sim-reveal'), bRepeat = document.getElementById('sim-repeat'), bOther = document.getElementById('sim-other');
+    var done = [], cur = null, tick = null, reg = 'all', asked = 0;
+    function pool(){
+      var on = {}; filters.forEach(function(f){ if(f.checked) on[f.value] = true; });
+      return bank.filter(function(x){ return on[x.info.b]; });
+    }
+    function limit(){ var r = simEl.querySelector('input[name="sim-t"]:checked'); return r ? parseInt(r.value,10) : 30; }
+    function stopTimer(){ if(tick){ clearInterval(tick); tick = null; } }
+    function startTimer(){
+      stopTimer(); var total = limit(), t0 = Date.now(); timer.classList.remove('over');
+      bar.style.width = '0%'; clock.textContent = total + ' s';
+      tick = setInterval(function(){
+        var el = (Date.now()-t0)/1000, left = Math.max(0, total-el);
+        bar.style.width = Math.min(100, el/total*100) + '%';
+        clock.textContent = Math.ceil(left) + ' s';
+        if(left <= 0){ timer.classList.add('over'); clock.textContent = 'time'; stopTimer(); }
+      }, 200);
+    }
+    function ask(item){
+      cur = item; asked++;
+      qEl.textContent = item.q; srcEl.textContent = item.src;
+      cntEl.textContent = 'question ' + asked + ' · ' + pool().length + ' disponibles';
+      ans.classList.remove('show'); bReveal.disabled = false; bRepeat.disabled = false;
+      startTimer();
+    }
+    function next(){
+      var p = pool(); if(!p.length){ qEl.textContent = 'Sélectionnez au moins un bloc.'; return; }
+      var rest = p.filter(function(x){ return done.indexOf(x) < 0; });
+      if(!rest.length){ done = []; rest = p; }
+      var item = rest[Math.floor(Math.random()*rest.length)];
+      done.push(item); ask(item);
+    }
+    function renderVars(){
+      varsEl.innerHTML = '';
+      var list = cur.info.vars.filter(function(li){
+        if(reg === 'all') return true;
+        var t = li.querySelector('.tag'); var c = t ? t.className : '';
+        var rich = c.indexOf('idio') >= 0 || c.indexOf('sout') >= 0;
+        return reg === 'rico' ? rich : !rich;
+      });
+      list.forEach(function(li){
+        var c = li.cloneNode(true);
+        c.addEventListener('click', function(){ varsEl.querySelectorAll('.lead-var').forEach(function(x){ x.classList.remove('lead-var'); }); c.classList.add('lead-var'); varsEl.insertBefore(c, varsEl.firstChild); });
+        varsEl.appendChild(c);
+      });
+      if(!list.length){ var e = document.createElement('li'); e.textContent = 'Aucune formulation dans ce registre pour ce segment.'; varsEl.appendChild(e); }
+    }
+    function reveal(){
+      stopTimer(); if(!cur) return;
+      factEl.textContent = cur.info.fr || cur.info.title;
+      amEl.textContent = cur.amorce || 'Pas d\u2019amorce : construisez la réponse à partir du fait et des formulations.';
+      renderVars(); ans.classList.add('show');
+      ans.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    bNext.addEventListener('click', next);
+    bReveal.addEventListener('click', reveal);
+    bRepeat.addEventListener('click', function(){ if(cur){ asked--; ask(cur); } });
+    bOther.addEventListener('click', function(){
+      var items = varsEl.querySelectorAll('li.var'); if(items.length < 2) return;
+      var k = 1 + Math.floor(Math.random()*(items.length-1));
+      items.forEach(function(x){ x.classList.remove('lead-var'); });
+      items[k].classList.add('lead-var'); varsEl.insertBefore(items[k], varsEl.firstChild);
+    });
+    simEl.querySelectorAll('.sim-reg').forEach(function(b){
+      b.addEventListener('click', function(){ simEl.querySelectorAll('.sim-reg').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); reg = b.dataset.reg; if(cur) renderVars(); });
+    });
+    link.addEventListener('click', function(ev){
+      ev.preventDefault(); if(!cur) return;
+      setBloc(cur.info.b); setVue('seg'); cur.info.seg.classList.add('open');
+      setTimeout(function(){ cur.info.seg.scrollIntoView({behavior:'smooth', block:'start'}); }, 350);
+    });
+
+    /* ---------- Modes du bloc 9 ---------- */
+    simEl.querySelectorAll('.sim-mode').forEach(function(b){
+      b.addEventListener('click', function(){
+        simEl.querySelectorAll('.sim-mode').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+        var target = (b.dataset.mode === 'pub' || b.dataset.mode === 'interview') ? 'ent' : b.dataset.mode;
+        simEl.querySelectorAll('.sim-panel').forEach(function(pn){ pn.hidden = pn.dataset.panel !== target; });
+        if(target === 'ent'){
+          planCur = (b.dataset.mode === 'interview') ? PLAN_INT : PLAN_PUB;
+          var iP = simEl.querySelector('.ent-intro-pub'), iI = simEl.querySelector('.ent-intro-int');
+          if(iP) iP.hidden = (b.dataset.mode === 'interview');
+          if(iI) iI.hidden = (b.dataset.mode !== 'interview');
+          if(typeof entResetUI === 'function') entResetUI();
+        }
+        stopTimer(); TTS.stop();
+      });
+    });
+
+    /* ---------- Chuleta del día (amélioration 8) ---------- */
+    var chuList = simEl.querySelector('.chu-list');
+    var hard = [];
+    document.querySelectorAll('.block:not([data-sim]) section.seg li.var').forEach(function(li){
+      var r = li.querySelector('.risk'); if(!r || r.textContent.trim() !== '●●●') return;
+      var seg = li.closest('section.seg'), blk = li.closest('.block');
+      hard.push({li:li, src:'Bloc ' + blk.dataset.b + ' · ' + seg.querySelector('.seg-title').textContent.trim()});
+    });
+    function chuleta(){
+      chuList.innerHTML = '';
+      var pool = hard.slice(), n = Math.min(5, pool.length);
+      for(var i = 0; i < n; i++){
+        var k = Math.floor(Math.random()*pool.length), it = pool.splice(k,1)[0];
+        var c = it.li.cloneNode(true);
+        var src = document.createElement('span'); src.className = 'chu-src'; src.textContent = it.src;
+        c.appendChild(src); chuList.appendChild(c);
+      }
+    }
+    document.getElementById('chu-next').addEventListener('click', chuleta);
+    chuleta();
+
+    /* ---------- Rebote del jurado (amélioration 4) ---------- */
+    var bRebote = document.getElementById('sim-rebote');
+    function rebote(){
+      if(!cur) return;
+      var same = bank.filter(function(x){ return x !== cur && x.info.seg === cur.info.seg; });
+      var pool2 = same.length ? same : bank.filter(function(x){ return x !== cur && x.info.b === cur.info.b && Math.abs(parseInt(x.info.seg.querySelector('.seg-num').textContent,10) - parseInt(cur.info.seg.querySelector('.seg-num').textContent,10)) <= 1; });
+      if(!pool2.length) pool2 = bank.filter(function(x){ return x !== cur && x.info.b === cur.info.b; });
+      if(!pool2.length){ next(); return; }
+      var item = pool2[Math.floor(Math.random()*pool2.length)];
+      done.push(item); ask(item); srcEl.textContent = 'They push back · ' + item.src;
+    }
+    bRebote.addEventListener('click', rebote);
+    var _ask = ask;
+    ask = function(item){ _ask(item); bRebote.disabled = false; };
+
+    /* ---------- Entrevista completa (amélioration 3) ---------- */
+    var PLAN_PUB = [
+      {phase:"You arrive · someone says hello", q:"You alright? You're the French one, right? Where are you from?", b:"1", n:"01", t:15},
+      {phase:"You arrive · someone says hello", pick:["1"], t:15},
+      {phase:"First round", pick:["3"], t:10},
+      {phase:"Getting to know you", pick:["1"], t:20},
+      {phase:"Someone tells a story · react", pick:["4"], t:8},
+      {phase:"Football and music", pick:["2"], t:20},
+      {phase:"Your turn to tell one", pick:["6"], t:60},
+      {phase:"Someone tells a story · react", pick:["4"], t:8},
+      {phase:"Someone suggests a plan", pick:["5"], t:15},
+      {phase:"Leaving", q:"You're not going already? Stay for one more.", b:"5", n:"04", t:15}
+    ];
+    var PLAN_INT = [
+      {phase:"Opening", q:"Thank you for coming in. To start with — tell me about yourself.", b:"7", n:"01", t:120},
+      {phase:"Background", q:"You started in wind power — walk me through that.", b:"7", n:"02", t:45},
+      {phase:"Experience", q:"Tell me about your time in Brazil. What scale are we talking about?", b:"7", n:"03", t:60},
+      {phase:"Experience", q:"What does a typical project look like, concretely?", b:"7", n:"03", t:45},
+      {phase:"Depth", q:"The Amazon work — what made it difficult?", b:"7", n:"04", t:60},
+      {phase:"Breadth", q:"Beyond project delivery, what else have you taken on?", b:"7", n:"05", t:60},
+      {phase:"Self-awareness", q:"Tell me about a failure — something that didn't work.", b:"7", n:"06", t:90},
+      {phase:"Motivation", q:"Why Europe, and why now?", b:"7", n:"07", t:60},
+      {phase:"Motivation", q:"Where do you see yourself in five years?", b:"7", n:"07", t:45},
+      {phase:"Closing", q:"Do you have any questions for us?", b:"7", n:"07", t:30}
+    ];
+    var planCur = PLAN_PUB;
+    var ent = {step:-1, items:[], t0:0, tick:null, log:[]};
+    var eQ = simEl.querySelector('.ent-q'), ePh = simEl.querySelector('.ent-phase'), eSt = simEl.querySelector('.ent-step');
+    var eTimer = simEl.querySelector('.ent-timer'), eBar = eTimer.querySelector('.sim-bar'), eClock = eTimer.querySelector('.sim-clock');
+    var eAns = simEl.querySelector('.ent-answer'), eFact = simEl.querySelector('.ent-fact'), eVars = simEl.querySelector('.ent-vars');
+    var eRep = simEl.querySelector('.ent-report'), eBody = eRep.querySelector('tbody'), eSum = simEl.querySelector('.ent-summary');
+    var bES = document.getElementById('ent-start'), bER = document.getElementById('ent-reveal'), bEN = document.getElementById('ent-next'), bEX = document.getElementById('ent-stop');
+    function entStopTimer(){ if(ent.tick){ clearInterval(ent.tick); ent.tick = null; } }
+    function entTimer(total){
+      entStopTimer(); ent.t0 = Date.now(); eTimer.classList.remove('over'); eBar.style.width = '0%';
+      ent.tick = setInterval(function(){
+        var el = (Date.now()-ent.t0)/1000;
+        eBar.style.width = Math.min(100, el/total*100) + '%';
+        eClock.textContent = Math.round(el) + ' s / ' + total + ' s';
+        if(el > total) eTimer.classList.add('over');
+      }, 250);
+    }
+    function entBuild(){
+      var used = [];
+      return planCur.map(function(st){
+        if(st.q){
+          var blk = document.querySelector('.block[data-b="'+st.b+'"]'); var seg = null;
+          blk.querySelectorAll('section.seg').forEach(function(sg){ if(sg.querySelector('.seg-num').textContent.trim() === st.n) seg = sg; });
+          return {phase:st.phase, q:st.q, t:st.t, info:segInfo(seg), src:'Bloc '+st.b};
+        }
+        var cand = bank.filter(function(x){ return st.pick.indexOf(x.info.b) >= 0 && used.indexOf(x.info.seg) < 0; });
+        if(!cand.length) cand = bank.filter(function(x){ return st.pick.indexOf(x.info.b) >= 0; });
+        var it = cand[Math.floor(Math.random()*cand.length)];
+        used.push(it.info.seg);
+        return {phase:st.phase, q:it.q, t:st.t, info:it.info, src:it.src, amorce:it.amorce};
+      });
+    }
+    function entShow(){
+      var it = ent.items[ent.step];
+      ePh.textContent = it.phase; eSt.textContent = 'step ' + (ent.step+1) + ' / ' + ent.items.length + ' · target ' + it.t + ' s';
+      eQ.textContent = it.q; eAns.classList.remove('show'); bER.disabled = false; bEN.disabled = false;
+      entTimer(it.t);
+    }
+    function entClose(){
+      var it = ent.items[ent.step]; if(!it) return;
+      ent.log.push({q:it.q, src:it.src, t:it.t, used:Math.round((Date.now()-ent.t0)/1000)});
+      entStopTimer();
+    }
+    function entReport(){
+      eBody.innerHTML = '';
+      var over = 0, under = 0, total = 0;
+      ent.log.forEach(function(l, i){
+        var tr = document.createElement('tr'); total += l.used;
+        var cls = l.used > l.t*1.2 ? 'over' : (l.used < l.t*0.5 ? 'under' : '');
+        if(cls === 'over') over++; if(cls === 'under') under++;
+        tr.innerHTML = '<td>'+(i+1)+'</td><td>'+l.q+'</td><td>'+l.src+'</td><td>'+l.t+' s</td><td class="'+cls+'">'+l.used+' s</td>';
+        eBody.appendChild(tr);
+      });
+      var m = Math.floor(total/60), sc = total%60;
+      eSum.textContent = 'Durée totale de vos réponses : ' + m + ' min ' + sc + ' s sur ' + ent.log.length + ' étapes. ' +
+        (over ? over + ' réponse(s) nettement au-dessus de la cible : coupez — au pub comme en entretien, qui parle plus d\'une minute d\'affilée perd la table. ' : '') +
+        (under ? under + ' réponse(s) très courtes : ajoutez un exemple concret ou une conséquence avant de rendre la parole. ' : '') +
+        (!over && !under ? 'Temps ajustés à toutes les étapes.' : '');
+      eRep.classList.add('show');
+    }
+    function entResetUI(){
+      entStopTimer(); ent.step = -1; ent.items = []; ent.log = [];
+      bES.disabled = false; bER.disabled = true; bEN.disabled = true; bEX.disabled = true;
+      eQ.textContent = 'Pulse « Start ».'; ePh.textContent = ''; eSt.textContent = '';
+      eAns.classList.remove('show'); eRep.classList.remove('show');
+      eBar.style.width = '0%'; eClock.textContent = '';
+    }
+    window.entResetUI = entResetUI;
+    bES.addEventListener('click', function(){
+      ent.items = entBuild(); ent.step = 0; ent.log = []; eRep.classList.remove('show');
+      bES.disabled = true; bEX.disabled = false; entShow();
+    });
+    bER.addEventListener('click', function(){
+      var it = ent.items[ent.step]; if(!it) return;
+      eFact.textContent = (it.amorce ? 'Amorce : ' + it.amorce + ' · ' : '') + (it.info.fr || it.info.title);
+      eVars.innerHTML = ''; it.info.vars.forEach(function(li){ eVars.appendChild(li.cloneNode(true)); });
+      eAns.classList.add('show');
+    });
+    function entFinish(){
+      entClose(); ent.step = -1; bES.disabled = false; bER.disabled = true; bEN.disabled = true; bEX.disabled = true;
+      eQ.textContent = 'Terminé. Rapport ci-dessous.'; ePh.textContent = ''; eSt.textContent = ''; eAns.classList.remove('show');
+      entReport();
+    }
+    bEN.addEventListener('click', function(){
+      entClose(); ent.step++;
+      if(ent.step >= ent.items.length){ ent.step = ent.items.length - 1; ent.log.pop(); entFinish(); return; }
+      entShow();
+    });
+    bEX.addEventListener('click', entFinish);
+
+    /* ---------- Detector de lusismos (amélioration 5) ---------- */
+    var LUS = [
+      [/\bi have (\d+|twenty|thirty|forty)[\w-]* years( old)?\b/gi,"I'm + âge : I'm 33","calque"],
+      [/\bsince (\d+|one|two|three|four|five|six|seven|eight|nine|ten|a few|several|many) (years?|months?|weeks?|days?)\b/gi,"for + durée : for six years","calque"],
+      [/\bduring (\d+|[a-z]+) (years?|months?)\b/gi,"for + durée","calque"],
+      [/\b(i|we) (live|work|am|are) (here|there|in \w+) since\b/gi,"present perfect : I've lived here since…","grammaire"],
+      [/\binformations\b/gi,"information (indénombrable)","grammaire"],
+      [/\badvices\b/gi,"advice (indénombrable)","grammaire"],
+      [/\btrainings\b/gi,"training sessions","grammaire"],
+      [/\bequipments\b/gi,"equipment (indénombrable)","grammaire"],
+      [/\bpersons\b/gi,"people","grammaire"],
+      [/\bi am agree\b/gi,"I agree","calque"],
+      [/\bexplain (me|us)\b/gi,"explain to me / to us","grammaire"],
+      [/\bresponsible of\b/gi,"responsible for","grammaire"],
+      [/\bdepends? of\b/gi,"depend on","grammaire"],
+      [/\bparticipate to\b/gi,"participate in","grammaire"],
+      [/\bassist(ed)? to\b/gi,"attend (assister à)","faux ami"],
+      [/\bsociety\b/gi,"company si vous pensez « société » (entreprise)","faux ami probable"],
+      [/\bformation\b/gi,"training / degree (formation)","faux ami"],
+      [/\bactually\b/gi,"= en fait ; pour « actuellement » dites currently","à vérifier"],
+      [/\beventually\b/gi,"= finalement, à terme ; pour « éventuellement » dites possibly","à vérifier"],
+      [/\bmake a (photo|picture)\b/gi,"take a photo","collocation"],
+      [/\bmake a party\b/gi,"throw / have a party","collocation"],
+      [/\btake a coffee\b/gi,"have a coffee","collocation"],
+      [/\bwin money\b/gi,"earn money","collocation"],
+      [/\bdo a break\b/gi,"take a break","collocation"],
+      [/\bpretend(s|ed)? to\b/gi,"intend to si vous pensez « pretender » (pt) ; pretend = faire semblant","faux ami probable"],
+      [/\bresume\b/gi,"summarise (résumer / resumir) ; resume = reprendre","faux ami probable"],
+      [/\blibrary\b/gi,"bookshop si vous pensez « librairie » ; library = bibliothèque","à vérifier"],
+      [/\bjourney\b/gi,"day si vous pensez « journée » ; journey = trajet","à vérifier"],
+      [/\bdemand(ed|s)?\b/gi,"ask (demander) ; demand = exiger","faux ami probable"],
+      [/\bcommand(ed|s)?\b/gi,"order (commander)","faux ami probable"],
+      [/\bachieve(d|s)?\b/gi,"finish si vous pensez « achever » ; achieve = accomplir","à vérifier"],
+      [/\bsensible\b/gi,"sensitive si vous pensez « sensible » ; sensible = raisonnable","faux ami probable"],
+      [/\bdeceived\b/gi,"disappointed (déçu) ; deceived = trompé","faux ami"],
+      [/\bin the end of\b/gi,"at the end of","calque"],
+      [/\bprecise\b/gi,"specify si vous pensez « préciser »","à vérifier"],
+      [/\bpropose you\b/gi,"suggest","calque"],
+      [/\bwe (will )?see us\b/gi,"see each other","calque"],
+      [/\bcome back in (france|europe|spain|brazil)\b/gi,"back to + lieu","grammaire"],
+      [/\bhow do you call\b/gi,"what do you call","calque"],
+      [/\bi am boring\b/gi,"I am bored (I'm boring = je suis ennuyeux)","grammaire"],
+      [/\bplay of the\b/gi,"play the + instrument, sans préposition","grammaire"],
+      [/\bpass(ed)? an exam\b/gi,"sit / take an exam pour « le passer » ; pass = le réussir","à vérifier"],
+      [/\bmuito\b|\bentão\b|\btambém\b|\bné\b|\btá\b/gi,"mot portugais échappé","lusisme"],
+      [/\bvoilà\b|\benfin\b|\balors\b|\bdonc\b/gi,"cheville française échappée — so, well, right","gallicisme"],
+      [/\bisn't it\b/g,"correct — mais vérifiez l'accord du tag : don't you? / wasn't it?","ok"]
+    ];
+    var lText = document.getElementById('lus-text'), lStatus = simEl.querySelector('.lus-status'), lOut = simEl.querySelector('.lus-out');
+    var lMarked = simEl.querySelector('.lus-marked'), lList = simEl.querySelector('.lus-list');
+    function esc(t){ return t.replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+    function analizar(){
+      var txt = lText.value; if(!txt.trim()){ lStatus.textContent = 'Nothing to analyse.'; return; }
+      var hits = [];
+      LUS.forEach(function(r){
+        if(r[2] === 'ok') return;
+        var m; r[0].lastIndex = 0;
+        while((m = r[0].exec(txt))){ hits.push({s:m.index, e:m.index+m[0].length, w:m[0], fix:r[1], kind:r[2]}); if(!r[0].global) break; }
+      });
+      hits.sort(function(a,b){ return a.s - b.s; });
+      var out = '', pos = 0, seen = {}, list = [];
+      hits.forEach(function(h){
+        if(h.s < pos) return;
+        out += esc(txt.slice(pos, h.s)) + '<mark class="' + (h.kind === 'lusisme' || h.kind === 'faux ami' ? '' : 'warn') + '" title="' + esc(h.fix) + '">' + esc(h.w) + '</mark>';
+        pos = h.e;
+        var key = h.w.toLowerCase(); if(!seen[key]){ seen[key] = 1; list.push(h); }
+      });
+      out += esc(txt.slice(pos));
+      lMarked.innerHTML = out; lList.innerHTML = '';
+      if(!list.length){ var ok = document.createElement('li'); ok.textContent = 'Aucun calque ni faux ami de la liste détecté. Rappel : la liste est limitée aux erreurs répertoriées dans vos fiches.'; lList.appendChild(ok); }
+      list.forEach(function(h){ var li = document.createElement('li'); li.innerHTML = '<b>' + esc(h.w) + '</b> → ' + esc(h.fix) + ' <span class="chu-src">' + esc(h.kind) + '</span>'; lList.appendChild(li); });
+      lOut.classList.add('show');
+      var words = txt.trim().split(/\s+/).length;
+      lStatus.textContent = words + ' words · ' + list.length + ' alert(s)';
+    }
+    document.getElementById('lus-analizar').addEventListener('click', analizar);
+    document.getElementById('lus-borrar').addEventListener('click', function(){ lText.value = ''; lOut.classList.remove('show'); lStatus.textContent = ''; });
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition, rec = null, recOn = false;
+    var bDict = document.getElementById('lus-dictar');
+    if(!SR){ bDict.disabled = true; bDict.title = 'Reconnaissance vocale indisponible dans ce navigateur (Chrome, Edge ou Safari récents)'; }
+    bDict.addEventListener('click', function(){
+      if(!SR) return;
+      if(recOn){ rec.stop(); return; }
+      rec = new SR(); rec.lang = 'en-GB'; rec.continuous = true; rec.interimResults = true;
+      var base = lText.value ? lText.value.replace(/\s*$/, ' ') : '';
+      rec.onresult = function(ev){
+        var fin = '', tmp = '';
+        for(var i = 0; i < ev.results.length; i++){ var r = ev.results[i]; if(r.isFinal) fin += r[0].transcript + ' '; else tmp += r[0].transcript; }
+        lText.value = base + fin + tmp;
+      };
+      rec.onend = function(){ recOn = false; bDict.textContent = 'Dictate'; bDict.classList.remove('on'); lStatus.textContent = 'Dictation stopped.'; };
+      rec.onerror = function(e){ lStatus.textContent = 'Dictation error: ' + e.error; };
+      rec.start(); recOn = true; bDict.textContent = 'Stop dictation'; bDict.classList.add('on'); lStatus.textContent = 'Listening (en-GB)…';
+    });
+
+    simEl.dataset.bank = bank.length;
+  })();
+
+  /* ---------- Démarrage ---------- */
+  setVue("seg");
+  setBloc("1");
+  blocs["1"].el.querySelector("section.seg").classList.add("open");
+})();
+
+</script>
+</body>
+</html>
