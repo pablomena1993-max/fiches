@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8a6520">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CLOE C1">
+<meta name="description" content="Guía de español informal para hacer amigos en Barcelona: respuestas de bar, reacciones, tacos dosificados, anécdotas, catalán mínimo y simulador.">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='34' fill='%23f5f0e8'/%3E%3Ctext x='90' y='118' font-size='92' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EES%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f5f0e8'/%3E%3Ctext x='32' y='44' font-size='34' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EES%3C/text%3E%3C/svg%3E">
+<link rel="manifest" id="manifest-link">
+<title>Español de bar · Barcelona</title>
+<style>
+
+:root{
+  --bg:#f5f0e8; --card:#faf7f0; --border:#d8ceb4; --gold:#8a6520; --ink:#3a2e18;
+  --ink-soft:#6b5c40; --accent:#7a4a2a; --ok:#4a6b3a; --warn:#9a5a20;
+  --radius:12px;
+  --pad-l:max(16px, env(safe-area-inset-left));
+  --pad-r:max(16px, env(safe-area-inset-right));
+  --pad-t:max(12px, env(safe-area-inset-top));
+  --pad-b:max(20px, env(safe-area-inset-bottom));
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  font-size:17px; line-height:1.6;
+  padding:var(--pad-t) var(--pad-r) var(--pad-b) var(--pad-l);
+}
+.wrap{max-width:880px;margin:0 auto}
+
+header.top{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  padding:20px 22px; margin-bottom:16px;
+}
+header.top h1{font-size:1.5rem;margin:0 0 6px;line-height:1.25;color:var(--gold);letter-spacing:.2px}
+header.top .sub{font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{
+  font-size:.76rem;letter-spacing:.4px;text-transform:uppercase;
+  background:#efe7d6;border:1px solid var(--border);border-radius:99px;
+  padding:4px 11px;color:var(--ink-soft);font-family:system-ui,sans-serif;
+}
+.badge.strong{background:var(--gold);color:#faf7f0;border-color:var(--gold)}
+
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
+  position:sticky; top:0; z-index:20;
+  background:var(--bg); padding:8px 0;
+}
+button{
+  font-family:system-ui,-apple-system,sans-serif;font-size:.85rem;
+  background:var(--card);color:var(--ink);border:1px solid var(--border);
+  border-radius:99px;padding:9px 15px;cursor:pointer;min-height:42px;
+  transition:background .15s,border-color .15s;
+}
+button:hover{background:#efe7d6}
+button.on{background:var(--gold);color:#faf7f0;border-color:var(--gold)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.intro-note{
+  background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:var(--radius);padding:14px 18px;margin-bottom:18px;font-size:.94rem;color:var(--ink-soft);
+}
+.intro-note strong{color:var(--ink)}
+
+section.seg{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:14px;overflow:hidden;
+}
+.seg-head{
+  display:flex;align-items:flex-start;gap:12px;width:100%;
+  padding:15px 18px;cursor:pointer;background:none;border:none;border-radius:0;
+  text-align:left;min-height:0;
+}
+.seg-head:hover{background:#f2ecdf}
+.seg-num{
+  flex:0 0 auto;font-family:system-ui,sans-serif;font-size:.78rem;font-weight:700;
+  background:var(--gold);color:#faf7f0;border-radius:6px;padding:3px 8px;margin-top:3px;
+}
+.seg-titles{flex:1 1 auto}
+.seg-title{font-size:1.06rem;font-weight:700;color:var(--gold);display:block}
+.seg-fr{font-size:.9rem;color:var(--ink-soft);display:block;margin-top:2px;font-style:italic}
+.chev{flex:0 0 auto;color:var(--ink-soft);font-size:1.1rem;margin-top:4px;transition:transform .2s}
+section.seg.open .chev{transform:rotate(90deg)}
+
+.seg-body{display:none;padding:0 18px 18px}
+section.seg.open .seg-body{display:block}
+
+h3.sub{
+  font-family:system-ui,sans-serif;font-size:.76rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border);
+}
+h3.sub:first-child{margin-top:6px}
+
+ol.variantes{list-style:none;margin:0;padding:0;counter-reset:v}
+ol.variantes li.var{
+  counter-increment:v;position:relative;padding:11px 12px 11px 40px;
+  border-bottom:1px dashed var(--border);
+}
+ol.variantes li.var:last-child{border-bottom:none}
+ol.variantes li.var::before{
+  content:counter(v);position:absolute;left:10px;top:12px;
+  font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft);
+  border:1px solid var(--border);border-radius:50%;width:21px;height:21px;
+  display:flex;align-items:center;justify-content:center;background:var(--bg);
+}
+li.var.picked{background:#f0ead9;border-left:3px solid var(--gold);border-radius:6px}
+.es{display:block;font-size:1.03rem;color:var(--ink)}
+.meta{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.75rem;color:var(--ink-soft)}
+.tag{
+  display:inline-block;border-radius:99px;padding:1px 8px;margin-right:6px;
+  border:1px solid var(--border);background:#efe7d6;
+}
+.tag.idio{background:#e6ecdd;border-color:#b9c8a6;color:#3f5530}
+.tag.sout{background:#e9e2f0;border-color:#c2b4d2;color:#4a3a5e}
+.risk{letter-spacing:1px;color:var(--warn)}
+.note-var{font-style:italic}
+
+.transitions{margin:10px 0 0;padding:12px 14px;background:#f0ead9;border-radius:8px;font-size:.94rem}
+.transitions span.ch{display:inline-block;margin:3px 8px 3px 0;padding:2px 9px;background:var(--card);border:1px solid var(--border);border-radius:99px;font-size:.9rem}
+
+ul.rebonds{list-style:none;margin:0;padding:0}
+ul.rebonds li{padding:9px 0 9px 20px;position:relative;border-bottom:1px dashed var(--border);font-size:.95rem}
+ul.rebonds li:last-child{border-bottom:none}
+ul.rebonds li::before{content:"?";position:absolute;left:0;top:9px;color:var(--gold);font-weight:700}
+ul.rebonds .amorce{display:block;margin-top:3px;color:var(--accent)}
+
+.alerte{
+  background:#f7efe2;border:1px solid #e0cba8;border-left:4px solid var(--warn);
+  border-radius:8px;padding:11px 14px;margin:9px 0;font-size:.93rem;
+}
+.alerte strong{color:var(--warn)}
+
+table{width:100%;border-collapse:collapse;font-size:.93rem;margin-top:8px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-family:system-ui,sans-serif;font-size:.74rem;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-soft)}
+td.es-col{font-weight:600;color:var(--gold);white-space:nowrap}
+
+
+.tb-sep{width:1px;background:var(--border);margin:2px 4px;align-self:stretch}
+.slot:hover{background:#f0ead9;border-bottom-color:var(--gold)}
+.slot.conn{color:var(--accent);font-style:italic;border-bottom-style:dotted}
+.slot.flash{background:#e8dfc6}
+
+.slot.active{background:#e8dfc6;border-bottom-color:var(--gold)}
+.slot:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#popover{
+  position:absolute;z-index:200;display:none;
+  background:var(--card);border:1px solid var(--gold);border-radius:10px;
+  box-shadow:0 6px 22px rgba(58,46,24,.18);
+  padding:6px;max-height:60vh;overflow-y:auto;
+  font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+}
+#popover.show{display:block}
+#popover .pop-head{
+  font-family:system-ui,sans-serif;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--ink-soft);padding:6px 10px 8px;border-bottom:1px solid var(--border);margin-bottom:4px;
+}
+#popover .pop-item{
+  padding:9px 11px;border-radius:7px;cursor:pointer;line-height:1.45;
+  border-left:3px solid transparent;
+}
+#popover .pop-item:hover{background:#f0ead9}
+#popover .pop-item.current{background:#eae1c9;border-left-color:var(--gold)}
+#popover .pop-es{display:block;font-size:1rem;color:var(--ink)}
+#popover .pop-meta{display:block;margin-top:4px;font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft)}
+#popover .pop-note{font-style:italic}
+@media (max-width:520px){
+  #popover .pop-es{font-size:.96rem}
+  #popover{max-height:52vh}
+}
+
+body.masque .es{filter:blur(5px);opacity:.55;cursor:pointer;transition:filter .18s,opacity .18s}
+body.masque li.var.revele .es{filter:none;opacity:1}
+body.masque .meta{visibility:hidden}
+body.masque li.var.revele .meta{visibility:visible}
+
+footer.jv{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 18px;margin-top:22px;font-size:.86rem;color:var(--ink-soft);
+}
+footer.jv h2{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink);margin:0 0 8px;font-family:system-ui,sans-serif}
+footer.jv ul{margin:0;padding-left:18px}
+footer.jv li{margin-bottom:5px}
+
+@media (max-width:520px){
+  body{font-size:16px}
+  header.top{padding:16px}
+  .seg-head{padding:13px 14px}
+  .seg-body{padding:0 14px 15px}
+  ol.variantes li.var{padding-left:36px}
+}
+
+/* ---------- Onglets ---------- */
+nav.tabs{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+nav.tabs button{
+  font-size:.82rem;padding:8px 13px;min-height:38px;border-radius:8px;
+  display:flex;align-items:center;gap:7px;
+}
+nav.tabs button .tn{
+  font-size:.68rem;font-weight:700;background:#efe7d6;border:1px solid var(--border);
+  border-radius:4px;padding:1px 5px;color:var(--ink-soft);
+}
+nav.tabs button.on .tn{background:rgba(250,247,240,.25);border-color:rgba(250,247,240,.4);color:#faf7f0}
+.block{display:none}
+.block.on{display:block}
+.block-intro{
+  background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);
+  border-radius:var(--radius);padding:13px 17px;margin-bottom:16px;font-size:.92rem;color:var(--ink-soft);
+}
+.block-intro strong{color:var(--ink)}
+.continu{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px 24px;margin-bottom:16px;
+}
+.continu .lead{font-size:.88rem;color:var(--ink-soft);font-family:system-ui,sans-serif;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.continu .lead strong{color:var(--ink)}
+.continu .texto{font-size:1.12rem;line-height:2.05;margin:0}
+.continu .metrics{
+  margin-top:16px;padding-top:12px;border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);
+  display:flex;flex-wrap:wrap;gap:16px;
+}
+.continu .metrics b{color:var(--ink);font-weight:600}
+.continu .howto{margin-top:14px;font-size:.86rem;color:var(--ink-soft);font-family:system-ui,sans-serif}
+body.vue-con .block.on section.seg{display:none}
+body.vue-seg .block.on .continu{display:none}
+body.vue-con .only-seg,body.vue-seg .only-con{display:none}
+body.sans-continu .only-con,body.sans-continu #btn-view-con,body.sans-continu #btn-view-all{display:none}
+@media (max-width:520px){
+  nav.tabs button{font-size:.76rem;padding:7px 10px}
+  .continu{padding:16px 15px}
+}
+@media print{
+  nav.tabs,.toolbar{display:none!important}
+  .block{display:block!important}
+  .seg-body{display:block!important}
+  .continu{display:none!important}
+}
+
+/* ---------- Simulador ---------- */
+.sim-filters{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-family:system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);margin-bottom:14px}
+.sim-filters label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.sim-lab{font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);font-weight:700;margin-right:2px}
+.sim-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:var(--radius);padding:20px 22px;margin-bottom:16px}
+.sim-q-head{display:flex;justify-content:space-between;font-family:system-ui,sans-serif;font-size:.74rem;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);margin-bottom:10px}
+.sim-q{font-size:1.35rem;line-height:1.5;margin:0 0 14px;color:var(--ink)}
+.sim-timer{position:relative;height:10px;background:#efe7d6;border-radius:99px;overflow:hidden;margin-bottom:14px}
+.sim-bar{height:100%;width:0;background:var(--gold);transition:width .25s linear}
+.sim-timer.over .sim-bar{background:#b0432f}
+.sim-clock{position:absolute;right:8px;top:-20px;font-family:system-ui,sans-serif;font-size:.78rem;color:var(--ink-soft)}
+.sim-actions{display:flex;flex-wrap:wrap;gap:8px}
+.sim-answer{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px}
+.sim-answer.show{display:block}
+.sim-fact,.sim-amorce{font-size:.98rem;margin:0 0 14px}
+.sim-amorce{font-style:italic}
+.sim-hint{font-family:system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sim-hint button{min-height:30px;padding:4px 11px;font-size:.78rem}
+.sim-vars li.var{cursor:pointer}
+.sim-vars li.var.lead-var{background:#efe7d6;border-radius:8px}
+.sim-go{font-family:system-ui,sans-serif;font-size:.84rem;margin:12px 0 0}
+.sim-go a{color:var(--gold)}
+body.sim-on .toolbar{display:none}
+button.mini{min-height:28px;padding:3px 10px;font-size:.74rem}
+.sim-modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chuleta{border-left-color:#b0432f}
+.chu-list li.var{cursor:default}
+.chu-src{display:block;font-family:system-ui,sans-serif;font-size:.72rem;color:var(--ink-soft);margin-top:3px}
+.ent-table{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:.82rem;margin-bottom:10px}
+.ent-table th,.ent-table td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.ent-table td.over{color:#b0432f;font-weight:600}
+.ent-table td.under{color:#7a6a3a}
+#lus-text{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--ink);margin-bottom:10px;resize:vertical}
+.lus-status{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);align-self:center}
+.lus-marked{line-height:1.9;font-size:1.05rem}
+.lus-marked mark{background:#f3d9c4;color:#7a2a1a;padding:1px 4px;border-radius:4px;border-bottom:2px solid #b0432f}
+.lus-marked mark.warn{background:#efe7d6;color:var(--ink);border-bottom-color:var(--gold)}
+.lus-list{padding-left:18px;font-size:.92rem}.lus-list li{margin-bottom:5px}
+.lus-list b{color:#b0432f}
+button.tts{min-height:22px;padding:0 7px;font-size:.66rem;margin:2px 0 4px;border-radius:6px;background:#efe7d6;display:inline-block}
+li.var .es+button.tts{float:right;margin-left:10px}
+body.masque button.tts{visibility:hidden}
+.tts-active{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+.tag.vul{background:#f3d9c4;color:#7a2a1a;border-color:#e0b898}
+.tag.muy{background:#e9b8b0;color:#5a1a10;border-color:#c98f85}
+.tag.bcn{background:#dfe7f3;color:#243c66;border-color:#b9c8e0}
+</style>
+</head>
+<body class="vue-seg">
+<div class="wrap">
+
+<header class="top">
+  <h1>Español de bar · Barcelona</h1>
+  <p class="sub">Guide pour se faire des amis en espagnol d'Espagne : réponses de bar, réactions, jurons dosés, anecdotes, catalan minimal et simulateur. Compagnon informel de l'outil CLOE C1. Tutoiement, <em>vosotros</em>, registre étiqueté <em>coloquial</em> / <em>vulgar</em> / <em>muy vulgar</em> / <em>Barcelone</em>.</p>
+  <div class="badges">
+    <span class="badge strong">Conformité linguistique ≈ 92 %</span>
+    <span class="badge">9 blocs</span>
+    <span class="badge">31 segments</span>
+    <span class="badge">225 formulations</span>
+    <span class="badge">72 chevilles</span>
+    <span class="badge">Faits : dictée du 27/08/2026</span>
+    <span class="badge">v1 · 27/08/2026</span>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button data-b="1"><span class="tn">1</span>Yo, en veinte segundos</button>
+  <button data-b="2"><span class="tn">2</span>Música y fútbol</button>
+  <button data-b="3"><span class="tn">3</span>En el bar</button>
+  <button data-b="4"><span class="tn">4</span>Reacciones y muletillas</button>
+  <button data-b="5"><span class="tn">5</span>Quedar y relanzar</button>
+  <button data-b="6"><span class="tn">6</span>Anécdotas</button>
+  <button data-b="7"><span class="tn">7</span>Català mínim</button>
+  <button data-b="8"><span class="tn">8</span>Chuleta SOS</button>
+  <button data-b="9" class="tab-sim"><span class="tn">9</span>Simulador</button>
+</nav>
+
+<div class="toolbar">
+  <button id="btn-view-seg" class="on">Vue segments</button>
+  <button id="btn-view-con">Vue continue</button>
+  <button id="btn-view-all">Vue complète</button>
+  <span class="tb-sep"></span>
+  <button id="btn-open" class="only-seg">Tout déplier</button>
+  <button id="btn-mask" class="only-seg">Mode production</button>
+  <button id="btn-sobrio" class="only-con">Sin tacos</button>
+  <button id="btn-rico" class="only-con">Con tacos</button>
+  <button id="btn-shuffle" class="only-con">Recombiner</button>
+  <button id="btn-print">Imprimer</button>
+</div>
+
+<div class="block" data-b="1" data-continu="1">
+  <div class="block-intro"><strong>Bloc 1 · Yo, en veinte segundos.</strong> Ce qu'on vous demande dans les dix premières minutes d'une soirée, et ce que vous répondez sans faire un exposé. Règle du bar : une réponse tient en deux phrases, la troisième est une question à l'autre. <em>Vue continue disponible : c'est votre « pitch » de présentation, à dire d'un trait puis à découper.</em></div>
+<div class="continu">
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage pour voir les formulations, cliquez pour changer. Les chevilles en italique sont les mots qui font « parlé ». Ce texte est trop long pour un vrai bar : entraînez-vous à n'en dire qu'un tiers et à laisser l'autre poser la question suivante.</p>
+  <p class="texto"></p>
+  <div class="metrics">
+    <span><b class="m-words">0</b> mots</span>
+    <span>durée estimée <b class="m-time">0</b> à 140 mots par minute</span>
+    <span><b class="m-combi">0</b> combinaisons possibles</span>
+  </div>
+  <p class="howto">Dites-le à voix haute, puis coupez-le en trois répliques séparées par une question à l'autre. <button class="tts-all mini">Escuchar el texto</button> <button class="tts-stop mini">Parar</button></p>
+</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">¿Y tú de dónde eres?</span><span class="seg-fr">Fait dicté : grandi à la campagne près de Lyon, Beaujolais des pierres dorées, famille d'origine espagnole.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Pues|Bueno,|A ver,|Nada,">
+      <li class="var"><span class="es">soy francés, de un pueblo cerca de Lyon, pero mi familia es española.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">la réponse de base ; « pero mi familia es española » est l'hameçon qui relance</span></span></li>
+      <li class="var"><span class="es">de la Francia profunda, tío: un pueblo de mil habitantes al lado de Lyon. Pero de sangre española, ¿eh?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« la Francia profunda » se dit tel quel ; « ¿eh? » final typiquement espagnol</span></span></li>
+      <li class="var"><span class="es">francés de pasaporte, español de apellido y brasileño de adopción. Un lío, vamos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">formule de présentation à trois temps, très efficace ; « vamos » en fin de phrase = « quoi »</span></span></li>
+      <li class="var"><span class="es">de un pueblo de viñas al lado de Lyon, de esos de piedra dorada que salen en las postales.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">soy de Lyon, bueno, del campo de al lado. Mitad andaluz, mitad vasco, criado en Francia. Ya te contaré.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ya te contaré » promet une suite : on vous reposera la question</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Española? ¿De dónde?<span class="amorce">De Almería por parte de padre y del País Vasco por parte de madre. ¿Y tú, de aquí de toda la vida?</span></li>
+      <li>¡Ah, Lyon! La comida, ¿no?<span class="amorce">Sí, sí, se come de puta madre. Pero aquí tampoco os quejáis, ¿eh?</span></li>
+      <li>¿Y qué haces en Barcelona?<span class="amorce">Voir segment 02.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le vocatif qui change tout.</strong> <em>Tío</em> (et <em>tía</em>) est le mot le plus fréquent d'une conversation entre gens de 25 à 40 ans en Espagne ; il ne veut pas dire « oncle », il ponctue. À Barcelone vous entendrez aussi <em>nano</em> (catalan, un peu plus jeune) et, plus rare, <em>tron</em>. Ne l'employez pas avec quelqu'un qui vous vouvoie ni avant la première bière ; après, à volonté. <em>Pues</em> en début de réponse est la cheville universelle, prononcée souvent <em>pos</em> ou <em>pus</em>.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">¿Y qué haces por aquí? ¿Cuánto llevas?</span><span class="seg-fr">Fait dicté : venu avec le travail, s'est débrouillé pour que l'entreprise l'envoie à Barcelone ; arrivé depuis peu, cherche encore à comprendre la ville, intention de rester quelques années.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Nada,|Pues|Bueno,|Es que">
+      <li class="var"><span class="es">me ha traído el curro. Bueno, me lo he montado yo para que el curro me trajera, que no es lo mismo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« montárselo » = s'arranger, se débrouiller ; « curro » = boulot, le mot de base</span></span></li>
+      <li class="var"><span class="es">llevo poco, un par de meses. Todavía estoy pillándole el truco a la ciudad.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« pillarle el truco a algo » = piger le truc ; adaptez « un par de meses » à la réalité</span></span></li>
+      <li class="var"><span class="es">acabo de llegar, así que si me ves perdido, es normal. La idea es quedarme unos años.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">me trasladó la empresa. Llevo cuatro días, o sea que aún no me entero de nada. Pero vengo para quedarme.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« llevo cuatro días » = image, pas un chiffre ; « no enterarse de nada » = ne rien capter</span></span></li>
+      <li class="var"><span class="es">vengo de Brasil, de Río, seis años allí, y ahora me toca Barcelona. Y tengo pensado quedarme una buena temporada.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« me toca » = c'est mon tour, très oral ; mentionner Rio déclenche à coup sûr la question suivante</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Y dónde vives?<span class="amorce">Répondez le quartier, puis : ¿Tú qué zona me recomiendas? Cette question est la meilleure relance de tout le guide : tout le monde a un avis sur les quartiers.</span></li>
+      <li>¿Y qué tal Barcelona de momento?<span class="amorce">De momento, muy bien. Lo del alquiler es un drama, eso sí, pero eso ya lo sabías tú antes que yo.</span></li>
+      <li>Ya verás, aquí se vive muy bien.<span class="amorce">Eso espero. De momento el vermut ya me ha convencido.</span></li>
+    </ul>
+    <div class="alerte"><strong>Le mot « guiri ».</strong> C'est le mot pour le touriste ou l'étranger du nord, moqueur mais rarement méchant. Dites-le avant les autres : <em>Sí, sí, un guiri más, pero de los que se quedan</em>. Auto-dérision immédiate, sympathie garantie.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">¿A qué te dedicas?</span><span class="seg-fr">Fait dicté : entreprise d'énergies renouvelables et d'efficacité énergétique ; longtemps chef de projet ; maintenant finance, stratégie, multi-pays ; vise les organisations internationales, projets d'intérêt général.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses, de la plus courte à la plus complète</h3>
+    <ol class="variantes" data-conn="Yo|Pues|Nada, yo|Bueno, yo">
+      <li class="var"><span class="es">curro en renovables. Placas solares, básicamente.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« placas solares » est le mot de la rue, pas « paneles fotovoltaicos »</span></span></li>
+      <li class="var"><span class="es">trabajo en una empresa de energía solar. He sido jefe de proyecto muchos años y ahora estoy más en la parte de números y estrategia.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">soy ingeniero, pero de los que hablan, no de los que se encierran con el Excel. Energía solar, proyectos, ahora un poco de finanzas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">auto-dérision sur le cliché de l'ingénieur : marche à tous les coups</span></span></li>
+      <li class="var"><span class="es">me dedico a la energía, renovables. Lo mío ahora es coordinar varios países, y a medio plazo me gustaría pasarme a algo más público, ONG, organismos internacionales, cosas así.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">version longue : à ne sortir que si on vous relance</span></span></li>
+      <li class="var"><span class="es">pongo placas solares en tejados de fábricas. Bueno, las pongo yo no, pero me entiendes.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« me entiendes » ferme la vanne ; très naturel</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Y eso da dinero?<span class="amorce">Para pagar las cañas, sí. Para el alquiler de aquí, ya veremos. ¿Y tú, qué haces?</span></li>
+      <li>¿Y por qué Barcelona?<span class="amorce">Por el clima, por la familia en España y porque es la única ciudad de Europa que se parece un poco a Río.</span></li>
+    </ul>
+    <div class="alerte"><strong>Ne parlez pas boulot plus de trente secondes</strong> en Espagne dans un cadre social, sauf si on insiste. La question <em>¿a qué te dedicas?</em> est une politesse, pas une demande de CV ; la vraie question qui suit est presque toujours <em>¿y te gusta?</em>. Préparez plutôt <em>¿y tú qué haces?</em> avec un vrai intérêt.</div>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">¿Y qué tal Brasil? ¿Cómo es vivir en Río?</span><span class="seg-fr">Fait dicté : incroyable, ville unique ; été perpétuel ; soirées, samba, musique, voyages, gens ; très facile de se faire des copains ; deux fois moins cher qu'en France ; sécurité pas un problème quand on sait se comporter.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Uf,|Pues|Mira,|Tío,">
+      <li class="var"><span class="es">una pasada. Es verano todo el año, hay samba en cada esquina y haces amigos en dos días.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« una pasada » = un truc de dingue, positif</span></span></li>
+      <li class="var"><span class="es">Río es única, no hay otra ciudad así. Playa, montaña, música, fiesta… y todo a mitad de precio que en Francia.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">te lo resumo: seis años de verano. Ahora entiendo por qué la gente no se va nunca.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">de puta madre, la verdad. Es una locura de ciudad, en el buen sentido: siempre hay algo, siempre hay gente, siempre hay música.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">« de puta madre » = génial ; vulgaire de forme, banal d'usage entre amis</span></span></li>
+      <li class="var"><span class="es">lo mejor, la gente. Allí se liga, se baila y se hacen amigos con una facilidad que aquí flipas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« flipar » = halluciner ; « que aquí flipas » = tu n'imagines pas</span></span></li>
+    </ol>
+    <h3 class="sub">Sur la sécurité, la question qui arrive toujours</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">¿Peligroso? Menos de lo que parece. Sabes por dónde ir y por dónde no, y ya está.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Yo en seis años, cero problemas. Pero porque no voy de listo: no saco el móvil en cualquier sitio, no me meto donde no debo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ir de listo » = jouer au malin</span></span></li>
+      <li class="var"><span class="es">Te puede pasar algo, como en cualquier sitio. Pero si tienes un poco de calle, vives tranquilo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« tener calle » = avoir de la bouteille, savoir se comporter</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Y las favelas?<span class="amorce">He trabajado y tocado música en varias. No es lo que sale en las pelis, o no solo. ¿Has estado en Brasil?</span></li>
+      <li>¿Y el carnaval? ¿Es como en la tele?<span class="amorce">Mucho mejor, porque no lo ves, lo tocas. Voir bloc 6, anecdotes.</span></li>
+      <li>Yo quiero ir a Brasil.<span class="amorce">Pues cuando quieras te hago la ruta. Y te presento a la peña de allí.</span></li>
+    </ul>
+    <div class="alerte"><strong>Deux mots-outils.</strong> <em>La peña</em> = la bande, les potes (aussi <em>la basca</em>, plus jeune) ; <em>ligar</em> = draguer, sans connotation lourde. <em>Cero problemas</em> avec <em>cero</em> invariable est courant à l'oral. Évitez <em>violencia</em> : en bar on dit <em>peligroso</em> ou <em>chungo</em> (craignos).</div>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">05</span><span class="seg-titles"><span class="seg-title">¿Hablas portugués? Se te nota el acento</span><span class="seg-fr">Fait dicté : portugais parlé parfaitement, accent « toujours dégueulasse » et impossible à effacer ; l'espagnol en souffre : souvent du « portugnol ».</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Rire de son accent avant les autres</h3>
+    <ol class="variantes" data-conn="Sí,|Hombre,|Ya,|Claro,">
+      <li class="var"><span class="es">hablo portugués perfectamente. Con un acento de mierda, pero perfectamente.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">« de mierda » traduit exactement votre « dégueulasse » ; version soft : « con un acento horrible »</span></span></li>
+      <li class="var"><span class="es">se me nota, ¿verdad? Es que llevo seis años en Brasil y a veces me sale portuñol en vez de español.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« portuñol » existe tel quel en espagnol ; « me sale » = ça me sort tout seul</span></span></li>
+      <li class="var"><span class="es">te aviso: si de repente digo «muito» o «então», no es que esté borracho, es que se me cuela el portugués.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« colarse » = se glisser ; la vanne désamorce tous les lusismes de la soirée</span></span></li>
+      <li class="var"><span class="es">mi español es un poco Frankenstein: cabeza francesa, cuerpo brasileño y apellido andaluz.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">corrígeme, en serio. Si me dejas hablar mal, en un año hablo peor.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">demander la correction : les Espagnols adorent corriger, autant en faire un lien</span></span></li>
+      <li class="var"><span class="es">el acento no me lo quito ni con lejía. Pero bueno, dicen que hace gracia.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« ni con lejía » = même à l'eau de Javel ; « hacer gracia » = amuser</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>Di algo en portugués.<span class="amorce">Dites une phrase, puis : ¿Ves? Suena a español borracho.</span></li>
+      <li>¿Y el francés no se te nota?<span class="amorce">Con la erre, seguro. Es lo único que no me han quitado ni Brasil ni España.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">06</span><span class="seg-titles"><span class="seg-title">¿Tienes pareja? ¿Cuántos años tienes?</span><span class="seg-fr">Fait dicté : célibataire, pas de relation pour l'instant ; 33 ans depuis peu.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">Réponses</h3>
+    <ol class="variantes" data-conn="Qué va,|Pues|No,|Ahora mismo">
+      <li class="var"><span class="es">estoy soltero. Recién llegado y soltero, o sea, disponible para planes.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« planes » = sorties ; le double sens est léger et assumé</span></span></li>
+      <li class="var"><span class="es">soltero, sin compromiso y sin prisa.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">nada serio ahora mismo. Acabo de mudarme de continente, ya es bastante lío.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">treinta y tres, recién cumplidos. Todavía me estoy acostumbrando al número.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« recién cumplidos » = tout juste fêtés</span></span></li>
+      <li class="var"><span class="es">treinta y tres. Edad de Cristo, dicen. Yo de momento solo he hecho el milagro de aprender portugués.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« la edad de Cristo » est une expression fixe en Espagne pour 33 ans ; vanne facile et locale</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Registre.</strong> <em>Qué va</em> = « pas du tout », réponse négative la plus fréquente à l'oral. <em>Soltero</em> est neutre ; <em>estar sin nadie</em> est plus intime. Ne dites jamais <em>solo</em> pour célibataire : <em>vivo solo</em> = j'habite seul.</div>
+  </div>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">07</span><span class="seg-titles"><span class="seg-title">Devolver la pregunta</span><span class="seg-fr">Pas de fait dicté : la brique qui transforme un interrogatoire en conversation. À utiliser après chaque réponse des segments 01 à 06.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">¿Y tú? ¿De aquí de toda la vida?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« de toda la vida » = depuis toujours</span></span></li>
+      <li class="var"><span class="es">¿Y tú a qué te dedicas? Y no vale decir «a sobrevivir».</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">¿Y tú qué me recomiendas de la ciudad? Pero sitios de verdad, no la Sagrada Familia.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">montre qu'on cherche la ville des habitants, pas des touristes</span></span></li>
+      <li class="var"><span class="es">¿Y vosotros os conocéis de qué?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« vosotros » : la deuxième personne du pluriel est obligatoire en Espagne, jamais « ustedes » entre amis</span></span></li>
+      <li class="var"><span class="es">Bueno, ya he hablado yo bastante. Cuéntame tú.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">¿Y qué se hace aquí un martes por la noche? Porque en Río un martes hay samba.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Vosotros.</strong> C'est la marque numéro un de l'espagnol d'Espagne, et celle que le portugais et l'espagnol d'Amérique vous ont fait perdre : <em>¿qué hacéis?</em>, <em>¿os apetece?</em>, <em>¿vais a ir?</em>. Une soirée sans <em>vosotros</em>, c'est une soirée où l'on vous prend pour un Colombien. Voir la chuleta du bloc 8.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="2" data-continu="0">
+  <div class="block-intro"><strong>Bloc 2 · Música y fútbol.</strong> Les deux sujets qui font passer d'« inconnu sympa » à « pote ». Faits dictés uniquement. Boîte à outils, sans vue continue.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">¿Qué música escuchas?</span><span class="seg-fr">Fait dicté : éducation rock, metal, funk ; beaucoup de jazz, surtout moderne et fusion ; électronique pour le sport ou pour « rester en transe » ; rap ; musiques balkaniques, ambient.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes" data-conn="Pues|Uf,|De todo, la verdad.|Depende del día.">
+      <li class="var"><span class="es">me crié con rock, metal y funk, y luego me fui pasando al jazz. Jazz moderno, fusión, esas cosas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« irse pasando a » = glisser progressivement vers</span></span></li>
+      <li class="var"><span class="es">de todo menos reguetón. Bueno, miento: en Río bailas hasta lo que odias.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">vanne sûre en Espagne, où le débat reguetón est éternel</span></span></li>
+      <li class="var"><span class="es">soy muy de jazz fusión, pero para entrenar me pongo electrónica, algo que te deje en trance y no pensar.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ser muy de » = être très branché ; « ponerse música » = se mettre de la musique</span></span></li>
+      <li class="var"><span class="es">bastante rap, y luego cosas raras: música balcánica, ambient… cuando me pongo intenso.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ponerse intenso » = se la jouer profond, auto-dérision</span></span></li>
+      <li class="var"><span class="es">tío, tengo un Spotify que parece un mercadillo. Rock, jazz, funk, rap, electrónica, y de vez en cuando una fanfarria balcánica.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« mercadillo » = brocante, marché aux puces</span></span></li>
+    </ol>
+    <h3 class="sub">Relances</h3>
+    <ul class="rebonds">
+      <li>¿Y tú qué escuchas?<span class="amorce">La question la plus simple, posez-la toujours, puis : ¿Y hay buenos conciertos aquí? ¿Dónde?</span></li>
+      <li>¿Vas a conciertos?<span class="amorce">Todos los que puedo. En Río tocaba yo, aquí de momento miro. ¿Qué salas molan?</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Toco la batería, busco grupo</span><span class="seg-fr">Fait dicté : batteur (12 ans de pratique), bassiste, blocos à Rio, cherche un groupe à Barcelone pour jouer, batterie idéalement, basse aussi.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes" data-conn="Yo|Bueno, yo|Es que yo|A todo esto,">
+      <li class="var"><span class="es">toco la batería desde los diez años, y el bajo también. En Río tocaba en tres blocos de carnaval.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">soy batería. Bueno, batería y bajista, según lo que falte en el grupo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« soy batería » : le musicien se dit « batería » ou « batero »</span></span></li>
+      <li class="var"><span class="es">estoy buscando grupo, en serio. Si conoces a alguien que necesite batería o bajo, aquí estoy.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">la demande explicite : c'est ainsi qu'on trouve un groupe en Espagne, par la peña</span></span></li>
+      <li class="var"><span class="es">llevo doce años dándole a la batería. Y en Brasil me enganché a la percusión: pandeiro, repique, todo eso.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« darle a algo » = pratiquer un truc ; « engancharse » = devenir accro</span></span></li>
+      <li class="var"><span class="es">sin tocar me muero. Así que lo primero que hago en cada ciudad es buscar con quién tocar.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">Jam session : oser sans se surestimer (fait dicté : possible, mais pas sûr d'être prêt en bar, plutôt joué entre potes)</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">¿Hay jams por aquí? Me apunto a mirar, y si un día me atrevo, subo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« apuntarse » = s'inscrire, être partant ; « subir » = monter sur scène</span></span></li>
+      <li class="var"><span class="es">De jam todavía no me veo. Me sé cuatro estándares mal contados. Pero en un local, entre colegas, cuando quieras.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« mal contados » = à tout casser ; « local » = local de répète</span></span></li>
+      <li class="var"><span class="es">Si hay bajo y batería libres, yo me lío. Pero avísame antes, que no quiero hacer el ridículo con un estándar que no me sé.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« liarse » = se lancer ; « hacer el ridículo » = se ridiculiser</span></span></li>
+      <li class="var"><span class="es">¿Tenéis local de ensayo? Por si os falta alguien un día.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Vocabulaire musicien d'Espagne.</strong> <em>Local</em> (de ensayo) = local de répète ; <em>bolo</em> = concert, date (<em>tenemos un bolo el sábado</em>) ; <em>sala</em> = salle de concert ; <em>tocar en directo</em> ; <em>ensayar</em> = répéter ; <em>el batería</em> (personne), <em>la batería</em> (instrument) ; <em>baqueta</em> = baguette ; <em>caja</em> = caisse claire ; <em>bombo</em> = grosse caisse ; <em>plato</em> = cymbale ; <em>afinar</em> = accorder ; <em>una jam</em> au féminin. Glosez toujours <em>bloco</em> : <em>una comparsa de percusión de carnaval, seiscientas personas tocando</em>.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">¿De qué equipo eres? Lyon, Liverpool, Vasco</span><span class="seg-fr">Fait dicté : équipe d'enfance Lyon, période 2001-2008, sept titres d'affilée, Juninho ; Liverpool suivi depuis plus de 12 ans, un match vu à Anfield, tous les matchs suivis, passion pour le club et la ville ; à Rio, Vasco : outsider, pas gagné depuis longtemps, pas très bon mais attachant, supporters fous, stade dans la favela, ambiance dingue ; lien Lyon-Vasco par Juninho.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">La réponse</h3>
+    <ol class="variantes" data-conn="Pues|Uf, complicado.|A ver,|Yo">
+      <li class="var"><span class="es">del Lyon de toda la vida. El de los siete títulos seguidos, el de Juninho. Luego ya, mejor no hablar.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« de toda la vida » ; « mejor no hablar » = vaut mieux pas en parler</span></span></li>
+      <li class="var"><span class="es">soy del Lyon y del Liverpool. Lo del Liverpool es amor de verdad: llevo doce años sin perderme un partido.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« no perderse un partido » = ne pas rater un match</span></span></li>
+      <li class="var"><span class="es">tengo tres equipos, que ya sé que no se puede: el Lyon por infancia, el Liverpool por amor y el Vasco por Río.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">énoncer la règle avant qu'on vous la rappelle : désamorce la vanne</span></span></li>
+      <li class="var"><span class="es">del Liverpool hasta la médula. Estuve en Anfield y casi lloro con el himno.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« hasta la médula » = jusqu'à la moelle ; l'hymne, c'est You'll Never Walk Alone, le jury de bar le sait</span></span></li>
+      <li class="var"><span class="es">en Río me hice del Vasco. Un equipo malísimo, pero con una afición loca y un estadio metido en una favela. La liga la ves por la tele; el Vasco lo vives.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« hacerse de un equipo » = devenir supporter ; « la afición » = les supporters (ici mot d'Espagne, jamais « la torcida »)</span></span></li>
+    </ol>
+    <h3 class="sub">Le lien Lyon-Vasco, votre carte maîtresse</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">Y mira qué casualidad: el mejor jugador de la historia del Lyon, Juninho, es leyenda del Vasco. Así que lo mío tiene lógica.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« mira qué casualidad » ouvre l'anecdote ; « tiene lógica » = ça se tient</span></span></li>
+      <li class="var"><span class="es">Juninho, el de las faltas, jugó en el Vasco antes de venir a Lyon. O sea que yo he hecho el camino inverso.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« el de las faltas » : ses coups francs, référence que tout amateur de foot de 30-40 ans connaît</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Barça o Madrid?<span class="amorce">Ni uno ni otro, así no me pego con nadie. Pero viviendo aquí, ya me imagino de qué voy a acabar siendo. ¿Tú del Barça, supongo?</span></li>
+      <li>¿Y el Espanyol?<span class="amorce">Réponse prudente : Sé que existe, y sé que aquí eso ya es una opinión. Le rapport Barça/Espanyol est un sujet local sensible ; ne prenez pas parti.</span></li>
+      <li>¿Vamos a ver el partido el sábado?<span class="amorce">Voir bloc 5, quedar.</span></li>
+    </ul>
+    <div class="alerte"><strong>Lexique foot d'Espagne.</strong> <em>La afición</em> (supporters), <em>ser del</em> + club, <em>el derbi</em>, <em>el clásico</em>, <em>meter un gol</em>, <em>ganar de calle</em> (haut la main), <em>palmar</em> (perdre, familier), <em>remontada</em>, <em>pegarse</em> (se battre), <em>quedar en tablas</em> (match nul, plutôt <em>empatar</em>). <em>Partido</em>, jamais <em>juego</em> ni le lusisme <em>jogo</em>. Les scores se disent <em>dos a uno</em>. <em>Lyon</em> se prononce à la française, le club se dit <em>el Lyon</em> ou <em>el Olympique</em>.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="3" data-continu="0">
+  <div class="block-intro"><strong>Bloc 3 · En el bar: pedir, pagar, comer.</strong> Les micro-interactions qui reviennent dix fois par soirée. Fait dicté : bière artisanale, vin rouge, cañas, vermut, ouvert à tout ; mange de tout. Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Pedir en la barra</span><span class="seg-fr">Commander au comptoir, à l'espagnole : court, direct, sans « je voudrais ».</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Una caña, porfa.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« porfa » = s'il te plaît, abrégé ; « caña » = petite pression, LE mot</span></span></li>
+      <li class="var"><span class="es">¿Me pones dos cañas y un vermut?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« ¿me pones…? » est la formule de commande standard en Espagne, pas « quiero » ni « quisiera »</span></span></li>
+      <li class="var"><span class="es">¿Qué tenéis de artesana? Es que soy un poco pesado con la cerveza.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« artesana » = artisanale ; « pesado » = chiant, en auto-dérision</span></span></li>
+      <li class="var"><span class="es">Ponme lo que más salga, que confío en ti.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« lo que más salga » = ce qui part le plus ; instantanément sympathique au barman</span></span></li>
+      <li class="var"><span class="es">Un tinto de la casa. ¿Y para picar qué hay?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« para picar » = à grignoter</span></span></li>
+      <li class="var"><span class="es">Otra ronda, cuando puedas. Lo mismo para todos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« cuando puedas » adoucit sans être servile</span></span></li>
+      <li class="var"><span class="es">¿Nos cobras cuando puedas? Todo junto.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">demander l'addition en Espagne : « cobrar », pas « la cuenta » seul</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Les tailles.</strong> <em>Caña</em> (20-25 cl, pression), <em>doble</em> (le double), <em>jarra</em> (grande chope), <em>tercio</em> (bouteille 33 cl), <em>quinto</em> (bouteille 20 cl), <em>clara</em> (panaché, avec limonade ou gaseosa). Le <em>chopp</em> de Rio est une <em>caña</em>. À Barcelone, le <em>vermut</em> se prend le week-end vers 13 h (<em>fer el vermut</em> en catalan, <em>hacer el vermut</em>), avec olives, chips et <em>berberechos</em>. Le tutoiement du serveur est la norme ; <em>oye</em> ou <em>perdona</em> pour l'appeler, jamais <em>señor</em>.</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Pagar, invitar, ir a medias</span><span class="seg-fr">Les règles de l'addition en Espagne : on paie par rondes, ou on partage à parts égales, rarement chacun sa consommation.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Esta ronda la pago yo. La siguiente, tú.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Invito yo, que soy el nuevo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« que » causal en fin de phrase = « vu que » ; typiquement espagnol</span></span></li>
+      <li class="var"><span class="es">¿Lo hacemos a pachas? Así nadie se raya.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« a pachas » = fifty-fifty ; « rayarse » = se prendre la tête</span></span></li>
+      <li class="var"><span class="es">Deja, deja, que ya te has dejado una pasta con las entradas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« deja » répété = laisse tomber ; « una pasta » = un paquet de fric</span></span></li>
+      <li class="var"><span class="es">Hago bizum, ¿vale? Pásame tu número.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">Bizum : le virement instantané entre particuliers, omniprésent en Espagne, le mot est devenu un verbe</span></span></li>
+      <li class="var"><span class="es">¿Tenéis datáfono o solo efectivo?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« datáfono » = terminal de carte</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Ne comptez jamais à l'euro près à voix haute</strong> : c'est le cliché du guiri. On arrondit, on paie une ronde, on se rattrape à la suivante. <em>Pagar a escote</em> existe aussi pour « à parts égales », plus vieilli que <em>a pachas</em>.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">¿Qué te apetece? Comer y beber</span><span class="seg-fr">Fait dicté : ouvert à tout, mange de tout ; bière artisanale, vin rouge par culture familiale, vermut apprécié à Barcelone.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes" data-conn="Pues|A mí|Yo|Mira,">
+      <li class="var"><span class="es">me va todo, no soy nada tiquismiquis.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« tiquismiquis » = chochotte, difficile ; mot adoré des Espagnols</span></span></li>
+      <li class="var"><span class="es">soy de cerveza artesana y de vino tinto. Lo del tinto viene de familia, en el Beaujolais no hay escapatoria.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">el vermut me ha conquistado. En Río no existe y aquí lo hacéis religión.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">como de todo. De verdad, de todo: he comido cosas en la Amazonía que aquí no os cuento hasta la tercera caña.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">crée du suspense pour plus tard : bon mécanisme de conversation</span></span></li>
+      <li class="var"><span class="es">¿me apetece? Lo que sea, mientras haya bravas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« bravas » : les patatas bravas, tapa universelle</span></span></li>
+    </ol>
+    <h3 class="sub">Mini-lexique de bar de Barcelone</h3>
+    <ol class="variantes">
+      <li class="var"><span class="es">tapear, ir de tapas, picar algo, tomar algo, ir de cañas, hacer el vermut.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">les six verbes de la sortie</span></span></li>
+      <li class="var"><span class="es">bravas, bombas (de la Barceloneta), pan con tomate (pa amb tomàquet), boquerones, pulpo, croquetas, tortilla, patatas alioli, calçots (en hiver, hors de la ville).</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">ce qu'on partage vraiment ; les « bombas » sont la tapa d'origine barcelonaise</span></span></li>
+      <li class="var"><span class="es">estar de resaca, ir pedo, ir contento, ir ciego, ir mamado.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">échelle de l'ivresse : « contento » (léger) → « pedo » (bourré) → « ciego / mamado » (très) ; « resaca » = gueule de bois</span></span></li>
+      <li class="var"><span class="es">Estoy que me caigo. Me voy a pedir un agua, que mañana curro.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">pour décrocher sans passer pour un rabat-joie</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le faux ami « estar bueno ».</strong> <em>Está bueno</em> pour un plat = c'est bon ; pour une personne = elle est canon. <em>Es bueno</em> = il est gentil. Et <em>tener hambre</em>, jamais <em>estar con hambre</em> (lusisme). Pour « ça me tente » : <em>me apetece</em>, verbe d'Espagne par excellence, inconnu en Amérique.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="4" data-continu="0">
+  <div class="block-intro"><strong>Bloc 4 · Reacciones y muletillas.</strong> Ce qu'on dit quand l'autre parle : la matière première de toute amitié. Chaque entrée est étiquetée <em>coloquial</em>, <em>vulgar</em> ou <em>muy vulgar</em>, et le niveau ● indique le risque social (● partout, ●●● uniquement entre potes confirmés). Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Sorpresa: ¡no me digas!</span><span class="seg-fr">Réagir à une nouvelle, une anecdote, un truc étonnant.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">¡No me digas!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">le « sans blague » universel</span></span></li>
+      <li class="var"><span class="es">¡Qué fuerte!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">l'expression la plus fréquente d'Espagne pour « c'est dingue », positif ou négatif</span></span></li>
+      <li class="var"><span class="es">¿En serio? ¡Venga ya!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« venga ya » = allez, arrête</span></span></li>
+      <li class="var"><span class="es">¡Qué pasada!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">admiration : quel truc de ouf</span></span></li>
+      <li class="var"><span class="es">Flipo. Flipo en colores.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« flipar en colores » = halluciner grave</span></span></li>
+      <li class="var"><span class="es">¡Anda ya!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">incrédulité amusée</span></span></li>
+      <li class="var"><span class="es">¡Hostia!</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">juron de surprise le plus courant en Espagne ; « hostia » seul, « la hostia » = le top ; blasphème d'origine, banal d'usage, à éviter devant des gens âgés</span></span></li>
+      <li class="var"><span class="es">¡Joder, qué fuerte!</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">« joder » est le « putain » espagnol ; prononcé souvent « joé »</span></span></li>
+      <li class="var"><span class="es">¡Me cago en la leche!</span><span class="meta"><span class="tag sout muy">muy vulgar</span><span class="risk">●●●</span><span class="note-var">surprise ou contrariété ; les variantes plus fortes (« en la puta », « en Dios ») restent à entendre, pas à dire</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Entusiasmo: ¡qué guay!</span><span class="seg-fr">Dire que quelque chose est bien, du plus sage au plus cru.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">¡Qué guay!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">le « cool » de base ; un peu daté pour les moins de 25 ans, parfait pour vous</span></span></li>
+      <li class="var"><span class="es">Mola. Mola mucho. Mola mazo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« molar » = plaire, être cool ; « mazo » = vachement, plutôt Madrid</span></span></li>
+      <li class="var"><span class="es">¡Qué bueno! ¡Qué bien!</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Es una pasada. Es brutal.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« brutal » = énorme, très courant, positif</span></span></li>
+      <li class="var"><span class="es">Me encanta. Me flipa.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Es la hostia.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">= c'est le top absolu</span></span></li>
+      <li class="var"><span class="es">De puta madre.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">= génial ; à ne pas traduire mentalement</span></span></li>
+      <li class="var"><span class="es">Lo peta. Lo va a petar.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« petarlo » = cartonner ; un concert, un bar, une personne</span></span></li>
+      <li class="var"><span class="es">Es un puntazo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">= c'est un super plan, une super idée</span></span></li>
+      <li class="var"><span class="es">Déu n'hi do.</span><span class="meta"><span class="tag bcn">Barcelone</span><span class="risk">●●●</span><span class="note-var">catalan, prononcé « déou ni do » : admiration ou étonnement, employé même en parlant castillan à Barcelone. À dire une fois par soirée, pas dix.</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Compasión y fastidio: qué mal rollo</span><span class="seg-fr">Réagir à une galère, une mauvaise nouvelle, un truc pénible.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Qué mal rollo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« rollo » = ambiance, truc ; « mal rollo » = mauvaise vibe, galère</span></span></li>
+      <li class="var"><span class="es">Vaya palo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« un palo » = un coup dur</span></span></li>
+      <li class="var"><span class="es">Qué putada.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">= quelle poisse, quel sale coup ; vulgaire d'étymologie, très courant</span></span></li>
+      <li class="var"><span class="es">Qué rabia.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">= c'est rageant</span></span></li>
+      <li class="var"><span class="es">Qué coñazo.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">= quelle plaie, quel truc chiant ; ne pas confondre avec « coño », interjection</span></span></li>
+      <li class="var"><span class="es">Menudo marrón.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« un marrón » = une tuile, une corvée ; « comerse un marrón » = se taper une galère</span></span></li>
+      <li class="var"><span class="es">Qué chungo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« chungo » = craignos, pourri, dur</span></span></li>
+      <li class="var"><span class="es">Ánimo, tío. Ya verás como se arregla.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« ya verás como » + indicatif : formule d'encouragement</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Acuerdo, desacuerdo, duda</span><span class="seg-fr">Dire oui, non, bof, sans jamais dire « je ne suis pas d'accord ».</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Vale. Vale, vale. Venga, vale.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« vale » = OK, le mot le plus dit d'Espagne ; inconnu en Amérique</span></span></li>
+      <li class="var"><span class="es">Claro. Claro que sí. Hombre, claro.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« hombre » est une interjection, même en parlant à une femme</span></span></li>
+      <li class="var"><span class="es">Totalmente. Tal cual. Y que lo digas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« tal cual » = exactement ; « y que lo digas » = tu l'as dit</span></span></li>
+      <li class="var"><span class="es">Ni de coña.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">= pas question, même pas en rêve</span></span></li>
+      <li class="var"><span class="es">Qué va. Para nada.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Ya, pero… Bueno, depende.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« ya » seul = ouais, je vois ; c'est le désaccord poli espagnol</span></span></li>
+      <li class="var"><span class="es">No sé yo. No lo veo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« no sé yo » avec le sujet après = j'en suis pas si sûr ; « no lo veo » = je le sens pas</span></span></li>
+      <li class="var"><span class="es">Me da igual. Como veas. Lo que tú digas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« como veas » = comme tu veux ; à ne pas dire d'un ton sec</span></span></li>
+      <li class="var"><span class="es">Pues igual sí. Puede ser.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« igual » = peut-être, sens d'Espagne ; en Amérique « igual » = quand même</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">05</span><span class="seg-titles"><span class="seg-title">Muletillas: el ruido de fondo</span><span class="seg-fr">Les mots qu'on dit quand on ne dit rien. C'est ce qui fait « parlé » plus que tout le vocabulaire.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Pues nada. Pues eso.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">clôture ou transition : « bon, voilà »</span></span></li>
+      <li class="var"><span class="es">Es que… Es que no sé.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« es que » introduit toute justification ; indispensable</span></span></li>
+      <li class="var"><span class="es">O sea… O sea, que sí.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« o sea » = enfin, c'est-à-dire ; en excès c'est un tic de pijo</span></span></li>
+      <li class="var"><span class="es">En plan… en plan tranqui.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« en plan » = genre, style ; marqueur des moins de 40 ans</span></span></li>
+      <li class="var"><span class="es">A ver… A ver, que me explico.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« a ver » ouvre une explication, gagne une seconde</span></span></li>
+      <li class="var"><span class="es">¿Sabes? ¿Me entiendes? ¿No?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">questions de contact en fin de phrase</span></span></li>
+      <li class="var"><span class="es">Bueno… Bueno, bueno, bueno.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">triplé = « eh ben dis donc »</span></span></li>
+      <li class="var"><span class="es">Venga. Venga, va.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« venga » = allez ; pour partir, accepter, encourager, clore</span></span></li>
+      <li class="var"><span class="es">Total, que…</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">= bref, résultat des courses</span></span></li>
+      <li class="var"><span class="es">Y tal. Y tal y cual.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">= et tout ça ; abrège une énumération</span></span></li>
+      <li class="var"><span class="es">Ya ves. Ya te digo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">= tu m'étonnes, je te le fais pas dire</span></span></li>
+      <li class="var"><span class="es">Joder, tío…</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">soupir universel</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Dosage.</strong> Les jurons espagnols (<em>joder</em>, <em>hostia</em>, <em>coño</em>, <em>de puta madre</em>) sont plus fréquents et moins forts qu'en français ; les bannir vous fait parler comme un manuel. Règle simple : n'en dites aucun avant que quelqu'un du groupe en ait dit un, puis alignez-vous un cran en dessous. <em>Cabrón</em> entre amis est affectueux (<em>qué cabrón, qué suerte tienes</em>), jamais avec un inconnu. Les insultes à la mère et les blasphèmes lourds (<em>me cago en Dios</em>) s'entendent, ne se disent pas quand on est le nouveau.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="5" data-continu="0">
+  <div class="block-intro"><strong>Bloc 5 · Quedar, relanzar, retirarse.</strong> Fait dicté : pas de scène spécifique, mais les interactions du quotidien pour rencontrer des gens et les revoir. Ce bloc couvre : relancer une conversation qui meurt, proposer de se revoir, refuser sans vexer, échanger les contacts, partir. Boîte à outils.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Relanzar una conversación que muere</span><span class="seg-fr">Les questions qui marchent toujours à Barcelone.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Oye, ¿y tú de qué barrio eres? ¿Gràcia, Poblenou…? Es que todavía no me aclaro.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">les quartiers : sujet inépuisable ; « no aclararse » = s'y perdre</span></span></li>
+      <li class="var"><span class="es">¿Qué es lo más de Barcelona que un guiri nunca hace y debería?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« lo más » = le truc le plus</span></span></li>
+      <li class="var"><span class="es">¿Y tú por qué no te vas de Barcelona? Todo el mundo dice que se quiere ir y nadie se va.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">provoque un peu ; excellent avec des locaux qui râlent sur les loyers</span></span></li>
+      <li class="var"><span class="es">¿Playa o montaña? Aquí tenéis las dos, no vale decir «depende».</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Cuéntame un sitio para comer bien y barato, que llevo una semana a base de bocadillos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« a base de » = à coups de</span></span></li>
+      <li class="var"><span class="es">¿Tú has estado en Francia? ¿Y qué te pareció?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« ¿qué te pareció? » = t'en as pensé quoi ; le verbe « parecer » est la clé des avis</span></span></li>
+      <li class="var"><span class="es">Bueno, ¿y qué plan hay para el finde?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« finde » = week-end ; « plan » = sortie prévue</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Proponer quedar</span><span class="seg-fr">Le verbe social numéro un : quedar = se donner rendez-vous. Proposer sans insister.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">¿Quedamos un día y me enseñas el barrio?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« quedar » n'a pas le sens de « rester » ici ; « ¿quedamos? » = on se voit ?</span></span></li>
+      <li class="var"><span class="es">Si un día hacéis algo, avisadme, que yo me apunto a todo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« apuntarse » = être partant ; « avisadme » impératif vosotros</span></span></li>
+      <li class="var"><span class="es">¿Os apetece unas cañas el jueves? Conozco un sitio… bueno, no conozco ninguno, por eso os lo pido.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">El sábado hay un concierto en Razzmatazz. ¿Alguien se anima?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« animarse » = être chaud ; adaptez le lieu</span></span></li>
+      <li class="var"><span class="es">Yo el finde estoy libre, así que lo que digáis.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« lo que digáis » subjonctif vosotros = ce que vous voulez</span></span></li>
+      <li class="var"><span class="es">Venga, pues nos vemos el jueves. Y si se cae el plan, me avisas, que yo también soy de cancelar.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« caerse un plan » = tomber à l'eau ; ironie sur le flake espagnol</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Le « ya quedamos ».</strong> En Espagne, <em>a ver si quedamos</em> ou <em>ya quedamos</em> sans date est une politesse, pas un engagement, comme « faut qu'on se fasse un truc ». Pour que ça arrive, proposez un jour et un lieu, et créez le groupe WhatsApp vous-même le soir même.</div>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Decir que no sin cortar el rollo</span><span class="seg-fr">Refuser une sortie, un verre de plus, une proposition, sans vexer.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Hoy no puedo, pero la próxima sin falta.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« sin falta » = sans faute</span></span></li>
+      <li class="var"><span class="es">Paso, que mañana madrugo. Pero id vosotros, ¿eh?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« paso » = je passe mon tour ; « madrugar » = se lever tôt ; « id » impératif vosotros de ir</span></span></li>
+      <li class="var"><span class="es">Me encantaría, en serio, pero hoy estoy muerto.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Una más y me voy. Y esta vez va en serio.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">la phrase la plus dite et la moins tenue d'Espagne</span></span></li>
+      <li class="var"><span class="es">No me apetece mucho, la verdad. Pero otro día os digo yo un plan.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« la verdad » en fin de phrase adoucit la franchise</span></span></li>
+      <li class="var"><span class="es">Ni de coña me meto ahí, tío. Pero os espero fuera con una caña.</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Intercambiar contacto, despedirse</span><span class="seg-fr">Échanger numéro ou Instagram, et partir à l'espagnole, c'est-à-dire en quinze minutes.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Pásame tu número y te meto en el grupo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« meter en el grupo » = ajouter au groupe WhatsApp, le vrai rite d'intégration</span></span></li>
+      <li class="var"><span class="es">¿Tienes Insta? Te sigo y así te aviso de los conciertos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">Apúntame el sitio ese que decías, que si no se me olvida.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« el sitio ese » avec démonstratif postposé : très oral</span></span></li>
+      <li class="var"><span class="es">Bueno, me voy yendo. Un placer, de verdad.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« me voy yendo » = je vais y aller ; annonce un départ progressif</span></span></li>
+      <li class="var"><span class="es">Me piro, que mañana curro. Nos vemos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« pirarse » = se casser ; « nos vemos » = à plus, sans date</span></span></li>
+      <li class="var"><span class="es">Venga, hasta luego. Y gracias por aguantar al guiri.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« aguantar » = supporter</span></span></li>
+      <li class="var"><span class="es">Nos vemos, chavales. Cuidaos.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« chavales » = les gars ; « cuidaos » impératif vosotros de cuidarse</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Les adieux durent.</strong> En Espagne, dire qu'on part et partir sont deux moments distincts séparés d'un quart d'heure ; partir sec est perçu comme froid. Deux bises entre homme et femme, poignée de main ou accolade entre hommes ; à Barcelone c'est identique. <em>Hasta luego</em> se dit même si vous ne revoyez jamais la personne.</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="6" data-continu="1">
+  <div class="block-intro"><strong>Bloc 6 · Anécdotas de carnaval.</strong> Deux histoires dictées, montées pour la table d'un bar : version courte en une phrase d'accroche, puis le récit à coulisses. Les chevilles sont les mots qui tiennent l'auditoire (<em>y de repente</em>, <em>total que</em>, <em>flipa</em>). <em>Vue continue disponible.</em></div>
+<div class="continu">
+  <p class="lead"><strong>Récit continu à coulisses.</strong> Les deux anecdotes bout à bout. Racontez-les à voix haute en regardant quelqu'un ; une anecdote de bar se joue, elle ne se lit pas. Coupez au premier « ¿y sabes qué pasó? » pour laisser l'autre dire « ¿qué? ».</p>
+  <p class="texto"></p>
+  <div class="metrics">
+    <span><b class="m-words">0</b> mots</span>
+    <span>durée estimée <b class="m-time">0</b> à 140 mots par minute</span>
+    <span><b class="m-combi">0</b> combinaisons possibles</span>
+  </div>
+  <p class="howto">Version bar : une minute maximum par anecdote. <button class="tts-all mini">Escuchar el texto</button> <button class="tts-stop mini">Parar</button></p>
+</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Anécdota 1, la accroche: la lluvia sobre el bloco</span><span class="seg-fr">Fait dicté : l'an dernier, trois blocos de plus de 600 personnes ; 42 °C ; il s'est mis à pleuvoir juste au-dessus du bloco et nulle part ailleurs, comme une bénédiction, arc-en-ciel à côté, après 6 ou 7 heures de jeu.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">L'accroche, une phrase</h3>
+    <ol class="variantes" data-conn="Os cuento una:|Mira, una de carnaval:|A ver, esta es buena:|Tengo una que flipas:">
+      <li class="var"><span class="es">el año pasado toqué en tres blocos, de seiscientas personas cada uno, y en uno pasó algo que todavía no me explico.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">el año pasado, en pleno carnaval, a cuarenta y dos grados, se puso a llover solo encima de nuestro bloco.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ponerse a » + infinitif = se mettre à ; les degrés se disent « grados »</span></span></li>
+      <li class="var"><span class="es">yo he visto llover sobre seiscientas personas y sobre nadie más. En serio.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">version mystère : oblige l'autre à demander</span></span></li>
+</ol>
+    <h3 class="sub">Le contexte</h3>
+    <ol class="variantes" data-conn="Resulta que|Es que|Para que te hagas una idea,|Total, que">
+      <li class="var"><span class="es">llevábamos seis o siete horas tocando, a cuarenta y dos grados, muertos, con la camiseta que se podía escurrir.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« llevábamos … tocando » : durée en cours dans le passé ; « escurrir » = essorer</span></span></li>
+      <li class="var"><span class="es">un bloco son seiscientos tíos tocando percusión por la calle, y detrás, miles de personas bailando. Siete horas. A cuarenta y dos grados.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">glose du bloco intégrée au récit</span></span></li>
+      <li class="var"><span class="es">estábamos ya al límite, en plan «no puedo más», y de repente…</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« y de repente » suspendu : laissez un silence</span></span></li>
+    </ol>
+    <h3 class="sub">Le retournement</h3>
+    <ol class="variantes" data-conn="Y de repente,|Y en esas,|Y entonces,|Y sin venir a cuento,">
+      <li class="var"><span class="es">se pone a llover. Pero solo encima de nosotros. Ni una gota en la calle de al lado.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">présent de narration : obligatoire pour une anecdote vivante ; « ni una gota » = pas une goutte</span></span></li>
+      <li class="var"><span class="es">empieza a caer una lluvia fina, solo sobre el bloco, como si alguien nos hubiera echado una bendición. Y sale un arcoíris al lado.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« como si … hubiera » : subjonctif plus-que-parfait, discret et impeccable</span></span></li>
+      <li class="var"><span class="es">cae una lluvia solo para nosotros, con arcoíris incluido. Seiscientas personas gritando como si hubiéramos ganado la Champions.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span></span></li>
+    </ol>
+    <h3 class="sub">La chute</h3>
+    <ol class="variantes" data-conn="Total, que|Y nada,|Y ya está:|Así que">
+      <li class="var"><span class="es">fue la liberación. No sé si fue un milagro o el cambio climático, pero yo casi lloro.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">la gente lo llamó bendición. Yo lo llamo el mejor momento de mi vida con unas baquetas en la mano.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">seguimos tocando una hora más como si nada. Y luego, claro, a la cama tres días.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">chute en auto-dérision</span></span></li>
+    </ol>
+    <h3 class="sub">Ce qu'on vous répondra, et votre relance</h3>
+    <ul class="rebonds">
+      <li>¿Y tú tocabas qué?<span class="amorce">Repique, que es el tambor que manda. Bueno, «manda»: el que hace las llamadas.</span></li>
+      <li>¡Qué pasada! Yo quiero ir.<span class="amorce">Pues el carnaval es en febrero. Si vienes, te consigo un tambor. Voir bloc 5 pour concrétiser.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Anécdota 2: el carnaval que no acababa nunca (2022)</span><span class="seg-fr">Fait dicté : 2022, carnaval annulé par la mairie ; soirées en club autorisées avec billet et PCR négatif ; Sambódromo ouvert ; la fête de rue a eu lieu quand même, plus forte que jamais ; second carnaval officiel en avril ; le post-carnaval du premier a rejoint le pré-carnaval du second : carnaval ininterrompu de fin décembre à début mai.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <h3 class="sub">L'accroche</h3>
+    <ol class="variantes" data-conn="Y otra:|Y luego está la del 2022:|Espera, que hay más:|Y la mejor:">
+      <li class="var"><span class="es">en 2022 viví el carnaval más largo de la historia: cinco meses.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">chiffre choc en premier, explication après</span></span></li>
+      <li class="var"><span class="es">en 2022 cancelaron el carnaval de Río. Y fue el mejor carnaval de mi vida.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">paradoxe : la meilleure accroche possible</span></span></li>
+    </ol>
+    <h3 class="sub">L'explication</h3>
+    <ol class="variantes" data-conn="Resulta que|Es que|Te explico:|A ver,">
+      <li class="var"><span class="es">el ayuntamiento canceló la fiesta en la calle por el covid, pero dejó las fiestas en discotecas con entrada y PCR. Y el Sambódromo abrió.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« ayuntamiento » pour la mairie ; « entrada » = billet</span></span></li>
+      <li class="var"><span class="es">en teoría, en la calle no había nada. En la práctica, la calle se lió más que nunca.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« liarse » = partir en vrille, en fête</span></span></li>
+      <li class="var"><span class="es">hubo un carnaval «cancelado» en febrero, que se hizo igual, y otro oficial en abril.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+    </ol>
+    <h3 class="sub">La mécanique, glosée</h3>
+    <ol class="variantes" data-conn="Y aquí viene lo bueno:|Lo mejor es esto:|Y claro,|Y entonces pasó algo:">
+      <li class="var"><span class="es">el carnaval de Río tiene precarnaval desde finales de diciembre, una semana de carnaval y dos o tres semanas de poscarnaval.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">el poscarnaval del primero se juntó con el precarnaval del segundo. Cada fin de semana, blocos, disfraces, fiesta. De diciembre a mayo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« juntarse » = se rejoindre ; « disfraces » = déguisements</span></span></li>
+      <li class="var"><span class="es">o sea, que no hubo un carnaval: hubo un carnaval ininterrumpido de cinco meses. Y yo con la batería a cuestas todos los fines de semana.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« a cuestas » = sur le dos</span></span></li>
+    </ol>
+    <h3 class="sub">La chute</h3>
+    <ol class="variantes" data-conn="Total, que|Así que|Y nada,|Conclusión:">
+      <li class="var"><span class="es">salí de aquel año con las manos destrozadas y con la sensación de haber vivido algo que no se va a repetir.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●●</span><span class="note-var">« de haber vivido » : infinitif composé après « sensación de »</span></span></li>
+      <li class="var"><span class="es">si algún día te dicen que cancelan algo en Río, no te lo creas.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">todavía estoy recuperándome. Y de eso hace cuatro años.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« de eso hace » + durée = ça fait … de ça</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Comment on raconte en Espagne.</strong> Présent de narration (<em>se pone a llover</em>), <em>resulta que</em> pour lancer, <em>total que</em> pour conclure, <em>en plan</em> pour citer, et une chute en auto-dérision. Les Espagnols coupent : attendez-vous à être interrompu, ce n'est pas de l'impolitesse, c'est de la participation. Reprenez avec <em>bueno, a lo que iba</em> (« bref, où j'en étais »).</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="7" data-continu="0">
+  <div class="block-intro"><strong>Bloc 7 · Català mínim, però de veritat.</strong> Fait dicté : montrer un effort réel, au-delà de bonjour-merci. Une quarantaine de phrases du quotidien, avec prononciation approchée et le moment où les sortir. <strong>Réserve honnête :</strong> je maîtrise le catalan standard, pas toutes les nuances d'usage de Barcelone ; les phrases sont correctes, le « quand » est un conseil, pas une règle.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">Quan i per què: la regla del joc</span><span class="seg-fr">Pense-bête : quand parler catalan à Barcelone sans forcer.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <div class="alerte"><strong>Trois règles.</strong> (1) À Barcelone, tout le monde comprend le castillan et personne ne vous en voudra de le parler ; le catalan est un plus, pas un dû. (2) Le bon moment : quand quelqu'un vous parle en catalan d'abord, ou pour saluer, remercier, commander. Répondre en catalan à quelqu'un qui s'est adressé à vous en castillan paraît forcé. (3) La phrase magique, à dire en catalan : <em>l'estic aprenent, corregeix-me</em> (je l'apprends, corrige-moi). Elle transforme chaque erreur en conversation. Prononciation notée entre crochets, approximative : le <em>e</em> et le <em>o</em> non accentués se réduisent à Barcelone ([ə], [u]), le <em>l·l</em> est un l long, le <em>x</em> initial se dit « ch », le <em>ny</em> est « gn », le <em>ig</em> final est « tch ».</div>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Saludar i presentar-se</span><span class="seg-fr">Saluer et se présenter.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Bon dia. Bona tarda. Bona nit.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[bon di-a, bo-na tar-da, bo-na nit] ; « bon dia » jusqu'au déjeuner, « bona tarda » après</span></span></li>
+      <li class="var"><span class="es">Hola, què tal? Com va?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[ke tal, kom ba] ; « com va » = comment ça va, le plus courant</span></span></li>
+      <li class="var"><span class="es">Em dic Pablo. Sóc francès, però la meva família és espanyola.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[əm dik, sok frən-sès, pə-ro lə me-bə fə-mi-li-ə es əs-pə-gno-lə]</span></span></li>
+      <li class="var"><span class="es">Acabo d'arribar a Barcelona. Encara m'estic situant.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[ə-ka-bu də-ri-ba, ən-ka-rə məs-tik si-tu-an] = je viens d'arriver, je me repère encore</span></span></li>
+      <li class="var"><span class="es">Molt de gust. Igualment.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[mol də gust, i-gwal-men] = enchanté, de même</span></span></li>
+      <li class="var"><span class="es">Estic aprenent català. Corregeix-me, si us plau.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[əs-tik ə-prə-nen kə-tə-la, ku-rə-djeych-mə, si us plau] ; LA phrase</span></span></li>
+      <li class="var"><span class="es">Parlo una mica de català, però el castellà el parlo millor.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[par-lu u-nə mi-kə, kəs-tə-lya, mi-lyo] ; « una mica » = un peu</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Al bar i a la botiga</span><span class="seg-fr">Au bar et dans les commerces : là où le catalan s'entend le plus.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Una canya, si us plau. Dues canyes.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[u-nə ka-gnə, si us plau ; du-əs ka-gnəs]</span></span></li>
+      <li class="var"><span class="es">Què em recomanes?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[kə əm rə-ku-ma-nəs] = qu'est-ce que tu me conseilles</span></span></li>
+      <li class="var"><span class="es">Ens cobres, si us plau? Quant és?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[əns ko-brəs ; kwan es] = tu nous encaisses ? c'est combien ?</span></span></li>
+      <li class="var"><span class="es">Gràcies. Moltes gràcies. De res.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[gra-si-əs, mol-təs, də rəs]</span></span></li>
+      <li class="var"><span class="es">Perdona, on és el lavabo?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[pər-do-nə, on es əl lə-ba-bu]</span></span></li>
+      <li class="var"><span class="es">Fem el vermut? Anem a fer unes canyes?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[fəm əl bər-mut ; ə-nem ə fe u-nəs ka-gnəs] = on fait le vermut ? on va boire des bières ?</span></span></li>
+      <li class="var"><span class="es">Una barra de pa, si us plau. Això és tot.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[u-nə ba-rə də pa ; ə-cho es tot] ; boulangerie : lieu idéal pour pratiquer sans enjeu</span></span></li>
+      <li class="var"><span class="es">Ho sento, no t'he entès. Ho pots repetir?</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[u sen-tu, no te ən-tès, u pots rə-pə-ti] = désolé, je n'ai pas compris, tu peux répéter ?</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">04</span><span class="seg-titles"><span class="seg-title">Reaccions i paraules que fan «d'aquí»</span><span class="seg-fr">Les mots catalans qui passent dans le castillan de Barcelone, et les réactions de base.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">Déu n'hi do!</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[déu ni do] = eh ben dis donc, pas mal ; intraduisible, très identitaire</span></span></li>
+      <li class="var"><span class="es">Ostres! Caram!</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[os-trəs, kə-ram] = purée, mince ; doux, dicibles partout</span></span></li>
+      <li class="var"><span class="es">Va bé. Molt bé. Perfecte.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[ba be, mol be, pər-fek-tə]</span></span></li>
+      <li class="var"><span class="es">D'acord. Vinga. Som-hi!</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[də-kor, bin-gə, som-i] = d'accord, allez, on y va ; « som-hi » est le cri de ralliement</span></span></li>
+      <li class="var"><span class="es">Quin fàstic. Quina merda.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●●</span><span class="note-var">[kin fas-tik, ki-nə mer-də] = quel dégoût, quelle merde ; le second est vulgaire</span></span></li>
+      <li class="var"><span class="es">Fins ara. Fins demà. Adéu. Bona nit.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[fins a-rə, fins də-ma, ə-déu] = à tout à l'heure, à demain, au revoir</span></span></li>
+      <li class="var"><span class="es">Ens veiem! Cuida't.</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●●</span><span class="note-var">[əns bə-yem, kui-dət] = on se voit, prends soin de toi</span></span></li>
+      <li class="var"><span class="es">Bon profit!</span><span class="meta"><span class="tag bcn">català</span><span class="risk">●</span><span class="note-var">[bon pru-fit] = bon appétit ; se dit aussi aux tables voisines</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Mots catalans dans le castillan de Barcelone</strong>, à reconnaître : <em>rachola</em> (carrelage), <em>plegar</em> (finir le boulot : <em>hoy plego a las seis</em>), <em>la paradeta</em> (le stand), <em>pixapins</em> (Barcelonais du week-end à la campagne, moqueur), <em>enchegar</em> (démarrer), <em>hacer el vermut</em>, <em>la castanyada</em>, <em>la Mercè</em> (la grande fête de la ville, fin septembre), <em>la revetlla de Sant Joan</em> (nuit du 23 juin, plages, pétards). Et deux dates de la vie quotidienne : <em>la Diada</em> (11 septembre) et <em>Sant Jordi</em> (23 avril, livres et roses).</div>
+  </div>
+</section>
+</div>
+
+<div class="block" data-b="8" data-continu="0">
+  <div class="block-intro"><strong>Bloc 8 · Chuleta SOS.</strong> Fait dicté : oui à une carte SOS en un clic. Trois cartes : quand on ne comprend pas, les lusismes qui trahissent, et la grammaire du tutoiement. À relire dans le métro avant la soirée.</div>
+
+<!-- ============ 01 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">01</span><span class="seg-titles"><span class="seg-title">SOS: no entiendo, no me sale, me he equivocado</span><span class="seg-fr">Les phrases de survie quand ça va trop vite.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">¿Cómo? Perdona, no te he pillado.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« pillar » = capter ; « ¿cómo? » et non « ¿qué? », plus poli</span></span></li>
+      <li class="var"><span class="es">Espera, espera, más despacio, que soy guiri.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">¿Eso qué significa? Es que esa palabra no la tengo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« no la tengo » = je ne l'ai pas en stock ; naturel et modeste</span></span></li>
+      <li class="var"><span class="es">¿Cómo se dice… lo de… eso que sirve para…?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">contourner par la définition : les gens complètent, et ça crée du lien</span></span></li>
+      <li class="var"><span class="es">Se me ha ido la palabra. Es la edad.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">« irse la palabra » = avoir le mot sur le bout de la langue</span></span></li>
+      <li class="var"><span class="es">Perdón, eso me ha salido en portugués. Quería decir…</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">¿Lo he dicho bien? Dímelo, en serio, que si no no aprendo.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">Vale, no me he enterado de nada, pero me río igual.</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">quand la vanne vous échappe : l'avouer en riant vaut mieux que rire à contretemps</span></span></li>
+      <li class="var"><span class="es">Con este ruido no me entero. ¿Salimos un momento fuera?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">le bruit est l'ennemi numéro un du non-natif : changez de lieu, pas de langue</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">02</span><span class="seg-titles"><span class="seg-title">Los lusismos que te delatan en el bar</span><span class="seg-fr">Les mêmes qu'à l'oral CLOE, mais ici avec leur version parlée. Le détecteur du bloc 9 les repère.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">muito → mucho / muy · mas → pero · então → entonces, pues · também → también · ainda → todavía · agora → ahora</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">les six mots-outils qui sortent sous fatigue ou alcool</span></span></li>
+      <li class="var"><span class="es">ficar → quedarse (ficar em casa → quedarse en casa) · a gente → nosotros · você → tú (jamais usted au bar)</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span></span></li>
+      <li class="var"><span class="es">legal → guay, genial · cara → tío · galera → peña, gente · bagunça → lío, follón · massa → mola · beleza → vale, guay</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">l'argot carioca a un équivalent madrilène-barcelonais pour chaque mot</span></span></li>
+      <li class="var"><span class="es">sentir falta de → echar de menos · estar com fome → tener hambre · tô de boa → estoy tranqui · valeu → gracias, venga</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+      <li class="var"><span class="es">cerveja → cerveza, caña, birra · balada → discoteca, garito · rolê → plan · bar (le mot est le même, la prononciation du r non)</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">« birra » (italianisme) et « garito » (bar un peu louche, affectueux) sont très espagnols</span></span></li>
+      <li class="var"><span class="es">Et les deux faux amis dangereux : embarazada (enceinte, jamais gêné : avergonzado) · exquisito (délicieux, pas bizarre : raro)</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="seg">
+  <button class="seg-head"><span class="seg-num">03</span><span class="seg-titles"><span class="seg-title">Gramática de bar: tú, vosotros y los imperativos</span><span class="seg-fr">Ce que le portugais et l'espagnol d'Amérique ont effacé et que Barcelone attend.</span></span><span class="chev">›</span></button>
+  <div class="seg-body">
+    <ol class="variantes">
+      <li class="var"><span class="es">vosotros: ¿qué hacéis?, ¿os apetece?, ¿vais a ir?, ¿habéis estado?, ¿queréis otra?</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">terminaisons -áis, -éis, -ís ; pronom « os »</span></span></li>
+      <li class="var"><span class="es">impératifs vosotros: venid, avisadme, mirad, esperad, decidme, id, sentaos, callaos</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">-ad, -ed, -id ; avec « os » le d tombe : sentaos ; à l'oral beaucoup disent « venir, sentaros », infinitif à valeur d'impératif, familier mais courant</span></span></li>
+      <li class="var"><span class="es">tú impératifs: ven, dime, mira, oye, espera, pásame, ponme, apúntame, cuéntame, déjalo</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">les dix impératifs de bar</span></span></li>
+      <li class="var"><span class="es">négatif: no te rayes, no te preocupes, no me digas, no jodas, no te vayas todavía</span><span class="meta"><span class="tag idio vul">vulgar</span><span class="risk">●●</span><span class="note-var">négatif = subjonctif ; « no jodas » = sans déconner</span></span></li>
+      <li class="var"><span class="es">le « que » causal en fin de phrase: vamos, que llegamos tarde · invito yo, que soy el nuevo · dímelo, que si no no aprendo</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">marqueur d'oralité numéro un ; sans lui, on parle comme un livre</span></span></li>
+      <li class="var"><span class="es">diminutifs: una cañita, un ratito, ahorita (non : ahorita est américain), un poquito, cerquita, tranqui</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●</span><span class="note-var">-ito partout, sauf « ahorita »</span></span></li>
+      <li class="var"><span class="es">passé composé pour la journée: hoy he currado mucho, ¿has comido?, he llegado hace un rato · prétérit pour hier: ayer fui, comí, llegué</span><span class="meta"><span class="tag">coloquial</span><span class="risk">●●</span><span class="note-var">règle péninsulaire, inverse du portugais et de l'Amérique</span></span></li>
+    </ol>
+    <div class="alerte"><strong>Prononciation d'Espagne en trois points.</strong> La <em>z</em> et le <em>c</em> devant e/i sont interdentaux (<em>cerveza</em>, <em>gracias</em>, <em>Barcelona</em>) ; les Barcelonais le font aussi. Le <em>s</em> final se prononce, contrairement à l'andalou. La jota est râpeuse (<em>joder</em>, <em>Gràcia</em> se dit « grassia » en catalan mais « gracia » en castillan). Les lettres avalées de Rio (« ficô », « tá ») n'existent pas : en Espagne on avale la fin des mots autrement, <em>pa'</em> pour <em>para</em>, <em>to'</em> pour <em>todo</em>, à l'oreille seulement.</div>
+  </div>
+</section>
+</div>
+
+
+<div class="block" data-b="9" data-continu="0" data-sim="1">
+  <div class="sim-card chuleta">
+    <div class="sim-q-head"><span>Chuleta del día · cinco frases ●●● a colocar hoy</span><button id="chu-next" class="mini">Otras cinco</button></div>
+    <ol class="variantes chu-list"></ol>
+  </div>
+  <div class="sim-modes">
+    <button class="sim-mode on" data-mode="libre">Preguntas sueltas</button>
+    <button class="sim-mode" data-mode="entrevista">Una noche de bar (10 réplicas)</button>
+    <button class="sim-mode" data-mode="lusismos">Detector de lusismos</button>
+  </div>
+  <div class="block-intro"><strong>Bloc 9 · Simulador de bar.</strong> Quelqu'un vous pose une question au hasard ; vous répondez en 15 secondes maximum, puis vous affichez le fait dicté et les formulations du segment concerné. Le mode « Una noche » enchaîne une soirée type en dix répliques. Le détecteur de lusismes relit ce que vous dictez. Rien n'est stocké.</div>
+  <div class="sim sim-panel" data-panel="libre">
+    <div class="sim-filters">
+      <span class="sim-lab">Blocs</span>
+      <label><input type="checkbox" class="sim-f" value="1" checked> 1 Yo</label>
+      <label><input type="checkbox" class="sim-f" value="2" checked> 2 Música y fútbol</label>
+      <label><input type="checkbox" class="sim-f" value="3" checked> 3 Bar</label>
+      <label><input type="checkbox" class="sim-f" value="4" checked> 4 Reacciones</label>
+      <label><input type="checkbox" class="sim-f" value="5" checked> 5 Quedar</label>
+      <label><input type="checkbox" class="sim-f" value="6" checked> 6 Anécdotas</label>
+      <label><input type="checkbox" class="sim-f" value="7"> 7 Català</label>
+      <label><input type="checkbox" class="sim-f" value="8"> 8 SOS</label>
+      <span class="sim-lab">Durée</span>
+      <label><input type="radio" name="sim-t" value="15" checked> 15 s</label>
+      <label><input type="radio" name="sim-t" value="30"> 30 s</label>
+      <label><input type="radio" name="sim-t" value="60"> 60 s</label>
+    </div>
+    <div class="sim-card">
+      <div class="sim-q-head"><span class="sim-src"></span><span class="sim-count"></span></div>
+      <p class="sim-q">Pulse « Nueva pregunta » para empezar.</p>
+      <div class="sim-timer"><div class="sim-bar"></div><span class="sim-clock"></span></div>
+      <div class="sim-actions">
+        <button id="sim-next" class="on">Nueva pregunta</button>
+        <button id="sim-reveal" disabled>Mostrar respuesta</button>
+        <button id="sim-repeat" disabled>Repetir esta</button>
+        <button id="sim-rebote" disabled title="Alguien insiste en el mismo tema">Insisten</button>
+      </div>
+    </div>
+    <div class="sim-answer">
+      <h3 class="sub">Ce que vous avez dit (fait de référence)</h3>
+      <p class="sim-fact"></p>
+      <h3 class="sub">Amorce</h3>
+      <p class="sim-amorce"></p>
+      <h3 class="sub">Formulations du segment, à permuter</h3>
+      <p class="sim-hint">Cliquez sur une formulation pour la mettre en tête ; « Otra tournure » en tire une autre au hasard. Registre : <button class="sim-reg on" data-reg="all">toutes</button><button class="sim-reg" data-reg="neutre">neutre</button><button class="sim-reg" data-reg="rico">soutenu / idiomatique</button> <button id="sim-other">Otra tournure</button></p>
+      <ol class="variantes sim-vars"></ol>
+      <p class="sim-go"><a href="#" class="sim-link">Ouvrir le segment complet</a></p>
+    </div>
+  </div>
+
+  <div class="sim sim-panel" data-panel="entrevista" hidden>
+    <div class="block-intro"><strong>Una noche de bar.</strong> Dix répliques dans l'ordre d'une vraie soirée : on vous aborde, on vous questionne, quelqu'un raconte un truc et vous réagissez, on parle foot, vous racontez une anecdote, on propose de se revoir, vous partez. Temps cible par réplique. Rapport à la fin. Rien n'est conservé.</div>
+    <div class="sim-card">
+      <div class="sim-q-head"><span class="ent-phase"></span><span class="ent-step"></span></div>
+      <p class="sim-q ent-q">Pulse « Empezar la entrevista ».</p>
+      <div class="sim-timer ent-timer"><div class="sim-bar"></div><span class="sim-clock"></span></div>
+      <div class="sim-actions">
+        <button id="ent-start" class="on">Empezar la noche</button>
+        <button id="ent-reveal" disabled>Ver apoyo</button>
+        <button id="ent-next" disabled>Siguiente</button>
+        <button id="ent-stop" disabled>Terminar</button>
+      </div>
+    </div>
+    <div class="sim-answer ent-answer">
+      <h3 class="sub">Apoyo</h3>
+      <p class="ent-fact"></p>
+      <ol class="variantes ent-vars"></ol>
+    </div>
+    <div class="sim-answer ent-report">
+      <h3 class="sub">Informe de la noche</h3>
+      <table class="ent-table"><thead><tr><th>#</th><th>Pregunta</th><th>Tema</th><th>Objetivo</th><th>Tiempo</th></tr></thead><tbody></tbody></table>
+      <p class="ent-summary"></p>
+    </div>
+  </div>
+
+  <div class="sim sim-panel" data-panel="lusismos" hidden>
+    <div class="block-intro"><strong>Detector de lusismos y falsos amigos.</strong> Dictez (reconnaissance vocale du navigateur, es-ES) ou tapez une réponse, puis analysez : les mots portugais, les calques et les faux amis relevés dans vos fiches sont surlignés avec la forme espagnole. Réserve : la reconnaissance vocale sur un accent mixte est inégale ; le texte n'est pas conservé.</div>
+    <div class="sim-card">
+      <textarea id="lus-text" rows="6" placeholder="Escriba o dicte aquí su respuesta en español…"></textarea>
+      <div class="sim-actions">
+        <button id="lus-dictar">Dictar</button>
+        <button id="lus-analizar" class="on">Analizar</button>
+        <button id="lus-borrar">Borrar</button>
+        <span class="lus-status"></span>
+      </div>
+    </div>
+    <div class="sim-answer lus-out">
+      <h3 class="sub">Texto analizado</h3>
+      <p class="lus-marked"></p>
+      <h3 class="sub">Correcciones</h3>
+      <ul class="lus-list"></ul>
+    </div>
+  </div>
+</div>
+
+<footer class="jv">
+  <h2>Journal de version et réserves</h2>
+  <ul>
+    <li><strong>v1, 27 août 2026.</strong> Neuf blocs construits sur la dictée du 27/08 (fichier DICTEE_BAR_27-08-2026.md) et le moteur de l'outil CLOE C1 v2.1 : vue segments, vue continue sur les blocs 1 et 6, panneau de formulations, synthèse vocale, simulateur en trois modes, détecteur de lusismes.</li>
+    <li><strong>Étiquetage.</strong> <em>coloquial</em> (dicible partout entre gens du même âge), <em>vulgar</em> (jurons usuels, entre amis), <em>muy vulgar</em> (à entendre plutôt qu'à dire), <em>Barcelone</em> / <em>català</em> (marqué localement). Les points ● à ●●● mesurent le risque social, pas la difficulté grammaticale.</li>
+    <li><strong>Boutons « Sin tacos » / « Con tacos »</strong> en vue continue : sélectionnent respectivement les formulations coloquiales et celles étiquetées vulgar ou muy vulgar.</li>
+    <li><strong>Réserves.</strong> Le lexique est de l'espagnol péninsulaire courant des 25-40 ans, sans source unique consultée ; les usages évoluent vite et varient par groupe. Le catalan est correct en standard, la prononciation notée est approximative (variante orientale de Barcelone), et la synthèse vocale le lit avec une voix castillane, donc mal. Les faits personnels sont exclusivement ceux dictés ; le prénom d'une amie et les lieux cités dans les questions du simulateur (Razzmatazz, Marta, Bali) sont des exemples, pas des faits.</li>
+    <li><strong>Non traité, faute de dictée :</strong> flirt explicite, politique et Catalogne (le candidat n'a rien voulu écarter, mais rien n'a été dicté ; une réponse d'esquive figure au bloc 2, segment 03).</li>
+  </ul>
+</footer>
+
+</div>
+<script>
+(function(){
+  /* ---------- PWA ---------- */
+  var mf = {
+    name:"Español de bar · Barcelona", short_name:"Bar BCN",
+    start_url:".", display:"standalone", background_color:"#f5f0e8", theme_color:"#8a6520",
+    icons:[
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%23f5f0e8'/%3E%3Ctext x='96' y='126' font-size='98' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EES%3C/text%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml", purpose:"any"},
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23f5f0e8'/%3E%3Ctext x='256' y='336' font-size='260' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%238a6520'%3EES%3C/text%3E%3C/svg%3E", sizes:"512x512", type:"image/svg+xml", purpose:"any"}
+    ]
+  };
+  try{
+    var url = URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:"application/json"}));
+    document.getElementById("manifest-link").setAttribute("href", url);
+  }catch(e){}
+
+  /* ---------- Accordéon ---------- */
+  document.querySelectorAll("section.seg").forEach(function(s){
+    s.querySelector(".seg-head").addEventListener("click", function(){ s.classList.toggle("open"); });
+  });
+
+  /* ---------- Panneau de choix, partagé ---------- */
+  var pop = document.createElement("div");
+  pop.id = "popover";
+  document.body.appendChild(pop);
+  var popSlot = null, closeT = null, touchMode = false;
+  /* Sur écran tactile, un appui émet mouseenter puis click : le panneau s'ouvrait puis se refermait aussitôt. On mémorise le type de pointeur. */
+  document.addEventListener("pointerdown", function(ev){ touchMode = (ev.pointerType === "touch" || ev.pointerType === "pen"); }, true);
+  document.addEventListener("touchstart", function(){ touchMode = true; }, {capture:true, passive:true});
+  function lower(t){ return t ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
+  function scheduleClose(){ closeT = setTimeout(closePop, 320); }
+  function closePop(){
+    pop.classList.remove("show");
+    if(popSlot) popSlot.el.classList.remove("active");
+    popSlot = null;
+  }
+  function place(anchor){
+    var r = anchor.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    pop.style.maxWidth = Math.min(440, vw - 24) + "px";
+    pop.style.left = "0px"; pop.style.top = "0px";
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var left = Math.min(Math.max(12, r.left), vw - pw - 12);
+    var top = r.bottom + 8;
+    if(top + ph > vh - 12) top = Math.max(12, r.top - ph - 8);
+    pop.style.left = (left + window.scrollX) + "px";
+    pop.style.top  = (top + window.scrollY) + "px";
+  }
+  function openPop(sl){
+    popSlot = sl;
+    pop.innerHTML = "";
+    var head = document.createElement("div");
+    head.className = "pop-head";
+    head.textContent = sl.conn ? "Chevilles de liaison" : "Formulations disponibles";
+    pop.appendChild(head);
+    sl.opts.forEach(function(o, k){
+      var item = document.createElement("div");
+      item.className = "pop-item" + (k === sl.i ? " current" : "");
+      var line = document.createElement("span");
+      line.className = "pop-es"; line.textContent = o.t;
+      item.appendChild(line);
+      if(o.tag || o.risk || o.note){
+        var meta = document.createElement("span"); meta.className = "pop-meta";
+        if(o.tag){ var tg=document.createElement("span"); tg.className=o.cls||"tag"; tg.textContent=o.tag; meta.appendChild(tg); }
+        if(o.risk){ var rk=document.createElement("span"); rk.className="risk"; rk.textContent=o.risk; meta.appendChild(rk); }
+        if(o.note){ var nt=document.createElement("span"); nt.className="pop-note"; nt.textContent=o.note; meta.appendChild(nt); }
+        item.appendChild(meta);
+      }
+      item.addEventListener("click", function(ev){
+        ev.stopPropagation();
+        sl.i = k; sl.block.render(); sl.block.metrics(); closePop();
+        sl.el.classList.add("flash");
+        setTimeout(function(){ sl.el.classList.remove("flash"); }, 260);
+      });
+      pop.appendChild(item);
+    });
+    pop.classList.add("show");
+    place(sl.el);
+    sl.el.classList.add("active");
+  }
+  pop.addEventListener("mouseenter", function(){ clearTimeout(closeT); });
+  pop.addEventListener("mouseleave", scheduleClose);
+  document.addEventListener("click", closePop);
+  document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closePop(); });
+  window.addEventListener("resize", closePop);
+  window.addEventListener("scroll", function(){ if(popSlot) place(popSlot.el); }, {passive:true});
+
+  /* ---------- Un moteur de vue continue par bloc ---------- */
+  function Bloc(el){
+    this.el = el;
+    this.cont = el.querySelector(".continu");
+    this.texto = this.cont ? this.cont.querySelector(".texto") : null;
+    this.slots = [];
+    this.built = false;
+  }
+  Bloc.prototype.mk = function(cls, opts, afterConn){
+    var self = this;
+    var el = document.createElement("span");
+    el.className = cls; el.tabIndex = 0;
+    this.texto.appendChild(el);
+    this.texto.appendChild(document.createTextNode(" "));
+    var sl = {el:el, opts:opts, i:0, conn:cls.indexOf("conn")>=0, afterConn:afterConn, block:self};
+    el.addEventListener("mouseenter", function(){ if(touchMode) return; clearTimeout(closeT); openPop(sl); });
+    el.addEventListener("mouseleave", function(){ if(!touchMode) scheduleClose(); });
+    el.addEventListener("click", function(ev){
+      ev.stopPropagation(); clearTimeout(closeT);
+      if(touchMode){ if(popSlot === sl) closePop(); else openPop(sl); return; }
+      if(popSlot !== sl) openPop(sl);
+    });
+    el.addEventListener("keydown", function(ev){
+      if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); openPop(sl); }
+      if(ev.key === "Escape") closePop();
+    });
+    return sl;
+  };
+  Bloc.prototype.build = function(){
+    if(this.built || !this.texto) return;
+    var self = this;
+    this.texto.innerHTML = ""; this.slots = [];
+    this.el.querySelectorAll("section.seg").forEach(function(s){
+      var num = s.querySelector(".seg-num").textContent.trim();
+      if(!/^\d+$/.test(num)) return;
+      s.querySelectorAll("ol.variantes").forEach(function(ol){
+        var opts = Array.prototype.map.call(ol.querySelectorAll("li.var"), function(li){
+          var tag = li.querySelector(".tag"), risk = li.querySelector(".risk"), note = li.querySelector(".note-var");
+          return { t: li.querySelector(".es").textContent.trim(),
+                   tag: tag ? tag.textContent.trim() : "",
+                   cls: tag ? tag.className : "",
+                   risk: risk ? risk.textContent.trim() : "",
+                   note: note ? note.textContent.trim() : "" };
+        });
+        if(!opts.length) return;
+        var conn = ol.getAttribute("data-conn");
+        if(conn){
+          var copts = conn.split("|").map(function(c){ return {t:c, tag:"cheville", cls:"tag", risk:"", note:""}; });
+          self.slots.push(self.mk("slot conn", copts, false));
+        }
+        self.slots.push(self.mk("slot", opts, !!conn));
+      });
+    });
+    this.built = true;
+    this.render(); this.metrics();
+  };
+  Bloc.prototype.render = function(){
+    this.slots.forEach(function(sl){
+      var t = sl.opts[sl.i].t;
+      if(!sl.conn && sl.afterConn) t = lower(t);
+      sl.el.textContent = t;
+      sl.el.title = (sl.i+1) + " sur " + sl.opts.length + ", cliquez pour choisir";
+    });
+  };
+  Bloc.prototype.metrics = function(){
+    if(!this.cont) return;
+    var words = this.texto.textContent.trim().split(/\s+/).filter(Boolean).length;
+    this.cont.querySelector(".m-words").textContent = words;
+    var sec = Math.round(words / 140 * 60);
+    this.cont.querySelector(".m-time").textContent =
+      Math.floor(sec/60) + " min " + String(sec%60).padStart(2,"0") + " s";
+    var log = 0;
+    this.slots.forEach(function(sl){ log += Math.log10(sl.opts.length); });
+    this.cont.querySelector(".m-combi").textContent =
+      log > 12 ? "plus de mille milliards de" : Math.round(Math.pow(10, log)).toLocaleString("fr-FR");
+  };
+  Bloc.prototype.pickBy = function(rich){
+    this.slots.forEach(function(sl){
+      if(sl.conn) return;
+      for(var k = 0; k < sl.opts.length; k++){
+        var c = sl.opts[k].cls || "";
+        var isRich = c.indexOf("idio") >= 0 || c.indexOf("sout") >= 0;
+        if(isRich === rich){ sl.i = k; return; }
+      }
+      sl.i = 0;
+    });
+    this.render(); this.metrics();
+  };
+  Bloc.prototype.shuffle = function(){
+    this.slots.forEach(function(sl){ sl.i = Math.floor(Math.random()*sl.opts.length); });
+    this.render(); this.metrics();
+  };
+
+  var blocs = {};
+  document.querySelectorAll(".block").forEach(function(el){ blocs[el.dataset.b] = new Bloc(el); });
+  var actif = null;
+
+  /* ---------- Onglets ---------- */
+  function setBloc(id){
+    document.querySelectorAll(".block").forEach(function(el){ el.classList.toggle("on", el.dataset.b === id); });
+    document.querySelectorAll("nav.tabs button").forEach(function(b){ b.classList.toggle("on", b.dataset.b === id); });
+    actif = blocs[id];
+    var hasCont = actif.el.dataset.continu === "1";
+    document.body.classList.toggle("sans-continu", !hasCont);
+    document.body.classList.toggle("sim-on", !!actif.el.dataset.sim);
+    if(!hasCont) setVue("seg");
+    if(hasCont) actif.build();
+    closePop();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  document.querySelectorAll("nav.tabs button").forEach(function(b){
+    b.addEventListener("click", function(){ setBloc(b.dataset.b); });
+  });
+
+  /* ---------- Vues ---------- */
+  var bSeg = document.getElementById("btn-view-seg"), bCon = document.getElementById("btn-view-con"), bAll = document.getElementById("btn-view-all");
+  function setVue(v){
+    document.body.classList.toggle("vue-con", v === "con");
+    document.body.classList.toggle("vue-seg", v === "seg");
+    document.body.classList.toggle("vue-all", v === "all");
+    bSeg.classList.toggle("on", v === "seg");
+    bCon.classList.toggle("on", v === "con");
+    bAll.classList.toggle("on", v === "all");
+  }
+  bAll.addEventListener("click", function(){ if(actif) actif.build(); setVue("all"); });
+  bSeg.addEventListener("click", function(){ setVue("seg"); });
+  bCon.addEventListener("click", function(){ if(actif) actif.build(); setVue("con"); window.scrollTo({top:0,behavior:"smooth"}); });
+
+  /* ---------- Barre d'outils ---------- */
+  var btnOpen = document.getElementById("btn-open");
+  btnOpen.addEventListener("click", function(){
+    var segs = Array.prototype.slice.call(actif.el.querySelectorAll("section.seg"));
+    var anyClosed = segs.some(function(s){ return !s.classList.contains("open"); });
+    segs.forEach(function(s){ s.classList.toggle("open", anyClosed); });
+    btnOpen.textContent = anyClosed ? "Tout replier" : "Tout déplier";
+  });
+
+  var btnMask = document.getElementById("btn-mask");
+  btnMask.addEventListener("click", function(){
+    document.body.classList.toggle("masque");
+    btnMask.classList.toggle("on", document.body.classList.contains("masque"));
+    if(!document.body.classList.contains("masque"))
+      document.querySelectorAll("li.var.revele").forEach(function(li){ li.classList.remove("revele"); });
+  });
+  document.querySelectorAll("li.var").forEach(function(li){
+    li.addEventListener("click", function(){
+      if(document.body.classList.contains("masque")) li.classList.toggle("revele");
+    });
+  });
+
+  document.getElementById("btn-sobrio").addEventListener("click", function(){ if(actif) actif.pickBy(false); });
+  document.getElementById("btn-rico").addEventListener("click",   function(){ if(actif) actif.pickBy(true); });
+  document.getElementById("btn-shuffle").addEventListener("click",function(){ if(actif) actif.shuffle(); });
+  document.getElementById("btn-print").addEventListener("click", function(){
+    document.querySelectorAll("section.seg").forEach(function(s){ s.classList.add("open"); });
+    window.print();
+  });
+
+
+
+  /* ---------- Synthèse vocale es-ES (amélioration 1) ---------- */
+  var TTS = (function(){
+    var ok = ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
+    var voice = null;
+    function pick(){
+      if(!ok) return;
+      var vs = window.speechSynthesis.getVoices() || [];
+      voice = vs.filter(function(v){ return /^es[-_]ES/i.test(v.lang); })[0]
+           || vs.filter(function(v){ return /^es/i.test(v.lang); })[0] || null;
+    }
+    if(ok){ pick(); window.speechSynthesis.onvoiceschanged = pick; }
+    var current = null;
+    function stop(){ if(ok) window.speechSynthesis.cancel(); if(current){ current.classList.remove('tts-active'); current = null; } }
+    function say(text, el){
+      if(!ok) return false;
+      stop();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'es-ES'; if(voice) u.voice = voice; u.rate = 0.92;
+      if(el){ current = el; el.classList.add('tts-active'); }
+      u.onend = u.onerror = function(){ if(el) el.classList.remove('tts-active'); if(current === el) current = null; };
+      window.speechSynthesis.speak(u);
+      return true;
+    }
+    return {ok:ok, say:say, stop:stop, hasEs:function(){ return !!voice; }};
+  })();
+  document.querySelectorAll('li.var > .es').forEach(function(es){
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'tts'; b.textContent = 'escuchar'; b.title = 'Synthèse vocale es-ES';
+    es.insertAdjacentElement('afterend', b);
+  });
+  document.addEventListener('click', function(ev){
+    var b = ev.target.closest('button.tts'); if(b){
+      ev.stopPropagation();
+      var es = b.previousElementSibling; if(!es) return;
+      if(!TTS.say(es.textContent.trim(), es)) b.textContent = 'sin voz';
+      return;
+    }
+    var a = ev.target.closest('button.tts-all'); if(a){
+      var blk = a.closest('.block'); var t = blk && blk.querySelector('.texto');
+      if(t && !TTS.say(t.textContent.replace(/\s+/g,' ').trim(), t)) a.textContent = 'sin voz en este navegador';
+      return;
+    }
+    if(ev.target.closest('button.tts-stop')) TTS.stop();
+  });
+  if(!TTS.ok) document.querySelectorAll('button.tts, button.tts-all, button.tts-stop').forEach(function(b){ b.disabled = true; b.title = 'Synthèse vocale indisponible dans ce navigateur'; });
+
+  /* ---------- Simulador ---------- */
+  (function(){
+    var simEl = document.querySelector('.block[data-b="9"]'); if(!simEl) return;
+    var bank = [];
+    function segInfo(seg){
+      var blk = seg.closest('.block'); var b = blk ? blk.dataset.b : '';
+      var title = seg.querySelector('.seg-title'); var fr = seg.querySelector('.seg-fr');
+      var vars = Array.prototype.map.call(seg.querySelectorAll('ol.variantes:not(.sim-vars) li.var'), function(li){ return li.cloneNode(true); });
+      return {b:b, seg:seg, title: title?title.textContent.trim():'', fr: fr?fr.textContent.trim():'', vars:vars};
+    }
+    document.querySelectorAll('.block:not([data-sim]) section.seg').forEach(function(seg){
+      var info = segInfo(seg);
+      seg.querySelectorAll('ul.rebonds li').forEach(function(li){
+        var am = li.querySelector('.amorce');
+        var q = li.childNodes[0] ? li.childNodes[0].textContent.trim() : '';
+        if(!q) return;
+        bank.push({q:q, amorce: am?am.textContent.trim():'', info:info, src:'Bloc '+info.b+' · '+info.title});
+      });
+      if(/[¿?]/.test(info.title)){
+        bank.push({q:info.title, amorce:'', info:info, src:'Bloc 3 · rebond préparé'});
+      }
+    });
+
+    /* Banque de questions du jury, rattachées à un segment (bloc, numéro). Formulées comme les poserait un examinateur. */
+    var EXTRA = [
+      ['1','01','¿Y tú de dónde eres?'],['1','01','¿Eres francés? No lo pareces.'],['1','02','¿Qué haces por Barcelona?'],['1','02','¿Cuánto llevas aquí?'],['1','02','¿Y dónde vives?'],
+      ['1','03','¿A qué te dedicas?'],['1','03','¿Y te gusta tu curro?'],['1','04','¿Qué tal Brasil? ¿Cómo es vivir en Río?'],['1','04','¿Río es peligroso de verdad?'],['1','04','¿Y las favelas?'],
+      ['1','05','¿Hablas portugués entonces?'],['1','05','Se te nota un acento raro, ¿de dónde es?'],['1','06','¿Tienes pareja?'],['1','06','¿Cuántos años tienes?'],['1','07','Bueno, ¿y tú qué me preguntas a mí?'],
+      ['2','01','¿Qué música escuchas?'],['2','01','¿Te gusta el reguetón?'],['2','02','¿Tocas algo?'],['2','02','Hay una jam el jueves, ¿te subes?'],['2','02','¿Qué es un bloco?'],
+      ['2','03','¿De qué equipo eres?'],['2','03','¿Barça o Madrid?'],['2','03','¿Y en Brasil de quién eras?'],['2','03','¿Has estado en Anfield?'],
+      ['3','01','¿Qué vas a tomar?'],['3','01','¿Te pido algo?'],['3','02','¿Cómo lo hacemos, pagamos a pachas?'],['3','02','Esta la pago yo, ¿vale?'],['3','03','¿Qué te apetece comer?'],['3','03','¿Eres de cerveza o de vino?'],['3','03','¿Has probado el vermut de aquí?'],
+      ['4','01','Tío, ayer me quedé sin trabajo.'],['4','01','¿Sabes que Marta se casa en Bali?'],['4','02','He conseguido entradas para el concierto del sábado.'],['4','02','¿Qué te parece este bar?'],
+      ['4','03','Me han robado la bici otra vez.'],['4','03','Llevo tres meses buscando piso y nada.'],['4','04','Deberíamos irnos todos a vivir a Lisboa, ¿no?'],['4','04','El mejor bar de Barcelona es este, ¿a que sí?'],['4','05','Cuéntame algo, que te veo muy callado.'],
+      ['5','01','Bueno… ¿y qué más?'],['5','01','¿Y qué te está pareciendo Barcelona?'],['5','02','¿Hacemos algo el finde?'],['5','02','¿Te vienes el sábado a la playa?'],['5','03','Venga, una más, no seas rancio.'],['5','03','Vente a la discoteca luego.'],
+      ['5','04','¿Me pasas tu número?'],['5','04','¿Ya te vas? Si es pronto.'],
+      ['6','01','¿Y qué es lo más loco que has vivido en el carnaval?'],['6','01','¿Es verdad que tocas siete horas seguidas?'],['6','02','¿Cómo fue el carnaval con el covid?'],['6','02','¿Cuánto dura el carnaval de Río?'],
+      ['7','02','Hola, com va? (en catalán)'],['7','02','Parles català?'],['7','03','Què vols prendre? (en catalán)'],['7','04','Déu n\u2019hi do, eh? (reacciona)'],
+      ['8','01','(Alguien habla muy rápido y no entiendes nada.)'],['8','01','(Has dicho «muito» y se han reído.)'],['8','03','¿Vosotros qué hacéis mañana? (responde usando vosotros)']
+    ];
+    EXTRA.forEach(function(x){
+      var blk = document.querySelector('.block[data-b="'+x[0]+'"]'); if(!blk) return;
+      var seg = null; blk.querySelectorAll('section.seg').forEach(function(sg){ var n = sg.querySelector('.seg-num'); if(n && n.textContent.trim() === x[1]) seg = sg; });
+      if(!seg) return;
+      var info = segInfo(seg);
+      bank.push({q:x[2], amorce:'', info:info, src:'Bloc '+info.b+' · '+info.title});
+    });
+    var filters = simEl.querySelectorAll('.sim-f');
+    var qEl = simEl.querySelector('.sim-q'), srcEl = simEl.querySelector('.sim-src'), cntEl = simEl.querySelector('.sim-count');
+    var bar = simEl.querySelector('.sim-bar'), timer = simEl.querySelector('.sim-timer'), clock = simEl.querySelector('.sim-clock');
+    var ans = simEl.querySelector('.sim-answer'), factEl = simEl.querySelector('.sim-fact'), amEl = simEl.querySelector('.sim-amorce');
+    var varsEl = simEl.querySelector('.sim-vars'), link = simEl.querySelector('.sim-link');
+    var bNext = document.getElementById('sim-next'), bReveal = document.getElementById('sim-reveal'), bRepeat = document.getElementById('sim-repeat'), bOther = document.getElementById('sim-other');
+    var done = [], cur = null, tick = null, reg = 'all', asked = 0;
+    function pool(){
+      var on = {}; filters.forEach(function(f){ if(f.checked) on[f.value] = true; });
+      return bank.filter(function(x){ return on[x.info.b]; });
+    }
+    function limit(){ var r = simEl.querySelector('input[name="sim-t"]:checked'); return r ? parseInt(r.value,10) : 30; }
+    function stopTimer(){ if(tick){ clearInterval(tick); tick = null; } }
+    function startTimer(){
+      stopTimer(); var total = limit(), t0 = Date.now(); timer.classList.remove('over');
+      bar.style.width = '0%'; clock.textContent = total + ' s';
+      tick = setInterval(function(){
+        var el = (Date.now()-t0)/1000, left = Math.max(0, total-el);
+        bar.style.width = Math.min(100, el/total*100) + '%';
+        clock.textContent = Math.ceil(left) + ' s';
+        if(left <= 0){ timer.classList.add('over'); clock.textContent = 'tiempo'; stopTimer(); }
+      }, 200);
+    }
+    function ask(item){
+      cur = item; asked++;
+      qEl.textContent = item.q; srcEl.textContent = item.src;
+      cntEl.textContent = 'pregunta ' + asked + ' · ' + pool().length + ' disponibles';
+      ans.classList.remove('show'); bReveal.disabled = false; bRepeat.disabled = false;
+      startTimer();
+    }
+    function next(){
+      var p = pool(); if(!p.length){ qEl.textContent = 'Seleccione al menos un tema.'; return; }
+      var rest = p.filter(function(x){ return done.indexOf(x) < 0; });
+      if(!rest.length){ done = []; rest = p; }
+      var item = rest[Math.floor(Math.random()*rest.length)];
+      done.push(item); ask(item);
+    }
+    function renderVars(){
+      varsEl.innerHTML = '';
+      var list = cur.info.vars.filter(function(li){
+        if(reg === 'all') return true;
+        var t = li.querySelector('.tag'); var c = t ? t.className : '';
+        var rich = c.indexOf('idio') >= 0 || c.indexOf('sout') >= 0;
+        return reg === 'rico' ? rich : !rich;
+      });
+      list.forEach(function(li){
+        var c = li.cloneNode(true);
+        c.addEventListener('click', function(){ varsEl.querySelectorAll('.lead-var').forEach(function(x){ x.classList.remove('lead-var'); }); c.classList.add('lead-var'); varsEl.insertBefore(c, varsEl.firstChild); });
+        varsEl.appendChild(c);
+      });
+      if(!list.length){ var e = document.createElement('li'); e.textContent = 'Aucune formulation dans ce registre pour ce segment.'; varsEl.appendChild(e); }
+    }
+    function reveal(){
+      stopTimer(); if(!cur) return;
+      factEl.textContent = cur.info.fr || cur.info.title;
+      amEl.textContent = cur.amorce || 'Pas d\u2019amorce : construisez la réponse à partir du fait et des formulations.';
+      renderVars(); ans.classList.add('show');
+      ans.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    bNext.addEventListener('click', next);
+    bReveal.addEventListener('click', reveal);
+    bRepeat.addEventListener('click', function(){ if(cur){ asked--; ask(cur); } });
+    bOther.addEventListener('click', function(){
+      var items = varsEl.querySelectorAll('li.var'); if(items.length < 2) return;
+      var k = 1 + Math.floor(Math.random()*(items.length-1));
+      items.forEach(function(x){ x.classList.remove('lead-var'); });
+      items[k].classList.add('lead-var'); varsEl.insertBefore(items[k], varsEl.firstChild);
+    });
+    simEl.querySelectorAll('.sim-reg').forEach(function(b){
+      b.addEventListener('click', function(){ simEl.querySelectorAll('.sim-reg').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on'); reg = b.dataset.reg; if(cur) renderVars(); });
+    });
+    link.addEventListener('click', function(ev){
+      ev.preventDefault(); if(!cur) return;
+      setBloc(cur.info.b); setVue('seg'); cur.info.seg.classList.add('open');
+      setTimeout(function(){ cur.info.seg.scrollIntoView({behavior:'smooth', block:'start'}); }, 350);
+    });
+
+    /* ---------- Modes du bloc 9 ---------- */
+    simEl.querySelectorAll('.sim-mode').forEach(function(b){
+      b.addEventListener('click', function(){
+        simEl.querySelectorAll('.sim-mode').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+        simEl.querySelectorAll('.sim-panel').forEach(function(pn){ pn.hidden = pn.dataset.panel !== b.dataset.mode; });
+        stopTimer(); TTS.stop();
+      });
+    });
+
+    /* ---------- Chuleta del día (amélioration 8) ---------- */
+    var chuList = simEl.querySelector('.chu-list');
+    var hard = [];
+    document.querySelectorAll('.block:not([data-sim]) section.seg li.var').forEach(function(li){
+      var r = li.querySelector('.risk'); if(!r || r.textContent.trim() !== '●●●') return;
+      var seg = li.closest('section.seg'), blk = li.closest('.block');
+      hard.push({li:li, src:'Bloc ' + blk.dataset.b + ' · ' + seg.querySelector('.seg-title').textContent.trim()});
+    });
+    function chuleta(){
+      chuList.innerHTML = '';
+      var pool = hard.slice(), n = Math.min(5, pool.length);
+      for(var i = 0; i < n; i++){
+        var k = Math.floor(Math.random()*pool.length), it = pool.splice(k,1)[0];
+        var c = it.li.cloneNode(true);
+        var src = document.createElement('span'); src.className = 'chu-src'; src.textContent = it.src;
+        c.appendChild(src); chuList.appendChild(c);
+      }
+    }
+    document.getElementById('chu-next').addEventListener('click', chuleta);
+    chuleta();
+
+    /* ---------- Rebote del jurado (amélioration 4) ---------- */
+    var bRebote = document.getElementById('sim-rebote');
+    function rebote(){
+      if(!cur) return;
+      var same = bank.filter(function(x){ return x !== cur && x.info.seg === cur.info.seg; });
+      var pool2 = same.length ? same : bank.filter(function(x){ return x !== cur && x.info.b === cur.info.b && Math.abs(parseInt(x.info.seg.querySelector('.seg-num').textContent,10) - parseInt(cur.info.seg.querySelector('.seg-num').textContent,10)) <= 1; });
+      if(!pool2.length) pool2 = bank.filter(function(x){ return x !== cur && x.info.b === cur.info.b; });
+      if(!pool2.length){ next(); return; }
+      var item = pool2[Math.floor(Math.random()*pool2.length)];
+      done.push(item); ask(item); srcEl.textContent = 'Insisten · ' + item.src;
+    }
+    bRebote.addEventListener('click', rebote);
+    var _ask = ask;
+    ask = function(item){ _ask(item); bRebote.disabled = false; };
+
+    /* ---------- Entrevista completa (amélioration 3) ---------- */
+    var PLAN = [
+      {phase:'Llegas al bar · te abordan', q:'Hola, ¿tú eres el amigo de… ? ¿De dónde eres?', b:'1', n:'01', t:15},
+      {phase:'Llegas al bar · te abordan', pick:['1'], t:15},
+      {phase:'Primera ronda', pick:['3'], t:10},
+      {phase:'Primera ronda', pick:['1'], t:20},
+      {phase:'Alguien cuenta algo · reacciona', pick:['4'], t:8},
+      {phase:'Se habla de fútbol y de música', pick:['2'], t:20},
+      {phase:'Te toca contar', pick:['6'], t:60},
+      {phase:'Alguien cuenta algo · reacciona', pick:['4'], t:8},
+      {phase:'Se propone un plan', pick:['5'], t:15},
+      {phase:'Te vas', q:'¿Ya te vas? Quédate un rato más, hombre.', b:'5', n:'04', t:15}
+    ];
+    var ent = {step:-1, items:[], t0:0, tick:null, log:[]};
+    var eQ = simEl.querySelector('.ent-q'), ePh = simEl.querySelector('.ent-phase'), eSt = simEl.querySelector('.ent-step');
+    var eTimer = simEl.querySelector('.ent-timer'), eBar = eTimer.querySelector('.sim-bar'), eClock = eTimer.querySelector('.sim-clock');
+    var eAns = simEl.querySelector('.ent-answer'), eFact = simEl.querySelector('.ent-fact'), eVars = simEl.querySelector('.ent-vars');
+    var eRep = simEl.querySelector('.ent-report'), eBody = eRep.querySelector('tbody'), eSum = simEl.querySelector('.ent-summary');
+    var bES = document.getElementById('ent-start'), bER = document.getElementById('ent-reveal'), bEN = document.getElementById('ent-next'), bEX = document.getElementById('ent-stop');
+    function entStopTimer(){ if(ent.tick){ clearInterval(ent.tick); ent.tick = null; } }
+    function entTimer(total){
+      entStopTimer(); ent.t0 = Date.now(); eTimer.classList.remove('over'); eBar.style.width = '0%';
+      ent.tick = setInterval(function(){
+        var el = (Date.now()-ent.t0)/1000;
+        eBar.style.width = Math.min(100, el/total*100) + '%';
+        eClock.textContent = Math.round(el) + ' s / ' + total + ' s';
+        if(el > total) eTimer.classList.add('over');
+      }, 250);
+    }
+    function entBuild(){
+      var used = [];
+      return PLAN.map(function(st){
+        if(st.q){
+          var blk = document.querySelector('.block[data-b="'+st.b+'"]'); var seg = null;
+          blk.querySelectorAll('section.seg').forEach(function(sg){ if(sg.querySelector('.seg-num').textContent.trim() === st.n) seg = sg; });
+          return {phase:st.phase, q:st.q, t:st.t, info:segInfo(seg), src:'Bloc '+st.b};
+        }
+        var cand = bank.filter(function(x){ return st.pick.indexOf(x.info.b) >= 0 && used.indexOf(x.info.seg) < 0; });
+        if(!cand.length) cand = bank.filter(function(x){ return st.pick.indexOf(x.info.b) >= 0; });
+        var it = cand[Math.floor(Math.random()*cand.length)];
+        used.push(it.info.seg);
+        return {phase:st.phase, q:it.q, t:st.t, info:it.info, src:it.src, amorce:it.amorce};
+      });
+    }
+    function entShow(){
+      var it = ent.items[ent.step];
+      ePh.textContent = it.phase; eSt.textContent = 'paso ' + (ent.step+1) + ' de ' + ent.items.length + ' · objetivo ' + it.t + ' s';
+      eQ.textContent = it.q; eAns.classList.remove('show'); bER.disabled = false; bEN.disabled = false;
+      entTimer(it.t);
+    }
+    function entClose(){
+      var it = ent.items[ent.step]; if(!it) return;
+      ent.log.push({q:it.q, src:it.src, t:it.t, used:Math.round((Date.now()-ent.t0)/1000)});
+      entStopTimer();
+    }
+    function entReport(){
+      eBody.innerHTML = '';
+      var over = 0, under = 0, total = 0;
+      ent.log.forEach(function(l, i){
+        var tr = document.createElement('tr'); total += l.used;
+        var cls = l.used > l.t*1.2 ? 'over' : (l.used < l.t*0.5 ? 'under' : '');
+        if(cls === 'over') over++; if(cls === 'under') under++;
+        tr.innerHTML = '<td>'+(i+1)+'</td><td>'+l.q+'</td><td>'+l.src+'</td><td>'+l.t+' s</td><td class="'+cls+'">'+l.used+' s</td>';
+        eBody.appendChild(tr);
+      });
+      var m = Math.floor(total/60), sc = total%60;
+      eSum.textContent = 'Duración total de sus respuestas: ' + m + ' min ' + sc + ' s sobre ' + ent.log.length + ' pasos. ' +
+        (over ? over + ' respuesta(s) claramente por encima del objetivo: recorte: en un bar, quien habla más de un minuto seguido pierde a la mesa. ' : '') +
+        (under ? under + ' respuesta(s) muy cortas: añada un ejemplo concreto o una consecuencia antes de devolver la palabra. ' : '') +
+        (!over && !under ? 'Tiempos ajustados en todos los pasos.' : '');
+      eRep.classList.add('show');
+    }
+    bES.addEventListener('click', function(){
+      ent.items = entBuild(); ent.step = 0; ent.log = []; eRep.classList.remove('show');
+      bES.disabled = true; bEX.disabled = false; entShow();
+    });
+    bER.addEventListener('click', function(){
+      var it = ent.items[ent.step]; if(!it) return;
+      eFact.textContent = (it.amorce ? 'Amorce : ' + it.amorce + ' · ' : '') + (it.info.fr || it.info.title);
+      eVars.innerHTML = ''; it.info.vars.forEach(function(li){ eVars.appendChild(li.cloneNode(true)); });
+      eAns.classList.add('show');
+    });
+    function entFinish(){
+      entClose(); ent.step = -1; bES.disabled = false; bER.disabled = true; bEN.disabled = true; bEX.disabled = true;
+      eQ.textContent = 'Noche terminada. Informe abajo.'; ePh.textContent = ''; eSt.textContent = ''; eAns.classList.remove('show');
+      entReport();
+    }
+    bEN.addEventListener('click', function(){
+      entClose(); ent.step++;
+      if(ent.step >= ent.items.length){ ent.step = ent.items.length - 1; ent.log.pop(); entFinish(); return; }
+      entShow();
+    });
+    bEX.addEventListener('click', entFinish);
+
+    /* ---------- Detector de lusismos (amélioration 5) ---------- */
+    var LUS = [
+      [/\bmuito\b/gi,'muy / mucho','lusisme'],[/\bmuitos?\b|\bmuitas?\b/gi,'muchos / muchas','lusisme'],[/\bmas\b/gi,'pero (« mas » existe en espagnol mais est littéraire)','lusisme probable'],
+      [/\bentão\b|\bentao\b/gi,'entonces','lusisme'],[/\btambém\b|\btambem\b/gi,'también','lusisme'],[/\bainda\b/gi,'todavía / aún','lusisme'],[/\bagora\b/gi,'ahora','lusisme'],
+      [/\bfic(ar|o|a|ou|ei|amos|ando)\b/gi,'quedarse / estar / volverse','lusisme'],[/\ba gente\b/gi,'nosotros','lusisme'],[/\bvocê(s)?\b|\bvoce(s)?\b/gi,'usted / ustedes / tú','lusisme'],
+      [/\bnão\b|\bnao\b/gi,'no','lusisme'],[/\bobrigad[oa]\b/gi,'gracias','lusisme'],[/\btudo\b/gi,'todo','lusisme'],[/\bcoisas?\b/gi,'cosa(s)','lusisme'],[/\btrabalh[\wáéíóúãç]*/gi,'trabajo / trabajar','lusisme'],
+      [/\bano\b|\banos\b/gi,'año / años (attention : « ano » a un autre sens en espagnol)','lusisme'],[/\bembora\b/gi,'aunque','lusisme'],[/\bporém\b|\bporem\b/gi,'pero / sin embargo','lusisme'],
+      [/\baté\b/gi,'hasta','lusisme'],[/\bdepois\b/gi,'después','lusisme'],[/\bsempre\b/gi,'siempre','lusisme'],[/\baqui\b/g,'aquí (accent)','accent'],[/\blá\b/gi,'allí / allá','lusisme'],
+      [/\bisso\b/gi,'eso','lusisme'],[/\bisto\b/gi,'esto','lusisme'],[/\baquilo\b/gi,'aquello','lusisme'],[/\beles?\b|\belas?\b/gi,'él / ella / ellos / ellas','lusisme'],[/\bnós\b/gi,'nosotros','lusisme'],
+      [/\bcom\b/gi,'con','lusisme'],[/\bem\b/gi,'en','lusisme'],[/\bd[oa]s?\b/gi,'del / de la / de los / de las','lusisme'],[/\bn[ao]s\b|\bna\b/gi,'en el / en la','lusisme'],
+      [/\bpra\b/gi,'para','lusisme'],[/\bme[u]s?\b|\bminhas?\b/gi,'mi / mis','lusisme'],[/\bsuas?\b/gi,'su / sus','lusisme'],[/\bsão\b|\bsao\b/gi,'son','lusisme'],[/\btem\b/gi,'tiene','lusisme'],
+      [/\btinha\b/gi,'tenía','lusisme'],[/\bfoi\b/gi,'fue','lusisme'],[/\bfaz(er|endo)?\b|\bfiz\b|\bfez\b/gi,'hacer / hice / hizo','lusisme'],[/\bconsegui\b/g,'conseguí (accent)','accent'],
+      [/\bgost(o|ar|ei|ava)\b/gi,'me gusta / gustar','lusisme'],[/\bprecis(o|ar|ava)\b/gi,'necesito / necesitar (« preciso » = précis en espagnol)','faux ami'],[/\blegal\b/gi,'genial / estupendo (« legal » = légal)','faux ami'],
+      [/\bbacana\b|\bmassa\b/gi,'genial','lusisme'],[/\bné\b/gi,'¿no? / ¿verdad?','lusisme'],[/\btá\b/gi,'está / vale','lusisme'],[/\bcara\b/gi,'tío / tipo (« cara » = visage, cher)','faux ami probable'],
+      [/\bmelhor\b/gi,'mejor','lusisme'],[/\bpior\b/gi,'peor','lusisme'],[/\bmaior\b/gi,'mayor','lusisme'],[/\bmenor\b/gi,'menor (correct) · vérifiez le sens','à vérifier'],[/\bcidade\b/gi,'ciudad','lusisme'],
+      [/\bempresa\b/gi,'empresa (correct)','ok'],[/\bconhec[\wáéíóúãç]*/gi,'conocer','lusisme'],[/\bsab(er|ia)\b/gi,'saber / sabía','lusisme'],[/\bpessoas?\b/gi,'persona(s)','lusisme'],[/\bmuita\b/gi,'mucha','lusisme'],
+      [/\bfinanciamiento\b/gi,'financiación (forme péninsulaire)','variété'],[/\bmutaci[oó]n\b/gi,'traslado / movilidad interna','faux ami'],[/\beficacia energ[ée]tica\b/gi,'eficiencia energética','faux ami'],
+      [/\bnovicio\b/gi,'principiante','faux ami'],[/\barg[ée]ntic[ao]\b/gi,'analógica','faux ami'],[/\bperform\w*/gi,'actuar / tocar en directo','calque'],[/\bcuadro multicultural\b/gi,'entorno multicultural','faux ami'],
+      [/\bm[áa]s que (\d+|un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|quince|veinte|treinta|cuarenta|cincuenta|sesenta|setenta|ochenta|noventa|cien|ciento|mil|millones)\b/gi,'más de + nombre','grammaire'],[/\bdomesticar\b/gi,'hacerse con / dominar','faux ami'],
+      [/\bjugar (la )?(bater[íi]a|guitarra|bajo)\b/gi,'tocar + instrument','faux ami'],[/\bs[ée] brasil\b/gi,'conozco Brasil','faux ami'],[/\bdoy clases\b/gi,'recibo clases / voy a clases (« doy clases » = enseigner)','faux ami'],
+      [/\bcarrera profesional\b/gi,'trayectoria profesional','faux ami'],[/\ba mi escala\b/gi,'a mi nivel / modestamente','calque'],[/\bpor mi lado\b/gi,'por mi parte','calque'],[/\btrabaj\w+ sobre\b/gi,'trabajar en','calque'],
+      [/\bsentir falta\b/gi,'echar de menos','lusisme'],[/\bmuy bueno\b/gi,'muy bueno (correct) · en Espagne on dit aussi « buenísimo »','ok']
+    ];
+    var lText = document.getElementById('lus-text'), lStatus = simEl.querySelector('.lus-status'), lOut = simEl.querySelector('.lus-out');
+    var lMarked = simEl.querySelector('.lus-marked'), lList = simEl.querySelector('.lus-list');
+    function esc(t){ return t.replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+    function analizar(){
+      var txt = lText.value; if(!txt.trim()){ lStatus.textContent = 'Nada que analizar.'; return; }
+      var hits = [];
+      LUS.forEach(function(r){
+        if(r[2] === 'ok') return;
+        var m; r[0].lastIndex = 0;
+        while((m = r[0].exec(txt))){ hits.push({s:m.index, e:m.index+m[0].length, w:m[0], fix:r[1], kind:r[2]}); if(!r[0].global) break; }
+      });
+      hits.sort(function(a,b){ return a.s - b.s; });
+      var out = '', pos = 0, seen = {}, list = [];
+      hits.forEach(function(h){
+        if(h.s < pos) return;
+        out += esc(txt.slice(pos, h.s)) + '<mark class="' + (h.kind === 'lusisme' || h.kind === 'faux ami' ? '' : 'warn') + '" title="' + esc(h.fix) + '">' + esc(h.w) + '</mark>';
+        pos = h.e;
+        var key = h.w.toLowerCase(); if(!seen[key]){ seen[key] = 1; list.push(h); }
+      });
+      out += esc(txt.slice(pos));
+      lMarked.innerHTML = out; lList.innerHTML = '';
+      if(!list.length){ var ok = document.createElement('li'); ok.textContent = 'Ningún lusismo ni falso amigo de la lista detectado. Recuerde que la lista es limitada: cubre los errores repertoriados en sus fichas.'; lList.appendChild(ok); }
+      list.forEach(function(h){ var li = document.createElement('li'); li.innerHTML = '<b>' + esc(h.w) + '</b> → ' + esc(h.fix) + ' <span class="chu-src">' + esc(h.kind) + '</span>'; lList.appendChild(li); });
+      lOut.classList.add('show');
+      var words = txt.trim().split(/\s+/).length;
+      lStatus.textContent = words + ' palabras · ' + list.length + ' alerta(s)';
+    }
+    document.getElementById('lus-analizar').addEventListener('click', analizar);
+    document.getElementById('lus-borrar').addEventListener('click', function(){ lText.value = ''; lOut.classList.remove('show'); lStatus.textContent = ''; });
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition, rec = null, recOn = false;
+    var bDict = document.getElementById('lus-dictar');
+    if(!SR){ bDict.disabled = true; bDict.title = 'Reconnaissance vocale indisponible dans ce navigateur (Chrome, Edge ou Safari récents)'; }
+    bDict.addEventListener('click', function(){
+      if(!SR) return;
+      if(recOn){ rec.stop(); return; }
+      rec = new SR(); rec.lang = 'es-ES'; rec.continuous = true; rec.interimResults = true;
+      var base = lText.value ? lText.value.replace(/\s*$/, ' ') : '';
+      rec.onresult = function(ev){
+        var fin = '', tmp = '';
+        for(var i = 0; i < ev.results.length; i++){ var r = ev.results[i]; if(r.isFinal) fin += r[0].transcript + ' '; else tmp += r[0].transcript; }
+        lText.value = base + fin + tmp;
+      };
+      rec.onend = function(){ recOn = false; bDict.textContent = 'Dictar'; bDict.classList.remove('on'); lStatus.textContent = 'Dictado detenido.'; };
+      rec.onerror = function(e){ lStatus.textContent = 'Error de dictado: ' + e.error; };
+      rec.start(); recOn = true; bDict.textContent = 'Parar dictado'; bDict.classList.add('on'); lStatus.textContent = 'Escuchando (es-ES)…';
+    });
+
+    simEl.dataset.bank = bank.length;
+  })();
+
+  /* ---------- Démarrage ---------- */
+  setVue("seg");
+  setBloc("1");
+  blocs["1"].el.querySelector("section.seg").classList.add("open");
+})();
+
+</script>
+</body>
+</html>
