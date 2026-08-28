@@ -337,7 +337,7 @@ body.masque button.tts{visibility:hidden}
 <div class="block" data-b="1" data-continu="1">
   <div class="block-intro"><strong>Bloc 1 · Presentación personal.</strong> Origines, famille, parcours de vie, projet espagnol. <em>11 segments, 83 formulations.</em></div>
 <div class="continu">
-  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles. Les passages en italique sont les chevilles de liaison. Sur mobile, un appui ouvre le panneau.</p>
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Cliquez sur un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles ; un clic ailleurs ou Échap referme le panneau. Les passages en italique sont les chevilles de liaison.</p>
   <p class="texto"></p>
   <div class="metrics">
     <span><b class="m-words">0</b> mots</span>
@@ -656,7 +656,7 @@ body.masque button.tts{visibility:hidden}
 <div class="block" data-b="2" data-continu="1">
   <div class="block-intro"><strong>Bloc 2 · Trayectoria profesional.</strong> Éolien en France, filiale brésilienne, projet de retour en Espagne. <em>14 segments, 77 formulations.</em></div>
 <div class="continu">
-  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles. Les passages en italique sont les chevilles de liaison. Sur mobile, un appui ouvre le panneau.</p>
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Cliquez sur un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles ; un clic ailleurs ou Échap referme le panneau. Les passages en italique sont les chevilles de liaison.</p>
   <p class="texto"></p>
   <div class="metrics">
     <span><b class="m-words">0</b> mots</span>
@@ -1461,7 +1461,7 @@ body.masque button.tts{visibility:hidden}
 <div class="block" data-b="4" data-continu="1">
   <div class="block-intro"><strong>Bloc 4 · Aficiones e intereses.</strong> Musique, percussion brésilienne, photographie, cinéma, patrimoine. <em>13 segments, 72 formulations.</em></div>
 <div class="continu">
-  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles. Les passages en italique sont les chevilles de liaison. Sur mobile, un appui ouvre le panneau.</p>
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Cliquez sur un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles ; un clic ailleurs ou Échap referme le panneau. Les passages en italique sont les chevilles de liaison.</p>
   <p class="texto"></p>
   <div class="metrics">
     <span><b class="m-words">0</b> mots</span>
@@ -1773,7 +1773,7 @@ body.masque button.tts{visibility:hidden}
 <div class="block" data-b="5" data-continu="1">
   <div class="block-intro"><strong>Bloc 5 · Proyecto lingüístico.</strong> L'espagnol non transmis, l'interférence du portugais, la méthode de travail. <em>12 segments, 65 formulations.</em></div>
 <div class="continu">
-  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles. Les passages en italique sont les chevilles de liaison. Sur mobile, un appui ouvre le panneau.</p>
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Cliquez sur un passage souligné pour voir toutes les formulations disponibles, avec registre, niveau de risque et note d'usage. Le texte ne change que si vous cliquez sur l'une d'elles ; un clic ailleurs ou Échap referme le panneau. Les passages en italique sont les chevilles de liaison.</p>
   <p class="texto"></p>
   <div class="metrics">
     <span><b class="m-words">0</b> mots</span>
@@ -2522,7 +2522,7 @@ body.masque button.tts{visibility:hidden}
   pop.id = "popover";
   document.body.appendChild(pop);
   var popSlot = null, closeT = null, touchMode = false;
-  /* Sur écran tactile, un appui émet mouseenter puis click : le panneau s'ouvrait puis se refermait aussitôt. On mémorise le type de pointeur. */
+  /* Le type de pointeur est mémorisé pour d'éventuels réglages tactiles ; l'ouverture se fait au clic ou à l'appui, jamais au survol. */
   document.addEventListener("pointerdown", function(ev){ touchMode = (ev.pointerType === "touch" || ev.pointerType === "pen"); }, true);
   document.addEventListener("touchstart", function(){ touchMode = true; }, {capture:true, passive:true});
   function lower(t){ return t ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
@@ -2575,8 +2575,8 @@ body.masque button.tts{visibility:hidden}
     place(sl.el);
     sl.el.classList.add("active");
   }
-  pop.addEventListener("mouseenter", function(){ clearTimeout(closeT); });
-  pop.addEventListener("mouseleave", scheduleClose);
+  /* Ouverture au clic uniquement (v2) : plus de survol, le panneau reste ouvert jusqu'au clic ailleurs, sur un autre passage, sur une formulation ou sur Échap. */
+  pop.addEventListener("click", function(ev){ ev.stopPropagation(); });
   document.addEventListener("click", closePop);
   document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closePop(); });
   window.addEventListener("resize", closePop);
@@ -2597,12 +2597,9 @@ body.masque button.tts{visibility:hidden}
     this.texto.appendChild(el);
     this.texto.appendChild(document.createTextNode(" "));
     var sl = {el:el, opts:opts, i:0, conn:cls.indexOf("conn")>=0, afterConn:afterConn, block:self};
-    el.addEventListener("mouseenter", function(){ if(touchMode) return; clearTimeout(closeT); openPop(sl); });
-    el.addEventListener("mouseleave", function(){ if(!touchMode) scheduleClose(); });
     el.addEventListener("click", function(ev){
       ev.stopPropagation(); clearTimeout(closeT);
-      if(touchMode){ if(popSlot === sl) closePop(); else openPop(sl); return; }
-      if(popSlot !== sl) openPop(sl);
+      if(popSlot === sl) closePop(); else openPop(sl);
     });
     el.addEventListener("keydown", function(ev){
       if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); openPop(sl); }

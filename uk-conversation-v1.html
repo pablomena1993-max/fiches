@@ -338,7 +338,7 @@ body.masque button.tts{visibility:hidden}
 <div class="block" data-b="1" data-continu="1">
   <div class="block-intro"><strong>Bloc 1 · Me, in twenty seconds.</strong> Ce qu'on vous demande dans les dix premières minutes, et ce que vous répondez sans faire un exposé. Règle britannique : réponse courte, une pointe d'autodérision, et la troisième phrase est une question à l'autre. Le Britannique se méfie de qui se vend ; il adore qui se moque de soi. <em>Vue continue disponible : votre « pitch » informel, à dire d'un trait puis à découper.</em></div>
 <div class="continu">
-  <p class="lead"><strong>Texte continu à coulisses.</strong> Survolez un passage pour voir les formulations, cliquez pour changer. Les chevilles en italique sont les mots qui font « parlé ». Trop long pour un vrai pub : n'en dites qu'un tiers et laissez l'autre poser la question suivante.</p>
+  <p class="lead"><strong>Texte continu à coulisses.</strong> Cliquez sur un passage pour voir les formulations, puis sur l'une d'elles pour changer ; un clic ailleurs referme le panneau. Les chevilles en italique sont les mots qui font « parlé ». Trop long pour un vrai pub : n'en dites qu'un tiers et laissez l'autre poser la question suivante.</p>
   <p class="texto"></p>
   <div class="metrics">
     <span><b class="m-words">0</b> mots</span>
@@ -1248,7 +1248,7 @@ body.masque button.tts{visibility:hidden}
   pop.id = "popover";
   document.body.appendChild(pop);
   var popSlot = null, closeT = null, touchMode = false;
-  /* Sur écran tactile, un appui émet mouseenter puis click : le panneau s'ouvrait puis se refermait aussitôt. On mémorise le type de pointeur. */
+  /* Le type de pointeur est mémorisé pour d'éventuels réglages tactiles ; l'ouverture se fait au clic ou à l'appui, jamais au survol. */
   document.addEventListener("pointerdown", function(ev){ touchMode = (ev.pointerType === "touch" || ev.pointerType === "pen"); }, true);
   document.addEventListener("touchstart", function(){ touchMode = true; }, {capture:true, passive:true});
   function lower(t){ return t ? t.charAt(0).toLowerCase() + t.slice(1) : t; }
@@ -1301,8 +1301,8 @@ body.masque button.tts{visibility:hidden}
     place(sl.el);
     sl.el.classList.add("active");
   }
-  pop.addEventListener("mouseenter", function(){ clearTimeout(closeT); });
-  pop.addEventListener("mouseleave", scheduleClose);
+  /* Ouverture au clic uniquement (v2) : plus de survol, le panneau reste ouvert jusqu'au clic ailleurs, sur un autre passage, sur une formulation ou sur Échap. */
+  pop.addEventListener("click", function(ev){ ev.stopPropagation(); });
   document.addEventListener("click", closePop);
   document.addEventListener("keydown", function(ev){ if(ev.key === "Escape") closePop(); });
   window.addEventListener("resize", closePop);
@@ -1323,12 +1323,9 @@ body.masque button.tts{visibility:hidden}
     this.texto.appendChild(el);
     this.texto.appendChild(document.createTextNode(" "));
     var sl = {el:el, opts:opts, i:0, conn:cls.indexOf("conn")>=0, afterConn:afterConn, block:self};
-    el.addEventListener("mouseenter", function(){ if(touchMode) return; clearTimeout(closeT); openPop(sl); });
-    el.addEventListener("mouseleave", function(){ if(!touchMode) scheduleClose(); });
     el.addEventListener("click", function(ev){
       ev.stopPropagation(); clearTimeout(closeT);
-      if(touchMode){ if(popSlot === sl) closePop(); else openPop(sl); return; }
-      if(popSlot !== sl) openPop(sl);
+      if(popSlot === sl) closePop(); else openPop(sl);
     });
     el.addEventListener("keydown", function(ev){
       if(ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); openPop(sl); }
