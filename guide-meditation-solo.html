@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Méditer seul, partout — Guide complet</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+
 <style>
 :root{
-  --cream:#FAF5EB; --cream-2:#F3ECDD; --ink:#2E2A24; --ink-soft:#5C554A;
-  --sage:#6E7F5C; --sage-deep:#4C5A3E; --clay:#B0713F; --clay-soft:#E8D9C4;
-  --card:#FFFDF8; --line:#E2D8C6; --gold:#C29E4B;
+  --cream:#f4f5f8; --cream-2:#eef1f6; --ink:#1b1f2a; --ink-soft:#3b4252;
+  --sage:#15803d; --sage-deep:#0f5f2d; --clay:#d97706; --clay-soft:#fef3e2;
+  --card:#ffffff; --line:#e3e6ee; --gold:#2d3fb8;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--cream);color:var(--ink);font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.65}
+body{background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.65}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px 80px}
 
 /* HERO */
 header{padding:64px 0 40px;text-align:center;border-bottom:1px solid var(--line)}
-.eyebrow{font-family:'Spectral';font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:14px}
-h1{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;color:var(--ink)}
+.eyebrow{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:14px}
+h1{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.1;color:var(--ink)}
 h1 em{font-style:italic;color:var(--sage-deep)}
 .sub{max-width:620px;margin:20px auto 0;color:var(--ink-soft);font-size:1.05rem}
 .breath{width:120px;height:120px;margin:34px auto 6px;position:relative}
@@ -32,16 +32,16 @@ h1 em{font-style:italic;color:var(--sage-deep)}
 .breath-cap{font-size:.85rem;color:var(--ink-soft);font-style:italic}
 
 /* NAV */
-nav{position:sticky;top:0;background:rgba(250,245,235,.94);backdrop-filter:blur(6px);z-index:50;border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:36px}
+nav{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);z-index:50;border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:36px}
 nav .in{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:0 16px}
 nav a{font-size:.82rem;text-decoration:none;color:var(--ink-soft);padding:5px 12px;border-radius:20px;border:1px solid transparent;transition:.2s}
 nav a:hover,nav a:focus-visible{color:var(--sage-deep);border-color:var(--sage);outline:none}
 
 /* SECTIONS */
 section{margin:52px 0}
-h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.9rem;color:var(--ink);margin-bottom:8px}
+h2{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:1.9rem;color:var(--ink);margin-bottom:8px}
 .h2-line{width:56px;height:3px;background:var(--gold);border-radius:2px;margin:10px 0 22px}
-h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--sage-deep);margin:26px 0 10px}
+h3{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:1.25rem;color:var(--sage-deep);margin:26px 0 10px}
 p{margin-bottom:14px}
 .lead{font-size:1.08rem;color:var(--ink-soft)}
 strong{color:var(--ink)}
@@ -53,24 +53,24 @@ strong{color:var(--ink)}
 
 /* ACCORDION (types de méditation) */
 details.tech{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
-details.tech summary{cursor:pointer;padding:18px 24px;font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:12px;list-style:none}
+details.tech summary{cursor:pointer;padding:18px 24px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:1.15rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:12px;list-style:none}
 details.tech summary::-webkit-details-marker{display:none}
 details.tech summary::after{content:"+";margin-left:auto;font-size:1.4rem;color:var(--clay);transition:.2s}
 details.tech[open] summary::after{content:"–"}
-details.tech summary .tag{font-family:'Spectral';font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--clay-soft);color:var(--clay);padding:3px 10px;border-radius:12px;font-weight:600}
+details.tech summary .tag{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;background:var(--clay-soft);color:var(--clay);padding:3px 10px;border-radius:12px;font-weight:600}
 details.tech .body{padding:0 24px 22px;border-top:1px dashed var(--line);padding-top:16px}
 .steps{counter-reset:st;margin:12px 0 6px}
 .steps li{list-style:none;position:relative;padding-left:44px;margin-bottom:12px}
-.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--sage);color:#fff;font-family:'Fraunces';font-size:.85rem;display:flex;align-items:center;justify-content:center}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--sage);color:#fff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center}
 .mini{font-size:.9rem;color:var(--ink-soft);font-style:italic}
 
 /* DUO fixer / laisser couler */
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
 @media(max-width:720px){.duo{grid-template-columns:1fr}}
 .duo .col{border-radius:14px;padding:24px}
-.duo .fix{background:#EEF1E7;border:1.5px solid var(--sage)}
-.duo .flow{background:#F7EEE2;border:1.5px solid var(--clay)}
-.duo h4{font-family:'Fraunces';font-size:1.1rem;margin-bottom:12px}
+.duo .fix{background:#e7f6ec;border:1.5px solid var(--sage)}
+.duo .flow{background:#fef3e2;border:1.5px solid var(--clay)}
+.duo h4{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:1.1rem;margin-bottom:12px}
 .duo .fix h4{color:var(--sage-deep)}
 .duo .flow h4{color:var(--clay)}
 .duo ul{margin-left:18px}
@@ -78,27 +78,27 @@ details.tech .body{padding:0 24px 22px;border-top:1px dashed var(--line);padding
 
 /* CALLOUTS */
 .note{border-left:4px solid var(--gold);background:var(--cream-2);padding:16px 20px;border-radius:0 10px 10px 0;margin:18px 0;font-size:.97rem}
-.warn{border-left:4px solid #B05A4A;background:#F6E9E4;padding:16px 20px;border-radius:0 10px 10px 0;margin:18px 0;font-size:.97rem}
-.note b,.warn b{font-family:'Fraunces'}
+.warn{border-left:4px solid #b42318;background:#fdeceb;padding:16px 20px;border-radius:0 10px 10px 0;margin:18px 0;font-size:.97rem}
+.note b,.warn b{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 
 /* TABLE */
 table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.94rem;background:var(--card);border-radius:12px;overflow:hidden}
-th{background:var(--sage-deep);color:#FAF5EB;font-family:'Fraunces';font-weight:600;text-align:left;padding:11px 14px;font-size:.88rem}
+th{background:var(--sage-deep);color:#ffffff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-weight:600;text-align:left;padding:11px 14px;font-size:.88rem}
 td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:last-child td{border-bottom:none}
 tr:nth-child(even) td{background:var(--cream-2)}
 
 /* PROGRAMME */
 .week{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
-.week .n{flex:0 0 64px;background:var(--clay);color:#fff;border-radius:10px;text-align:center;padding:8px 0;font-family:'Fraunces';font-size:.8rem;line-height:1.25}
+.week .n{flex:0 0 64px;background:var(--clay);color:#fff;border-radius:10px;text-align:center;padding:8px 0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:.8rem;line-height:1.25}
 .week .n b{display:block;font-size:1.2rem}
 .week .t{padding-top:2px}
-.week .t b{font-family:'Fraunces'}
+.week .t b{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 
 /* SOURCES */
 .src{font-size:.88rem;color:var(--ink-soft)}
 .src li{margin-bottom:8px;margin-left:18px}
-.conf{display:inline-block;background:var(--sage-deep);color:#FAF5EB;font-family:'Fraunces';padding:6px 16px;border-radius:20px;font-size:.95rem;margin-top:8px}
+.conf{display:inline-block;background:var(--sage-deep);color:#ffffff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;padding:6px 16px;border-radius:20px;font-size:.95rem;margin-top:8px}
 footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);text-align:center;font-size:.85rem;color:var(--ink-soft);font-style:italic}
 </style>
 </head>
@@ -449,5 +449,6 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);text-al
 
 </main>
 <footer class="wrap">Guide produit pour une pratique autonome, silencieuse et nomade · Août 2026 · La plus courte méditation du monde tient en trois respirations — vous pouvez la faire maintenant.</footer>
+<!-- CHARTE V2 : réhabillage du 2 septembre 2026 (variables et police), contenu inchangé -->
 </body>
 </html>
